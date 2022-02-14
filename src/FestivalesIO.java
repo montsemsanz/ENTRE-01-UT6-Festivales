@@ -8,6 +8,7 @@ import java.util.Scanner;
  * La clase contiene méodos estáticos que permiten
  * cargar la agenda de festivales leyendo los datos desde
  * un fichero
+ * @author - Jiacheng Lin
  */
 public class FestivalesIO {
 
@@ -39,12 +40,19 @@ public class FestivalesIO {
      * @return el festival creado
      */
     public static Festival parsearLinea(String lineaFestival) {
-       //TODO
+
         
         return null;
     }
-    
-   
-    
-    
+    private String obtenerNombre(String lineaFestival){
+        lineaFestival = lineaFestival.trim();
+        String[] pala = lineaFestival.split(":");
+        String[] pala2 = pala[0].split(" ");
+        String nombre = "";
+        for (int i = 0; i < pala2.length; i++){
+            char letra = pala2[i].toUpperCase().charAt(0);
+            nombre += letra + pala2[i].substring(1).toLowerCase() + " ";
+        }
+        return nombre;
+    }
 }
