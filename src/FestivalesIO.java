@@ -47,24 +47,31 @@ public class FestivalesIO {
     private String obtenerNombre(String lineaFestival){
         lineaFestival = lineaFestival.trim();
         String[] pala = lineaFestival.split(":");
-        String[] pala2 = pala[0].split(" ");
+        String del = "[.\\s]+";
+        String[] pala2 = pala[0].split(del);
         String nombre = "";
         for (int i = 0; i < pala2.length; i++){
             char letra = pala2[i].toUpperCase().charAt(0);
-            nombre += letra + pala2[i].substring(1).toLowerCase() + " ";
+            nombre += letra + pala2[i].substring(1).toLowerCase();
+            if(i > pala2.length){
+                nombre += " ";
+            }
         }
         return nombre;
     }
 
-    public String obtenerLugar(String lineaFestival){
+    private String obtenerLugar(String lineaFestival){
         lineaFestival = lineaFestival.trim();
         String[] pala = lineaFestival.split(":");
         pala[1] = pala[1].trim();
-        String[] pala2 = pala[1].split(" ");
+        String del = "[.\\s]+";
+        String[] pala2 = pala[1].split(del);
         String lugar = "";
         for (int i = 0; i < pala2.length; i++){
-            char letra = pala2[i].toUpperCase().charAt(0);
-            lugar += letra + pala2[i].substring(1).toLowerCase() + " ";
+            lugar += pala2[i].toUpperCase();
+            if(i > pala2.length){
+                lugar += " ";
+            }
         }
         return lugar;
     }
