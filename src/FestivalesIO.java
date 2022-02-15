@@ -78,9 +78,9 @@ public class FestivalesIO {
     private String obtenerFecha(String lineaFestival){
         lineaFestival = lineaFestival.trim();
         String[] pala = lineaFestival.split(":");
-        pala[1] = pala[2].trim();
+        pala[2] = pala[2].trim();
         String del = "[.\\s\\-]+";
-        String[] pala2 = pala[1].split(del);
+        String[] pala2 = pala[2].split(del);
         String fecha = "";
         for (int i = 0; i < pala2.length; i++){
             if(i == 0){
@@ -119,5 +119,14 @@ public class FestivalesIO {
             }
         }
         return fecha;
+    }
+    private String obtenerDuracion(String lineaFestival){
+        lineaFestival = lineaFestival.trim();
+        String[] pala = lineaFestival.split(":");
+        pala[3] = pala[3].trim();
+        String del = "[.\\s\\-]+";
+        String[] pala2 = pala[3].split(del);
+        String duracion = pala2[0] + " días";
+        return duracion;
     }
 }
