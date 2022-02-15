@@ -59,9 +59,10 @@ public class Festival {
      *
      */
     public Mes getMes() {
-        //TODO
-        
-        return null;
+        Mes[] meses = Mes.values();
+        int i = fechaInicio.getMonthValue();
+        Mes mes = meses[i];
+        return mes;
         
     }
 

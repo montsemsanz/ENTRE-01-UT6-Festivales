@@ -43,7 +43,8 @@ public class FestivalesIO {
         String [] parsear = lineaFestival.trim().split(":");
         String nombre = parsear[0].trim();
         String lugar = parsear[1].trim();
-        LocalDate fechaInicio = LocalDate.parse(parsear[2].trim(), DateTimeFormatter.ofPattern("dd MMM yyyy"));
+        LocalDate fechaInicio = LocalDate.parse(parsear[2].trim(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+
         int duracion = Integer.parseInt(parsear[3].trim());
         HashSet<Estilo> estilos = new HashSet<>();
         for (int i = 4; i < parsear.length; i++){
