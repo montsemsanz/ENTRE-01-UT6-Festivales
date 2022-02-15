@@ -14,15 +14,17 @@ import java.util.Locale;
  * se engloba en un conjunto determinado de estilos
  *
  */
+
+// Cambiar fechaInicio a tipo LocalDate
 public class Festival {
     private final String nombre;
     private final String lugar;
-    private final LocalDate fechaInicio;
+    private final String fechaInicio;
     private final int duracion;
     private final HashSet<Estilo> estilos;
     
     
-    public Festival(String nombre, String lugar, LocalDate fechaInicio,
+    public Festival(String nombre, String lugar, String fechaInicio,
                     int duracion, HashSet<Estilo> estilos) {
         this.nombre = nombre;
         this.lugar = lugar;
@@ -40,9 +42,9 @@ public class Festival {
         return lugar;
     }
     
-    public LocalDate getFechaInicio() {
-        return fechaInicio;
-    }
+//    public LocalDate getFechaInicio() {
+//        return fechaInicio;
+//    }
     
     public int getDuracion() {
         return duracion;
@@ -62,14 +64,14 @@ public class Festival {
      * valor enumerado
      *
      */
-    public Mes getMes() {
-        //TODO
-        Month month = fechaInicio.getMonth();
-        String m = month.getDisplayName(TextStyle.FULL,new Locale("es","ES"));
-        Mes mes = Mes.valueOf(m.trim().toUpperCase());
-        return mes;
-        
-    }
+//    public Mes getMes() {
+//        //TODO
+//        Month month = fechaInicio.getMonth();
+//        String m = month.getDisplayName(TextStyle.FULL,new Locale("es","ES"));
+//        Mes mes = Mes.valueOf(m.trim().toUpperCase());
+//        return mes;
+//
+//    }
 
     /**
      *
@@ -77,14 +79,14 @@ public class Festival {
      * @return true si el festival actual empieza
      * en un fecha anterior a otro
      */
-    public boolean empiezaAntesQue(Festival otro) {
-        //TODO
-        if (fechaInicio.isBefore(otro.getFechaInicio())) {
-            return true;
-        }
-        return false;
-        
-    }
+//    public boolean empiezaAntesQue(Festival otro) {
+//        //TODO
+//        if (fechaInicio.isBefore(otro.getFechaInicio())) {
+//            return true;
+//        }
+//        return false;
+//
+//    }
 
     /**
      *
@@ -92,14 +94,14 @@ public class Festival {
      * @return true si el festival actual empieza
      * en un fecha posteior a otro
      */
-    public boolean empiezaDespuesQue(Festival otro) {
-        //TODO
-        if (!fechaInicio.isBefore(otro.getFechaInicio())) {
-            return true;
-        }
-        return false;
-        
-    }
+//    public boolean empiezaDespuesQue(Festival otro) {
+//        //TODO
+//        if (!fechaInicio.isBefore(otro.getFechaInicio())) {
+//            return true;
+//        }
+//        return false;
+//
+//    }
 
     /**
      *
@@ -129,48 +131,48 @@ public class Festival {
      * Código para probar la clase Festival
      *
      */
-    public static void main(String[] args) {
-        System.out.println("Probando clase Festival");
-        String datosFestival = "Gazpatxo Rock : " +
-                "valencia: 28-02-2022  :1  :rock" +
-                ":punk " +
-                ": hiphop ";
-        Festival f1 = FestivalesIO.parsearLinea(datosFestival);
-        System.out.println(f1);
+//    public static void main(String[] args) {
+//        System.out.println("Probando clase Festival");
+//        String datosFestival = "Gazpatxo Rock : " +
+//                "valencia: 28-02-2022  :1  :rock" +
+//                ":punk " +
+//                ": hiphop ";
+//        Festival f1 = FestivalesIO.parsearLinea(datosFestival);
+//        System.out.println(f1);
+//
+//        datosFestival = "black sound fest:badajoz:05-02-2022:  21" +
+//                ":rock" + ":  blues";
+//        Festival f2 = FestivalesIO.parsearLinea(datosFestival);
+//        System.out.println(f2);
+//
+//        datosFestival = "guitar bcn:barcelona: 28-01-2022 :  170" +
+//                ":indie" + ":pop:fusion";
+//        Festival f3 = FestivalesIO.parsearLinea(datosFestival);
+//        System.out.println(f3);
+//
+//        datosFestival = "  benidorm fest:benidorm:26-01-2022:3" +
+//                ":indie" + ": pop  :rock";
+//        Festival f4 = FestivalesIO.parsearLinea(datosFestival);
+//        System.out.println(f4);
+//
+//
+//        System.out.println("\nProbando empiezaAntesQue() empiezaDespuesQue()" +
+//                "\n");
+//        if (f1.empiezaAntesQue(f2)) {
+//            System.out.println(f1.getNombre() + " empieza antes que " + f2.getNombre());
+//        } else if (f1.empiezaDespuesQue(f2)) {
+//            System.out.println(f1.getNombre() + " empieza después que " + f2.getNombre());
+//        } else {
+//            System.out.println(f1.getNombre() + " empieza el mismo día que " + f2.getNombre());
+//        }
+//
+//        System.out.println("\nProbando haConcluido()\n");
+//        System.out.println(f4);
+//        System.out.println(f4.getNombre() + " ha concluido? " + f4.haConcluido());
+//        System.out.println(f1);
+//        System.out.println(f1.getNombre() + " ha concluido? " + f1.haConcluido());
+//
         
-        datosFestival = "black sound fest:badajoz:05-02-2022:  21" +
-                ":rock" + ":  blues";
-        Festival f2 = FestivalesIO.parsearLinea(datosFestival);
-        System.out.println(f2);
-    
-        datosFestival = "guitar bcn:barcelona: 28-01-2022 :  170" +
-                ":indie" + ":pop:fusion";
-        Festival f3 = FestivalesIO.parsearLinea(datosFestival);
-        System.out.println(f3);
-    
-        datosFestival = "  benidorm fest:benidorm:26-01-2022:3" +
-                ":indie" + ": pop  :rock";
-        Festival f4 = FestivalesIO.parsearLinea(datosFestival);
-        System.out.println(f4);
-      
         
-        System.out.println("\nProbando empiezaAntesQue() empiezaDespuesQue()" +
-                "\n");
-        if (f1.empiezaAntesQue(f2)) {
-            System.out.println(f1.getNombre() + " empieza antes que " + f2.getNombre());
-        } else if (f1.empiezaDespuesQue(f2)) {
-            System.out.println(f1.getNombre() + " empieza después que " + f2.getNombre());
-        } else {
-            System.out.println(f1.getNombre() + " empieza el mismo día que " + f2.getNombre());
-        }
-
-        System.out.println("\nProbando haConcluido()\n");
-        System.out.println(f4);
-        System.out.println(f4.getNombre() + " ha concluido? " + f4.haConcluido());
-        System.out.println(f1);
-        System.out.println(f1.getNombre() + " ha concluido? " + f1.haConcluido());
- 
-        
-        
-    }
+//    }
 }
