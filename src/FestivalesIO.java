@@ -55,4 +55,17 @@ public class FestivalesIO {
         }
         return nombre;
     }
+
+    public String obtenerLugar(String lineaFestival){
+        lineaFestival = lineaFestival.trim();
+        String[] pala = lineaFestival.split(":");
+        pala[1] = pala[1].trim();
+        String[] pala2 = pala[1].split(" ");
+        String lugar = "";
+        for (int i = 0; i < pala2.length; i++){
+            char letra = pala2[i].toUpperCase().charAt(0);
+            lugar += letra + pala2[i].substring(1).toLowerCase() + " ";
+        }
+        return lugar;
+    }
 }
