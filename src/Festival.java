@@ -8,7 +8,7 @@ import java.util.HashSet;
  * Todo festival tiene un nombre, se celebra en un lugar
  * en una determinada fecha, dura una serie de días y
  * se engloba en un conjunto determinado de estilos
- *
+ * @author AIMAR
  */
 public class Festival {
     private final String nombre;
@@ -59,10 +59,7 @@ public class Festival {
      *
      */
     public Mes getMes() {
-        //TODO
-        
         return null;
-        
     }
 
     /**
@@ -96,10 +93,7 @@ public class Festival {
      * @return true si el festival ya ha concluido
      */
     public boolean haConcluido() {
-        //TODO
-        
-        return true;
-
+        return fechaInicio.isAfter(LocalDate.now());
     }
 
     /**
