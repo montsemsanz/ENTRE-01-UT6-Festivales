@@ -1,6 +1,10 @@
 
 import java.time.LocalDate;
+import java.time.Month;
+import java.time.format.TextStyle;
+import java.util.Date;
 import java.util.HashSet;
+import java.util.Locale;
 
 /**
  * Un objeto de esta clase almacena los datos de un
@@ -60,8 +64,10 @@ public class Festival {
      */
     public Mes getMes() {
         //TODO
-        
-        return null;
+        Month month = fechaInicio.getMonth();
+        String m = month.getDisplayName(TextStyle.FULL,new Locale("es","ES"));
+        Mes mes = Mes.valueOf(m.trim().toUpperCase());
+        return mes;
         
     }
 
@@ -73,8 +79,10 @@ public class Festival {
      */
     public boolean empiezaAntesQue(Festival otro) {
         //TODO
-        
-        return true;
+        if (fechaInicio.isBefore(otro.getFechaInicio())) {
+            return true;
+        }
+        return false;
         
     }
 
@@ -86,8 +94,10 @@ public class Festival {
      */
     public boolean empiezaDespuesQue(Festival otro) {
         //TODO
-        
-        return true;
+        if (!fechaInicio.isBefore(otro.getFechaInicio())) {
+            return true;
+        }
+        return false;
         
     }
 
@@ -97,7 +107,7 @@ public class Festival {
      */
     public boolean haConcluido() {
         //TODO
-        
+
         return true;
 
     }
