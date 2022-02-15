@@ -73,8 +73,8 @@ public class Festival {
      * en un fecha anterior a otro
      */
     public boolean empiezaAntesQue(Festival otro) {
-        LocalDate fecha2 = otro.getFechaInicio();
-        return this.fechaInicio.isBefore(fecha2);
+
+        return this.fechaInicio.isBefore(otro.getFechaInicio());
         
     }
 
@@ -85,9 +85,8 @@ public class Festival {
      * en un fecha posteior a otro
      */
     public boolean empiezaDespuesQue(Festival otro) {
-        //TODO
         
-        return true;
+        return this.fechaInicio.isAfter(otro.getFechaInicio());
         
     }
 
