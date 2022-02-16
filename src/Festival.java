@@ -1,7 +1,7 @@
 
 import java.time.LocalDate;
 import java.util.HashSet;
-
+//@Author Aritz Ciriza
 /**
  * Un objeto de esta clase almacena los datos de un
  * festival.
@@ -29,22 +29,27 @@ public class Festival {
     }
     
     public String getNombre() {
+
         return nombre;
     }
     
     public String getLugar() {
+
         return lugar;
     }
     
     public LocalDate getFechaInicio() {
+
         return fechaInicio;
     }
     
     public int getDuracion() {
+
         return duracion;
     }
     
     public HashSet<Estilo> getEstilos() {
+
         return estilos;
     }
     
@@ -59,9 +64,11 @@ public class Festival {
      *
      */
     public Mes getMes() {
-        //TODO
+
+        String fechaA = String.valueOf(fechaInicio);
+        Mes mes = Mes.valueOf(fechaA);
         
-        return null;
+        return mes;
         
     }
 

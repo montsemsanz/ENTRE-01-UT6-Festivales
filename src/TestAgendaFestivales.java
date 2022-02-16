@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.TreeSet;
-
+//@Author Aritz Ciriza
 public class TestAgendaFestivales {
     
     /**
@@ -30,7 +30,7 @@ public class TestAgendaFestivales {
     
     
     private static void testFestivalesEnMes(AgendaFestivales agenda) {
-        // System.out.println("Meses y nº festivales en ese mes\n");
+        // System.out.println("Meses y n? festivales en ese mes\n");
         // Mes[] meses = {Mes.FEBRERO, Mes.ABRIL, Mes.MAYO, Mes.JUNIO,
                 // Mes.SEPTIEMBRE, Mes.OCTUBRE};
         // for (Mes mes : meses) {
@@ -76,7 +76,7 @@ public class TestAgendaFestivales {
         // } else {
             // System.out.println("Cancelados " + borrados + " festival/es");
         // }
-        // System.out.println("Después de borrar ....");
+        // System.out.println("Despu?s de borrar ....");
         // System.out.println(agenda);
     }
 }
