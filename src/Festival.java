@@ -56,7 +56,6 @@ public class Festival {
     /**
      * devuelve el mes de celebración del festival, como
      * valor enumerado
-     *
      */
     public Mes getMes() {
         //TODO
