@@ -48,7 +48,7 @@ public class FestivalesIO {
     /**
      * devuelve nombre
      */
-    private  String nombre(String lineaFestival) {
+    private static String nombre(String lineaFestival) {
         String [] nombres = lineaFestival.trim().split(":");
         String nombrefesti = nombres[0].trim();
         char primer = nombrefesti.toUpperCase().charAt(0);
@@ -61,7 +61,7 @@ public class FestivalesIO {
     /**
      * devuelve lugar
      */
-    private  String lugar(String lineaFestival) {
+    private static String lugar(String lineaFestival) {
         String [] nombres = lineaFestival.trim().split(":");
         String nombrefesti = nombres[1].trim();
         String lugar = nombrefesti.toUpperCase();
@@ -71,7 +71,7 @@ public class FestivalesIO {
     /**
      * devuelve duracion
      */
-    private  int duracion(String lineaFestival) {
+    private static int duracion(String lineaFestival) {
         String [] nombres = lineaFestival.trim().split(":");
         String nombrefesti = nombres[3].trim();
         int duracion = Integer.valueOf(nombrefesti);
@@ -81,7 +81,7 @@ public class FestivalesIO {
     /**
      * devuelve de estilos
      */
-    private HashSet estilo(String lineaFestival) {
+    private static HashSet estilo(String lineaFestival) {
         HashSet <Estilo> valores = new HashSet<>();
 
         String [] nombres = lineaFestival.trim().split(":");
