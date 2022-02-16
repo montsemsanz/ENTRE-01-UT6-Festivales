@@ -79,9 +79,8 @@ public class Festival {
      * en un fecha anterior a otro
      */
     public boolean empiezaAntesQue(Festival otro) {
-        //TODO
-        
-        return true;
+
+        return fechaInicio.compareTo( otro.getFechaInicio()) < 0;
         
     }
 
