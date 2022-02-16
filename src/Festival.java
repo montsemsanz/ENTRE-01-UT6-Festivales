@@ -103,9 +103,12 @@ public class Festival {
      */
     @Override
     public String toString() {
-       //TODO
+       StringBuilder sb = new StringBuilder();
+       for (int i = 0; i < 5; i++){
+           sb.append(nombre + " "+ fechaInicio + " " + duracion);
+       }
         
-        return null;
+        return sb.toString();
         
     }
 
