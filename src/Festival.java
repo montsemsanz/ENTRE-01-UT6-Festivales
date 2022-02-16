@@ -59,9 +59,8 @@ public class Festival {
      *
      */
     public Mes getMes() {
-        //TODO
-        
-        return null;
+
+
         
     }
 
@@ -72,9 +71,8 @@ public class Festival {
      * en un fecha anterior a otro
      */
     public boolean empiezaAntesQue(Festival otro) {
-        //TODO
-        
-        return true;
+
+        return fechaInicio.compareTo(otro.fechaInicio) > 0;
         
     }
 
