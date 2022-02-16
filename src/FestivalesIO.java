@@ -51,16 +51,14 @@ public class FestivalesIO {
 
        int duracion = Integer.parseInt(datos[3].trim());
         for (int i = 4; i < datos.length; i++) {
-            estilos.add(datos[i].toUpperCase());
+            estilos.add(datos[i].toUpperCase().trim());
         }
 
-        System.out.println(Arrays.toString(datos));
-        System.out.println(linea);
-        System.out.println(nombre);
-        System.out.println(lugar);
-        System.out.println(fecha2);
-        System.out.println(duracion);
-        System.out.println(estilos);
+        System.out.println(nombre + ", " + lugar + ", " + fecha2 + ", " + duracion + ", " + estilos);
+//        System.out.println(lugar);
+//        System.out.println(fecha2);
+//        System.out.println(duracion);
+//        System.out.println(estilos);
 
         Festival festival = new Festival(nombre, lugar, fecha2, duracion, estilos);
         return festival;

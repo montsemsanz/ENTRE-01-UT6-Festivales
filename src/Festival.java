@@ -50,7 +50,6 @@ public class Festival {
     
     public void addEstilo(Estilo estilo) {
         this.estilos.add(estilo);
-        
     }
 
     /**
@@ -58,10 +57,7 @@ public class Festival {
      * valor enumerado
      */
     public Mes getMes() {
-        //TODO
-        
         return null;
-        
     }
 
     /**
@@ -71,10 +67,7 @@ public class Festival {
      * en un fecha anterior a otro
      */
     public boolean empiezaAntesQue(Festival otro) {
-        //TODO
-        
-        return true;
-        
+        return getFechaInicio().isBefore(otro.getFechaInicio());
     }
 
     /**
@@ -84,10 +77,7 @@ public class Festival {
      * en un fecha posteior a otro
      */
     public boolean empiezaDespuesQue(Festival otro) {
-        //TODO
-        
-        return true;
-        
+        return getFechaInicio().isAfter(otro.getFechaInicio());
     }
 
     /**
@@ -153,11 +143,11 @@ public class Festival {
             System.out.println(f1.getNombre() + " empieza el mismo día que " + f2.getNombre());
         }
 
-        System.out.println("\nProbando haConcluido()\n");
-        System.out.println(f4);
-        System.out.println(f4.getNombre() + " ha concluido? " + f4.haConcluido());
-        System.out.println(f1);
-        System.out.println(f1.getNombre() + " ha concluido? " + f1.haConcluido());
+//        System.out.println("\nProbando haConcluido()\n");
+//        System.out.println(f4);
+//        System.out.println(f4.getNombre() + " ha concluido? " + f4.haConcluido());
+//        System.out.println(f1);
+//        System.out.println(f1.getNombre() + " ha concluido? " + f1.haConcluido());
  
         
         
