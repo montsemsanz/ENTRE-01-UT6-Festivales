@@ -35,7 +35,7 @@ public class FestivalesIO {
     }
 
     /**
-     *
+     * Metodo auxiliar para el nombre
      */
     private static String nombreFest(String nombre) {
         String[] nombres = nombre.trim().split("[.\\s]+");
@@ -50,7 +50,7 @@ public class FestivalesIO {
     }
 
     /**
-     *
+     * Metodo auxiliar para el lugar
      */
 
     private static String lugarFest(String lugar) {
@@ -59,7 +59,7 @@ public class FestivalesIO {
     }
 
     /**
-     *
+     * Metodo auxiliar para la fecha
      */
     private static LocalDate fechaFest(String fecha) {
         DateTimeFormatter formateador = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -68,11 +68,10 @@ public class FestivalesIO {
     }
 
     /**
-     *
+     * Metodo auxiliar para el estilo
      */
-    public static HashSet<Estilo> estilosFest(String estilo) {
-        HashSet<Estilo> estilos = new HashSet<>();
-        estilos.add(Estilo.valueOf(estilo.trim().toUpperCase()));
+    public static Estilo estilosFest(String estilo) {
+        Estilo estilos = Estilo.valueOf(estilo.trim().toUpperCase());
         return estilos;
     }
 
@@ -87,7 +86,7 @@ public class FestivalesIO {
         String[] parse = lineaFestival.trim().split("[:]+");
         HashSet<Estilo> estilos = new HashSet<>();
         for (int i = 4; i < parse.length; i++) {
-            estilos = estilosFest(parse[i]);
+            estilos.add(estilosFest(parse[i]));
         }
         Festival festival = new Festival(nombreFest(parse[0]), lugarFest(parse[1]), fechaFest(parse[2]), Integer.parseInt(parse[3].trim()), estilos);
 
