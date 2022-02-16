@@ -2,6 +2,7 @@
 
 import java.util.HashSet;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 /**
  * @author Iñigo Camarero
@@ -77,6 +78,17 @@ public class FestivalesIO {
         int duracion = Integer.valueOf(nombrefesti);
         return duracion;
     }
+
+    /**
+     * devuelve fecha
+     */
+    private static LocalDate fecha(String lineaFestival) {
+        String [] nombres = lineaFestival.trim().split(":");
+        String [] fechas =  nombres[2].trim().split("-");
+        LocalDate fecha = LocalDate.of(Integer.parseInt(fechas[0]),Integer.parseInt(fechas[1]),Integer.parseInt(fechas[2]));
+        return fecha;
+    }
+
 
     /**
      * devuelve de estilos
