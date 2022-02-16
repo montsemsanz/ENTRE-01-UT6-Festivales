@@ -95,7 +95,6 @@ public class Festival {
      * @return true si el festival ya ha concluido
      */
     public boolean haConcluido() {
-        //TODO
         LocalDate fechaFin = fechaInicio.plusDays(duracion);
         return fechaFin.isBefore(LocalDate.now());
 
@@ -109,8 +108,15 @@ public class Festival {
     @Override
     public String toString() {
        //TODO
-        
-        return null;
+        String str = "";
+        str = String.format("%-30s %-30s",nombre,estilos);
+        str += "\n" + lugar;
+
+//       str += "\n" +nombre + "\t\t\t" + estilos + "\n"
+//                + lugar + "\n"
+//               + fechaInicio + "\n"
+//                + "-----------------------------";
+        return str;
         
     }
 

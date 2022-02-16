@@ -41,8 +41,8 @@ public class FestivalesIO {
      */
     public static Festival parsearLinea(String lineaFestival) {
         String [] parsear = lineaFestival.trim().split(":");
-        String nombre = parsear[0].trim();
-        String lugar = parsear[1].trim();
+        String nombre = capitalizar(parsear[0]);
+        String lugar = parsear[1].trim().toUpperCase();
         LocalDate fechaInicio = LocalDate.parse(parsear[2].trim(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 
         int duracion = Integer.parseInt(parsear[3].trim());
@@ -54,8 +54,21 @@ public class FestivalesIO {
         Festival festival = new Festival(nombre,lugar,fechaInicio,duracion,estilos);
         return festival;
     }
-    
-   
+
+    /**
+     * Se capitaliza una cadena para que esta tenga la primera letra de cada palabra en mayúscula
+     * @param cadena la cadena que se quiere capitalizar
+     * @return El nombre capitalizado
+     */
+    public static String capitalizar(String cadena) {
+        cadena = cadena.trim();
+        String str = "";
+        String[] palabras = cadena.split(" ");
+        for (String palabra:palabras) {
+            str += palabra.substring(0,1).toUpperCase() + palabra.substring(1) + " ";
+        }
+        return str;
+    }
     
     
 }
