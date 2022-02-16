@@ -91,9 +91,9 @@ public class Festival {
      * en un fecha posteior a otro
      */
     public boolean empiezaDespuesQue(Festival otro) {
-        //TODO
-        
-        return true;
+
+
+        return fechaInicio.compareTo( otro.getFechaInicio()) > 0;
         
     }
 
@@ -102,9 +102,9 @@ public class Festival {
      * @return true si el festival ya ha concluido
      */
     public boolean haConcluido() {
-        //TODO
-        
-        return true;
+
+
+        return fechaInicio.equals(LocalDate.now());
 
     }
 
