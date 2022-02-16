@@ -49,7 +49,7 @@ public class FestivalesIO {
         // Creamos variable para el lugar del festival eliminando los caracteres blancos iniciales y finales de la cadena y pasandolo a Mayusculas.
         String tokia = parseado[1].trim().toUpperCase();
         // Fecha de inicio de tipo LocalDate , sin espacios y con el formato "DD-MM-YYYY"
-        LocalDate hasieraData = LocalDate.parse(parseado[2].trim(), DateTimeFormatter.ofPattern("DD-MM-YYYY"));
+        LocalDate hasieraData = LocalDate.parse(parseado[2].trim(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         // Variable para parsar el String de duracion a un int eliminando los caracteres blancos iniciales y finales de la cadena
         int iraupena = Integer.parseInt(parseado[3].trim());
         // Creamos una tabla Hash de la clase Estilo
