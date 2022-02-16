@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Scanner;
 
 /**
- * La clase contiene mÈodos est·ticos que permiten
+ * La clase contiene m√©odos est√°ticos que permiten
  * cargar la agenda de festivales leyendo los datos desde
  * un fichero
  */
@@ -37,7 +37,7 @@ public class FestivalesIO {
     }
 
     /**
-     * se parsea la lÌnea extrayendo sus datos y creando y
+     * se parsea la l√≠nea extrayendo sus datos y creando y
      * devolviendo un objeto Festival
      * @param lineaFestival los datos de un festival
      * @return el festival creado
@@ -58,8 +58,10 @@ public class FestivalesIO {
         return l[1];
     }
 
-    public static String obtenerfecha (String lineaFestival) {
+    public static LocalDate obtenerfecha (String lineaFestival) {
         String[] l = lineaFestival.split(":");
+        LocalDate fechaInicio = LocalDate.parse(l[2].trim()),
+                                DateTimeFormatter.ofPattern("dd-MM-yyyy");
         return l[2];
     }
 
