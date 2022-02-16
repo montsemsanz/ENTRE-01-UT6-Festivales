@@ -41,12 +41,16 @@ public class FestivalesIO {
      * @return el festival creado
      */
     public static Festival parsearLinea(String lineaFestival) {
-
-        
-        return null;
+        String nombre = obtenerNombre(lineaFestival);
+        String lugar = obtenerLugar(lineaFestival);
+        LocalDate fecha = obtenerFecha(lineaFestival);
+        int duracion = obtenerDuracion(lineaFestival);
+        HashSet<Estilo> estilos = obtenerEstilos(lineaFestival);
+        Festival festival = new Festival(nombre, lugar, fecha, duracion, estilos);
+        return festival;
     }
 
-    private String obtenerNombre(String lineaFestival){
+    public static String obtenerNombre(String lineaFestival){
         lineaFestival = lineaFestival.trim();
         String[] pala = lineaFestival.split(":");
         String del = "[.\\s\\-]+";
@@ -62,7 +66,7 @@ public class FestivalesIO {
         return nombre;
     }
 
-    private String obtenerLugar(String lineaFestival){
+    public static String obtenerLugar(String lineaFestival){
         lineaFestival = lineaFestival.trim();
         String[] pala = lineaFestival.split(":");
         pala[1] = pala[1].trim();
@@ -77,8 +81,7 @@ public class FestivalesIO {
         }
         return lugar;
     }
-
-    private LocalDate obtenerFecha(String lineaFestival){
+    public static LocalDate obtenerFecha(String lineaFestival){
         lineaFestival = lineaFestival.trim();
         String[] pala = lineaFestival.split(":");
         pala[2] = pala[2].trim();
@@ -87,30 +90,30 @@ public class FestivalesIO {
         int dia = Integer.parseInt(pala2[0]);
         int mes = Integer.parseInt(pala2[1]);
         int year = Integer.parseInt(pala2[2]);
-        LocalDate fecha = LocalDate.of(dia, mes, year);
+        LocalDate fecha = LocalDate.of(year, mes, dia);
         return fecha;
     }
-
-    private int obtenerDuracion(String lineaFestival){
+    public static int obtenerDuracion(String lineaFestival){
         lineaFestival = lineaFestival.trim();
         String[] pala = lineaFestival.split(":");
         pala[3] = pala[3].trim();
         int duracion = Integer.parseInt(pala[3]);
         return duracion;
     }
-
-    private HashSet<Estilo> obtenerEstilos(String lineaFestival){
+    public static HashSet<Estilo> obtenerEstilos(String lineaFestival){
         HashSet<Estilo> estilos = new HashSet<>();
         lineaFestival = lineaFestival.trim();
         String[] pala = lineaFestival.split(":");
         for (int i = 4; i < pala.length; i++){
+            pala[i] = pala[i].trim();
             Estilo[] styles = Estilo.values();
             for (Estilo es:styles) {
-                if(es.equals(pala[i])){
+                if(pala[i].equalsIgnoreCase(String.valueOf(es))){
                     estilos.add(es);
                 }
             }
         }
+        System.out.println(estilos.toString());
         return estilos;
     }
 }
