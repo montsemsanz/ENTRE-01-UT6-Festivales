@@ -1,7 +1,5 @@
 
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Scanner;
 
 /**
@@ -11,7 +9,7 @@ import java.util.Scanner;
  */
 public class FestivalesIO {
 
-    
+
     public static void cargarFestivales(AgendaFestivales agenda) {
         Scanner sc = null;
         try {
@@ -21,15 +19,15 @@ public class FestivalesIO {
                 String lineaFestival = sc.nextLine();
                 Festival festival = parsearLinea(lineaFestival);
                 agenda.addFestival(festival);
-                
+
             }
         } finally {
             if (sc != null) {
                 sc.close();
             }
         }
-        
-        
+
+
     }
 
     /**
@@ -39,12 +37,28 @@ public class FestivalesIO {
      * @return el festival creado
      */
     public static Festival parsearLinea(String lineaFestival) {
-       //TODO
-        
-        return null;
+        String [] nombres = lineaFestival.trim().split(":");
+        Festival festival = new Festival();
+        return festival;
     }
-    
-   
-    
-    
+
+
+    /**
+     * se parsea la línea extrayendo sus datos y creando y
+     * devolviendo un objeto Festival
+     * @param lineaFestival los datos de un festival
+     * @return el festival creado
+     */
+    private  String nombre(String lineaFestival) {
+        String [] nombres = lineaFestival.trim().split(":");
+        String nombrefesti = nombres[0].trim();
+        char primer = nombrefesti.toUpperCase().charAt(0);
+        int pos = nombrefesti.lastIndexOf(" ");
+        char segun = nombrefesti.toUpperCase().charAt(pos + 1);
+        String nombre = primer + nombrefesti.substring(1,pos) + " " +segun + nombrefesti.substring(pos + 2,nombrefesti.length());
+        return nombre;
+    }
+
+
+
 }
