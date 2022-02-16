@@ -1,5 +1,6 @@
 
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -75,58 +76,23 @@ public class FestivalesIO {
         }
         return lugar;
     }
-    private String obtenerFecha(String lineaFestival){
+    private LocalDate obtenerFecha(String lineaFestival){
         lineaFestival = lineaFestival.trim();
         String[] pala = lineaFestival.split(":");
         pala[2] = pala[2].trim();
         String del = "[.\\s\\-]+";
         String[] pala2 = pala[2].split(del);
-        String fecha = "";
-        for (int i = 0; i < pala2.length; i++){
-            if(i == 0){
-                fecha += pala2[i] + " de ";
-            }
-            else if(i == 1){
-                switch (pala2[1]){
-                    case "01": fecha += Mes.ENERO;
-                        break;
-                    case "02": fecha += Mes.FEBRERO;
-                        break;
-                    case "03": fecha += Mes.MARZO;
-                        break;
-                    case "04": fecha += Mes.ABRIL;
-                        break;
-                    case "05": fecha += Mes.MAYO;
-                        break;
-                    case "06": fecha += Mes.JUNIO;
-                        break;
-                    case "07": fecha += Mes.JULIO;
-                        break;
-                    case "08": fecha += Mes.AGOSTO;
-                        break;
-                    case "09": fecha += Mes.SEPTIEMBRE;
-                        break;
-                    case "10": fecha += Mes.OCTUBRE;
-                        break;
-                    case "11": fecha += Mes.NOVIEMBRE;
-                        break;
-                    case "12": fecha += Mes.DICIEMBRE;
-                        break;
-                }
-            }
-            else{
-                fecha += " " + pala2[2];
-            }
-        }
+        int dia = Integer.parseInt(pala2[0]);
+        int mes = Integer.parseInt(pala2[1]);
+        int year = Integer.parseInt(pala2[2]);
+        LocalDate fecha = LocalDate.of(dia, mes, year);
         return fecha;
     }
-    private String obtenerDuracion(String lineaFestival){
+    private int obtenerDuracion(String lineaFestival){
         lineaFestival = lineaFestival.trim();
         String[] pala = lineaFestival.split(":");
         pala[3] = pala[3].trim();
-        String del = "[.\\s\\-]+";
-        String[] pala2 = pala[3].split(del);
-        String duracion = pala2[0] + " días";
+        int duracion = Integer.parseInt(pala[3]);
         return duracion;
     }
 }
