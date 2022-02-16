@@ -96,8 +96,8 @@ public class Festival {
      */
     public boolean haConcluido() {
         //TODO
-        
-        return true;
+        LocalDate fechaFin = fechaInicio.plusDays(duracion);
+        return fechaFin.isBefore(LocalDate.now());
 
     }
 
