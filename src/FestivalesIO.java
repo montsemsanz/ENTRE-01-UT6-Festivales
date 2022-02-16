@@ -1,5 +1,7 @@
 
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -28,7 +30,7 @@ public class FestivalesIO {
                 sc.close();
             }
         }
-        
+
         
     }
 
@@ -40,8 +42,22 @@ public class FestivalesIO {
      */
     public static Festival parsearLinea(String lineaFestival) {
        //TODO
-        
-        return null;
+        String[] linea = lineaFestival.split(":");
+        String nombre = "";
+        String[] palabras = linea[0].trim().split(" ");
+        for (String palabra : palabras) {
+            nombre += palabra.substring(0,1).toUpperCase() + palabra.substring(1) + " ";
+        }
+        nombre = nombre.trim();
+        String lugar = linea[1].trim().toUpperCase();
+        DateTimeFormatter formatter  = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate fecha = LocalDate.parse(linea[2].trim(), formatter);
+        int duracion = Integer.parseInt(linea[3].trim());
+        HashSet<Estilo> estilos = new HashSet<>();
+        for (int i = 4; i < linea.length; i++) {
+            estilos.add(Estilo.valueOf(linea[i].trim().toUpperCase()));
+        }
+        return new Festival(nombre,lugar, fecha, duracion, estilos);
     }
     
    
