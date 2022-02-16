@@ -29,22 +29,27 @@ public class Festival {
     }
     
     public String getNombre() {
+
         return nombre;
     }
     
     public String getLugar() {
+
         return lugar;
     }
     
     public LocalDate getFechaInicio() {
+
         return fechaInicio;
     }
     
     public int getDuracion() {
-        return duracion;
+        return
+                duracion;
     }
     
     public HashSet<Estilo> getEstilos() {
+
         return estilos;
     }
     
