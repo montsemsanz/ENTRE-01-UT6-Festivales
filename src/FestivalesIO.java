@@ -37,19 +37,44 @@ public class FestivalesIO {
     /**
      *
      */
-    private String nombreFest(String nombre) {
-        String[] nombres = nombre.trim().split("[.//s]+");
+    private static String nombreFest(String nombre) {
+        String[] nombres = nombre.trim().split("[.\\s]+");
         String nombreParse = "";
         for (int i = 0; i < nombres.length; i++) {
-            char[] letra = nombres[i].toCharArray();
-            letra[0] = Character.toUpperCase(letra[0]);
-            nombres[i] = letra.toString();
-            nombreParse += nombres[i] + "\s";
+            char letra = nombres[i].toUpperCase().charAt(0);
+            nombres[i] = letra + nombres[i].substring(1, nombres[i].length());
+            nombreParse += nombres[i] + " ";
         }
-        nombreParse.trim();
+        nombreParse = nombreParse.trim();
         return nombreParse;
     }
 
+    /**
+     *
+     */
+
+    private static String lugarFest(String lugar) {
+        String sitio = lugar.trim().toUpperCase();
+        return sitio;
+    }
+
+    /**
+     *
+     */
+    private static LocalDate fechaFest(String fecha) {
+        DateTimeFormatter formateador = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate fechaReal = LocalDate.parse(fecha.trim(), formateador);
+        return fechaReal;
+    }
+
+    /**
+     *
+     */
+    public static HashSet<Estilo> estilosFest(String estilo) {
+        HashSet<Estilo> estilos = new HashSet<>();
+        estilos.add(Estilo.valueOf(estilo.trim().toUpperCase()));
+        return estilos;
+    }
 
     /**
      * se parsea la línea extrayendo sus datos y creando y
@@ -60,15 +85,13 @@ public class FestivalesIO {
      */
     public static Festival parsearLinea(String lineaFestival) {
         String[] parse = lineaFestival.trim().split("[:]+");
-        for (int i = 0; i < parse.length; i++) {
-            parse[i] = parse[i].trim();
+        HashSet<Estilo> estilos = new HashSet<>();
+        for (int i = 4; i < parse.length; i++) {
+            estilos = estilosFest(parse[i]);
         }
-        String[] saveFecha = parse[2].split("-");
-        LocalDate fecha = LocalDate.of(Integer.parseInt(saveFecha[2]), Integer.parseInt(saveFecha[1]), Integer.parseInt(saveFecha[0]));
-        DateTimeFormatter formateador = DateTimeFormatter.ofPattern("dd MM yyyy");
+        Festival festival = new Festival(nombreFest(parse[0]), lugarFest(parse[1]), fechaFest(parse[2]), Integer.parseInt(parse[3].trim()), estilos);
 
-
-        return null;
+        return festival;
     }
 
 
