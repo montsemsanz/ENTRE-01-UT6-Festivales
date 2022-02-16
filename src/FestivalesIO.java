@@ -44,10 +44,7 @@ public class FestivalesIO {
 
 
     /**
-     * se parsea la línea extrayendo sus datos y creando y
-     * devolviendo un objeto Festival
-     * @param lineaFestival los datos de un festival
-     * @return el festival creado
+     * devuelve nombre
      */
     private  String nombre(String lineaFestival) {
         String [] nombres = lineaFestival.trim().split(":");
@@ -59,6 +56,23 @@ public class FestivalesIO {
         return nombre;
     }
 
+    /**
+     * devuelve lugar
+     */
+    private  String lugar(String lineaFestival) {
+        String [] nombres = lineaFestival.trim().split(":");
+        String nombrefesti = nombres[1].trim();
+        String lugar = nombrefesti.toUpperCase();
+        return lugar;
+    }
 
-
+    /**
+     * devuelve duracion
+     */
+    private  String duracion(String lineaFestival) {
+        String [] nombres = lineaFestival.trim().split(":");
+        String nombrefesti = nombres[3].trim();
+        String duracion = nombrefesti  + "días" ;
+        return duracion;
+    }
 }
