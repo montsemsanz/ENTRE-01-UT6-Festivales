@@ -7,6 +7,7 @@ import java.util.TreeMap;
 
 
 /**
+ * @author Iñigo Camarero
  * Esta clase guarda una agenda con los festivales programados
  * en una serie de meses
  *

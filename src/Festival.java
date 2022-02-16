@@ -3,6 +3,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 
 /**
+ *  @author Iñigo Camarero
  * Un objeto de esta clase almacena los datos de un
  * festival.
  * Todo festival tiene un nombre, se celebra en un lugar
@@ -72,7 +73,7 @@ public class Festival {
      * en un fecha anterior a otro
      */
     public boolean empiezaAntesQue(Festival otro) {
-        //TODO
+         this.festival
         
         return true;
         

@@ -1,8 +1,10 @@
 
 
+import java.util.HashSet;
 import java.util.Scanner;
 
 /**
+ * @author Iñigo Camarero
  * La clase contiene méodos estáticos que permiten
  * cargar la agenda de festivales leyendo los datos desde
  * un fichero
@@ -69,10 +71,27 @@ public class FestivalesIO {
     /**
      * devuelve duracion
      */
-    private  String duracion(String lineaFestival) {
+    private  int duracion(String lineaFestival) {
         String [] nombres = lineaFestival.trim().split(":");
         String nombrefesti = nombres[3].trim();
-        String duracion = nombrefesti  + "días" ;
+        int duracion = Integer.valueOf(nombrefesti);
+        return duracion;
+    }
+
+    /**
+     * devuelve de estilos
+     */
+    private HashSet estilo(String lineaFestival) {
+        HashSet <Estilo> valores = new HashSet<>();
+
+        String [] nombres = lineaFestival.trim().split(":");
+        for (int i = 4; i < nombres.length;i++){
+            if (nombres[i].equalsIgnoreCase() ){
+
+            }
+             valores.add(nombres[i]);
+        }
+        String duracion = nombrefesti  + "días";
         return duracion;
     }
 }
