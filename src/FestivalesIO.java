@@ -2,6 +2,7 @@
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 //@Author Aritz Ciriza
 /**
@@ -39,10 +40,11 @@ public class FestivalesIO {
      * @return el festival creado
      */
     public static Festival parsearLinea(String lineaFestival) {
-        String nombre = consigueNombre(lineaFestival);
-        String lugar = consigueLugar(lineaFestival);
-        LocalDate fecha = consigueFecha(lineaFestival);
-        int duracion = consigueDuracion(lineaFestival);
+        String[] festival = lineaFestival.trim().split(":");
+        String nombre = consigueNombre(festival[0]);
+        String lugar = consigueLugar(festival[1]);
+        LocalDate fecha = consigueFecha(festival[2]);
+        int duracion = consigueDuracion(festival[3]);
         HashSet<Estilo> estilos = consigueEstilo(lineaFestival);
        Festival festival1 =new Festival(nombre,lugar,fecha,duracion,estilos);
         return festival1;
@@ -52,8 +54,8 @@ public class FestivalesIO {
      * Metodo auxiliar para conseguir el nombre
      */
     private static String  consigueNombre(String cadena) {
-        String[] festival = cadena.trim().split(":");
-        String[] aux = festival[0].split(" ");
+
+        String[] aux = cadena.split(" ");
         String nombre = "";
         nombre += aux[0].toUpperCase().charAt(0);
         nombre += aux[0].substring(1);
@@ -67,8 +69,8 @@ public class FestivalesIO {
      * Metodo auxiliar para conseguir el lugar
      */
     private static String  consigueLugar(String cadena) {
-        String[] festival = cadena.trim().split(":");
-        String lugar = festival[1].toUpperCase();
+
+        String lugar = cadena.toUpperCase();
         return lugar;
 
     }
@@ -77,8 +79,9 @@ public class FestivalesIO {
      * Metodo auxiliar para conseguir la fecha
      */
     private static LocalDate  consigueFecha(String cadena) {
-        String[] festival = cadena.trim().split(":");
-        LocalDate fecha = LocalDate.parse(festival[2]);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate fecha = LocalDate.parse(cadena,formatter);
         return fecha;
 
     }
@@ -87,8 +90,8 @@ public class FestivalesIO {
      * Metodo auxiliar para conseguir la duracion
      */
     private static int  consigueDuracion(String cadena) {
-        String[] festival = cadena.trim().split(":");
-        int duracion = Integer.parseInt(festival[3]);
+        cadena =cadena.trim();
+        int duracion = Integer.parseInt(cadena);
         return duracion;
 
     }
