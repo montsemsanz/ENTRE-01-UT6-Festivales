@@ -1,7 +1,10 @@
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Locale;
 
 /**
  * Un objeto de esta clase almacena los datos de un
@@ -117,8 +120,38 @@ public class Festival {
      */
     @Override
     public String toString() {
+        LocalDate hoy = LocalDate.now();
+        LocalDate FechaFin = getFechaInicio().plusDays(duracion);
+        StringBuilder sb = new StringBuilder("\n");
+        sb.append(getNombre());
+        for (int i = getNombre().length(); i < 30; i++){
+            sb.append(" ");
+        }
+        sb.append(getEstilos() + "\n" );
+        sb.append(getLugar().toUpperCase() + "\n");
 
-        return null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM. yyyy");
+
+        sb.append(getFechaInicio().format(formatter));
+        if (this.getDuracion() > 1){
+            sb.append(" - " + FechaFin.format(formatter));
+        }
+        if (haConcluido()){
+            sb.append(" (concluido)");
+        }
+
+        else if(hoy.isBefore(FechaFin) && hoy.isAfter(getFechaInicio())){
+            sb.append(" (ON)");
+        }
+        else {
+            long diff = ChronoUnit.DAYS.between(hoy,getFechaInicio());
+            sb.append(" (quedan " + diff + " dias)");
+        }
+
+        sb.append("\n---------------------------------------------------");
+
+
+        return sb.toString();
 
     }
 
@@ -128,10 +161,13 @@ public class Festival {
      */
     public static void main(String[] args) {
         System.out.println("Probando clase Festival");
+
+
         String datosFestival = "Gazpatxo Rock : " +
                 "valencia: 28-02-2022  :1  :rock" +
                 ":punk " +
                 ": hiphop ";
+
         Festival f1 = FestivalesIO.parsearLinea(datosFestival);
         System.out.println(f1);
 
