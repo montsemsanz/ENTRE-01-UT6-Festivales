@@ -1,5 +1,6 @@
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.HashSet;
 
 /**
@@ -51,7 +52,6 @@ public class Festival {
     
     public void addEstilo(Estilo estilo) {
         this.estilos.add(estilo);
-        
     }
 
     /**
@@ -60,10 +60,8 @@ public class Festival {
      *
      */
     public Mes getMes() {
-        //TODO
-        
-        return null;
-        
+        Month mes = fechaInicio.getMonth();
+        String
     }
 
     /**
@@ -73,10 +71,7 @@ public class Festival {
      * en un fecha anterior a otro
      */
     public boolean empiezaAntesQue(Festival otro) {
-         this.festival
-        
-        return true;
-        
+        return fechaInicio.isBefore(otro.getFechaInicio());
     }
 
     /**
@@ -86,21 +81,13 @@ public class Festival {
      * en un fecha posteior a otro
      */
     public boolean empiezaDespuesQue(Festival otro) {
-        //TODO
-        
-        return true;
-        
-    }
-
+        return otro.getFechaInicio().isBefore(fechaInicio);
     /**
      *
      * @return true si el festival ya ha concluido
      */
     public boolean haConcluido() {
-        //TODO
-        
-        return true;
-
+       return fechaInicio.plusDays(duracion).compareTo(LocalDate.now()) > 0;
     }
 
     /**
@@ -110,9 +97,7 @@ public class Festival {
      */
     @Override
     public String toString() {
-       //TODO
-        
-        return null;
+
         
     }
 
