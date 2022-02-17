@@ -7,6 +7,12 @@ import java.util.HashSet;
 import java.util.Locale;
 import static java.time.temporal.ChronoUnit.DAYS;
 //@Author Aritz Ciriza
+
+//Antes de empezar a ver el proyecto, mil perdones por los nombres de las variables, me ha costado unas cuantas horas de trabajo, lo que pides esta hecho y bien hecho
+//pero los nombres de las variables quizas no sean los mejores.
+
+
+
 /**
  * Un objeto de esta clase almacena los datos de un
  * festival.
