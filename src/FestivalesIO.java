@@ -41,6 +41,9 @@ public class FestivalesIO {
      * @return el festival creado
      */
     public static Festival parsearLinea(String lineaFestival) {
+        Festival festival = new Festival(getNombre(lineaFestival),getLugar(lineaFestival),getFecha(lineaFestival)
+        ,getDuracion(lineaFestival),getEstilo(lineaFestival));
+
 
         return null;
     }
@@ -61,7 +64,19 @@ public class FestivalesIO {
          LocalDate fechaInicio = (LocalDate) f.parse(s);
          return fechaInicio;
     }
-   
-    
+
+    public static int getDuracion(String lineaFestival){
+        String [] duracion = lineaFestival.split(":");
+        int d = Integer.parseInt(duracion[3].trim()) ;
+        return d;
+    }
+
+    public static HashSet <Estilo> getEstilo (String lineaFestival){
+        HashSet <Estilo> estilo = new HashSet<>();
+        String [] e = lineaFestival.split(":");
+        for (int i = 4; i < e.length ; i++) {
+            estilo.add(Estilo.valueOf(e[i].trim().toUpperCase()));
+        }
+    }
     
 }
