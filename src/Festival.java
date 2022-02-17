@@ -1,6 +1,7 @@
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.Locale;
 
 /**
  * Un objeto de esta clase almacena los datos de un
@@ -57,8 +58,8 @@ public class Festival {
      * valor enumerado
      */
     public Mes getMes() {
-        String mes = "" + fechaInicio.getMonth();
-        return Mes.valueOf(mes.toUpperCase());
+        int numMes = fechaInicio.getMonthValue() - 1;
+        return Mes.values()[numMes];
     }
 
     /**
@@ -85,7 +86,8 @@ public class Festival {
      * @return true si el festival ya ha concluido
      */
     public boolean haConcluido() {
-        return fechaInicio.isAfter(LocalDate.now());
+        LocalDate fecha = fechaInicio.plusDays(duracion);
+        return fecha.isBefore(LocalDate.now());
 
     }
 
@@ -95,8 +97,26 @@ public class Festival {
      */
     @Override
     public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(nombre + String.format("%25s", estilos));
+        sb.append("\n" + lugar + "\n");
 
 
+        sb.append("---------------------------------------------");
+        return sb.toString();
+
+    }
+
+    private String escribirFechas() {
+        String str = "";
+        Festival festival = new Festival(nombre, lugar, fechaInicio, duracion, estilos);
+        if (haConcluido()) {
+            str += (getFechaInicio().getDayOfMonth() + " " + getMes().toString().toLowerCase().substring(0, 3) + ". - " + (getFechaInicio().getDayOfMonth() + duracion)
+                    + " " + getMes().toString().toLowerCase().substring(0, 3) + ". " + getFechaInicio().getYear() + " (concluido)" + "\n");
+        } else if (empiezaAntesQue(festival)) {
+            str += (getFechaInicio().getDayOfMonth() + " " + getMes().toString().toLowerCase().substring(0, 3) + ". " + getFechaInicio().getYear() + "(quedan " + getFechaInicio().getDayOfMonth() + "\n");
+        }
+        return str;
     }
 
     /**
