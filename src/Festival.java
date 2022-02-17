@@ -59,7 +59,9 @@ public class Festival {
      *
      */
     public Mes getMes() {
-        return null;
+        String data = String.valueOf(fechaInicio);
+        Mes hilabetea = Mes.valueOf(data);
+        return hilabetea;
     }
 
     /**
@@ -69,10 +71,7 @@ public class Festival {
      * en un fecha anterior a otro
      */
     public boolean empiezaAntesQue(Festival otro) {
-        //TODO
-        
-        return true;
-        
+        return fechaInicio.compareTo(otro.getFechaInicio())<0;
     }
 
     /**
@@ -82,10 +81,7 @@ public class Festival {
      * en un fecha posteior a otro
      */
     public boolean empiezaDespuesQue(Festival otro) {
-        //TODO
-        
-        return true;
-        
+        return fechaInicio.compareTo(otro.getFechaInicio())>0;
     }
 
     /**
@@ -105,7 +101,7 @@ public class Festival {
     public String toString() {
        StringBuilder sb = new StringBuilder();
        for (int i = 0; i < 5; i++){
-           sb.append(nombre + " "+ fechaInicio + " " + duracion);
+           sb.append(nombre + "               " + estilos +"\n"+ lugar+"   ");
        }
         
         return sb.toString();
@@ -156,8 +152,5 @@ public class Festival {
         System.out.println(f4.getNombre() + " ha concluido? " + f4.haConcluido());
         System.out.println(f1);
         System.out.println(f1.getNombre() + " ha concluido? " + f1.haConcluido());
- 
-        
-        
     }
 }
