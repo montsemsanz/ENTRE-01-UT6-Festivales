@@ -46,6 +46,7 @@ public class FestivalesIO {
         HashSet datos = new HashSet();
         if(nombres.length == 6) {
             Festival festival2 = new Festival(nombres[0],nombres[1],nombres[2],nombres[3],nombres[4],nombres[5];
+
             festival = festival2;
         }
         else if(nombres.length == 7) {
@@ -103,7 +104,6 @@ public class FestivalesIO {
         return fecha;
     }
 
-
     /**
      * devuelve los estilos
      */
@@ -112,7 +112,7 @@ public class FestivalesIO {
         HashSet <Estilo> valores = new HashSet<>();
         Estilo[] estilos = Estilo.values();
         String [] nombres = lineaFestival.trim().split(":");
-        for (int i = 4; i < nombres.length;i++){
+        for (int i = 5; i < nombres.length;i++){
             if(nombres[i].equalsIgnoreCase(String.valueOf(estilos[x]))){
                 valores.add(estilos[x]);
             }
