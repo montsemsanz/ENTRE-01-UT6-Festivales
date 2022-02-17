@@ -96,9 +96,9 @@ public class Festival {
      * @return true si el festival ya ha concluido
      */
     public boolean haConcluido() {
-        //TODO
+
         
-        return true;
+        return getFechaInicio().plusDays(duracion).isBefore(LocalDate.now());
 
     }
 
