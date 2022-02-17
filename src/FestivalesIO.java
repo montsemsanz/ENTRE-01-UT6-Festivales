@@ -1,5 +1,7 @@
 
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -39,11 +41,26 @@ public class FestivalesIO {
      * @return el festival creado
      */
     public static Festival parsearLinea(String lineaFestival) {
-       //TODO
-        
+
         return null;
     }
-    
+    public static String getNombre(String lineaFestival){
+        String [] nombre =  lineaFestival.split(":");
+        return nombre[0].trim();
+    }
+
+    public  static String getLugar(String lineaFestival){
+        String [] lugar = lineaFestival.split(":");
+        return lugar[1].trim();
+    }
+
+    public static LocalDate getFecha(String lineaFestival){
+        String [] fecha = lineaFestival.split(":");
+         String s = fecha[2].trim();
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+         LocalDate fechaInicio = (LocalDate) f.parse(s);
+         return fechaInicio;
+    }
    
     
     
