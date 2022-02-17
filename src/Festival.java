@@ -38,7 +38,7 @@ public class Festival {
         return lugar;
     }
     
-    public static LocalDate getFechaInicio() {
+    public  LocalDate getFechaInicio() {
         return fechaInicio;
     }
     
@@ -129,26 +129,26 @@ public class Festival {
         return cadena;
     }
 
-    private static String obtenerFecha(){
+    private  String obtenerFecha(){
 
         String cadena = "";
-        LocalDate inicio = Festival.getFechaInicio();
+        LocalDate inicio = fechaInicio;
 
         LocalDate hoy = LocalDate.now();
 
         if(inicio.isBefore(hoy)) {
             cadena += getFechaInicio();
-            cadena += "(Quedan " + getFechaInicio().compareTo(hoy) + " días)";
+            cadena += "(Quedan " + inicio.compareTo(hoy) + " días)";
         }
 
         if(inicio.equals(hoy)) {
-            cadena += String.format(String.valueOf(getFechaInicio().getDayOfMonth()), getFechaInicio().getMonth(),
+            cadena += String.format(String.valueOf(inicio.getDayOfMonth()), inicio.getMonth(),
                                       hoy);
             cadena += "(Concluido)";
         }
 
         else{
-            cadena += String.format(String.valueOf(getFechaInicio().getDayOfMonth()), getFechaInicio().getMonth(),
+            cadena += String.format(String.valueOf(inicio.getDayOfMonth()), inicio.getMonth(),
                     hoy);
             cadena += "(ON)";
         }
