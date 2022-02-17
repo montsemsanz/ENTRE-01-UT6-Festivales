@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- *  @author Iñigo Camarero
+ * @author Iñigo Camarero
  * Un objeto de esta clase almacena los datos de un
  * festival.
  * Todo festival tiene un nombre, se celebra en un lugar
@@ -22,8 +22,7 @@ public class Festival {
     private final HashSet<Estilo> estilos;
     
     
-    public Festival(String nombre, String lugar, LocalDate fechaInicio,
-                    int duracion, HashSet<Estilo> estilos) {
+    public Festival(String nombre) {
         this.nombre = nombre;
         this.lugar = lugar;
         this.fechaInicio = fechaInicio;
@@ -31,7 +30,7 @@ public class Festival {
         this.estilos = estilos;
         
     }
-    
+
     public String getNombre() {
         return nombre;
     }
@@ -64,9 +63,9 @@ public class Festival {
     public Mes getMes() {
         Mes valorMes = null;
         Mes [] arrayMes = Mes.values();
-        for (int i = 0; i < arrayMes.length;i++){
-            if(i == fechaInicio.getMonthValue()){
-                valorMes = arrayMes[i];
+        for (int num = 0; num < arrayMes.length;num++){
+            if(fechaInicio.getMonthValue() == num ){
+                valorMes = arrayMes[num];
             }
         }
         return valorMes;
@@ -79,7 +78,7 @@ public class Festival {
      * en un fecha anterior a otro
      */
     public boolean empiezaAntesQue(Festival otro) {
-        return fechaInicio.isBefore(otro.getFechaInicio());
+        return getFechaInicio().isBefore(otro.getFechaInicio());
     }
 
     /**
@@ -89,13 +88,13 @@ public class Festival {
      * en un fecha posteior a otro
      */
     public boolean empiezaDespuesQue(Festival otro) {
-        return otro.getFechaInicio().isBefore(fechaInicio);
+        return getFechaInicio().isAfter(otro.getFechaInicio());
     /**
      *
      * @return true si el festival ya ha concluido
      */
     public boolean haConcluido(){
-       return fechaInicio.plusDays(duracion).compareTo(LocalDate.now()) > 0;
+       return getFechaInicio().plusDays(duracion).compareTo(LocalDate.now()) > 0;
     }
 
     /**
