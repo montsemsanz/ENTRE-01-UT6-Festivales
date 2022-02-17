@@ -97,10 +97,7 @@ public class Festival {
      * @return true si el festival ya ha concluido
      */
     public boolean haConcluido() {
-        //TODO
-        
-        return true;
-
+        return fechaInicio.compareTo(LocalDate.now()) < 0;
     }
 
     /**
