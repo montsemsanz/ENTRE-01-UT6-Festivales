@@ -8,6 +8,8 @@ import java.util.Scanner;
  * La clase contiene métodos estáticos que permiten
  * cargar la agenda de festivales leyendo los datos desde
  * un fichero
+ *
+ * @author - Iratxe Remón
  */
 public class FestivalesIO {
     
@@ -43,13 +45,7 @@ public class FestivalesIO {
 
        String[] nombreCompleto = new String[datos[0].trim().split(" ").length];
        nombreCompleto =  datos[0].trim().split(" ");
-       String nombre = "";
-        for (String nom:nombreCompleto) {
-            nombre += nom.substring(0, 1).toUpperCase();
-            nombre += nom.substring(1);
-            nombre += " ";
-        }
-        nombre = nombre.trim();
+       String nombre = getNombre(nombreCompleto);
 
        String lugar = datos[1].trim().toUpperCase();
 
@@ -62,16 +58,25 @@ public class FestivalesIO {
         Estilo[] estilo = Estilo.values();
         for (int i = 4; i < datos.length; i++) {
             for (Estilo todos:estilo) {
-                if (String.valueOf(todos).equalsIgnoreCase(datos[i].trim())) {
+              if (datos[i].trim().equalsIgnoreCase(String.valueOf(todos))) {
                     estilos.add(todos);
                 }
             }
         }
-
 //        System.out.println(nombre + ", " + lugar + ", " + fecha2 + ", " + duracion + ", " + estilos);
-
         Festival festival = new Festival(nombre, lugar, fecha2, duracion, estilos);
         return festival;
+    }
+
+    public static String getNombre(String[] nombreCompleto) {
+        String nombre = "";
+        for (String nom:nombreCompleto) {
+            nombre += nom.substring(0, 1).toUpperCase();
+            nombre += nom.substring(1).toLowerCase();
+            nombre += " ";
+        }
+        nombre = nombre.trim();
+        return nombre;
     }
 
     public static LocalDate getFecha(String fecha) {
@@ -79,9 +84,5 @@ public class FestivalesIO {
         fechas = fecha.split("-");
         LocalDate fecha2 = LocalDate.of(Integer.parseInt(fechas[2]),Integer.parseInt(fechas[1]),Integer.parseInt(fechas[0]));
         return fecha2;
-    }
-
-    public static void main(String[] args) {
-        parsearLinea("     benidorm fest: benidorm:26-01-2022:3 :indie : pop  :rock");
     }
 }
