@@ -44,20 +44,14 @@ public class FestivalesIO {
         String [] nombres = lineaFestival.trim().split(":");
         Festival festival = new Festival(nombres[0]);
         HashSet datos = new HashSet();
-        if(nombres.length == 6) {
-            Festival festival2 = new Festival(nombres[0],nombres[1],nombres[2],nombres[3],nombres[4],nombres[5];
-
-            festival = festival2;
-        }
-        else if(nombres.length == 7) {
-            Festival festival2 = new Festival (nombres[0],nombres[1],nombres[2],nombres[3],nombres[4],nombres[5],nombres[6];
-            festival = festival2;
-        }
-        else{
-            Festival festival2 = new Festival(nombres[0],nombres[1],nombres[2],nombres[3],nombres[4],nombres[5],nombres[6],nombres[7]);
-            festival = festival2;
-        }
-        return festival;
+        // Accesores
+        String lugar = lugar(lineaFestival);
+        String nombre = nombre(lineaFestival);
+        int duracion = duracion(lineaFestival);
+        LocalDate fechaInicio = fecha(lineaFestival);
+        HashSet estilo  = estilo(lineaFestival);
+        Festival festival1 = new Festival(nombre,lugar,duracion,fechaInicio,estilo);
+        return festival1;
     }
 
 
