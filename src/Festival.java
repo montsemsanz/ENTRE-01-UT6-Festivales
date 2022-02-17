@@ -2,6 +2,8 @@
 import java.time.LocalDate;
 import java.util.HashSet;
 
+import static java.time.temporal.ChronoUnit.DAYS;
+
 /**
  * Un objeto de esta clase almacena los datos de un
  * festival.
@@ -72,7 +74,7 @@ public class Festival {
      */
     public boolean empiezaAntesQue(Festival otro) {
 
-        return fechaInicio.compareTo(otro.fechaInicio) > 0;
+        return fechaInicio.compareTo(otro.getFechaInicio()) > 0;
         
     }
 
@@ -84,7 +86,7 @@ public class Festival {
      */
     public boolean empiezaDespuesQue(Festival otro) {
         
-        return fechaInicio.compareTo(otro.fechaInicio) <  0;
+        return fechaInicio.compareTo(otro.getFechaInicio()) <  0;
         
     }
 
@@ -93,9 +95,10 @@ public class Festival {
      * @return true si el festival ya ha concluido
      */
     public boolean haConcluido() {
-        //TODO
-        
-        return true;
+
+        LocalDate ahora = LocalDate.now();
+        LocalDate dias = getFechaInicio().plusDays(getDuracion());
+        return ahora.isAfter(dias) ;
 
     }
 
