@@ -1,5 +1,7 @@
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
 
 /**
@@ -109,15 +111,55 @@ public class Festival {
     public String toString() {
        //TODO
         String str = "";
-        str = String.format("%-30s %-30s",nombre,estilos);
-        str += "\n" + lugar;
+        str = String.format("%-30s %-30s",nombre,estilos)
+                + "\n" + lugar + "\n"
+                + fechaEvento(this.fechaInicio) + " "
+                + duracionEvento() + "\n"
+                + "-----------------------------------";
 
-//       str += "\n" +nombre + "\t\t\t" + estilos + "\n"
-//                + lugar + "\n"
-//               + fechaInicio + "\n"
-//                + "-----------------------------";
         return str;
         
+    }
+
+    public String estilo(){
+        String str ="[";
+        for (Estilo estilo:estilos) {
+            str += estilo;
+        }
+        str += "]";
+        return str;
+    }
+
+    /**
+     * Método auxiliar de ayuda para escribir la fecha
+     *
+     */
+    public String fechaEvento(LocalDate fecha){
+        String strFecha = "";
+        int duracion = getDuracion();
+        DateTimeFormatter formateador = DateTimeFormatter.ofPattern("dd MMM yyyy");
+
+        if ( duracion == 1) {
+            strFecha += fecha.format(formateador);
+        }
+        else {
+            LocalDate fechaFin = fecha.plusDays(duracion);
+            DateTimeFormatter formateador2 = DateTimeFormatter.ofPattern("dd MMM");
+            strFecha += fecha.format(formateador2) + " -" + fechaFin.format(formateador);
+        }
+        return strFecha;
+    }
+
+    public String duracionEvento() {
+        String str = "";
+        if (haConcluido()) {
+            return str += "(concluido)";
+        }
+        else if (fechaInicio.isAfter(LocalDate.now())){
+            long n = ChronoUnit.DAYS.between(LocalDate.now(),fechaInicio);
+            return str += "(quedan " + n + " dias)";
+        }
+        return str += "(ON)";
     }
 
     /**
@@ -162,6 +204,7 @@ public class Festival {
         System.out.println("\nProbando haConcluido()\n");
         System.out.println(f4);
         System.out.println(f4.getNombre() + " ha concluido? " + f4.haConcluido());
+        System.out.println();
         System.out.println(f1);
         System.out.println(f1.getNombre() + " ha concluido? " + f1.haConcluido());
  
