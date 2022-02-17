@@ -1,6 +1,7 @@
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Un objeto de esta clase almacena los datos de un
@@ -85,24 +86,44 @@ public class Festival {
      * @return true si el festival ya ha concluido
      */
     public boolean haConcluido() {
-        //TODO
-        
-        return true;
-
+        return getFechaInicio().plusDays(duracion).isBefore(LocalDate.now());
     }
 
     /**
      * Representación textual del festival, exactamente
      * como se indica en el enunciado
-     *
      */
     @Override
     public String toString() {
-       //TODO
-        
-        return null;
-        
+        String str = String.format("%s%27s\n", nombre, estilos);
+        str += String.format("%s\n", lugar);
+        str += String.format("%s",fechas());
+        str += String.format("%s", "-");
+       return str;
     }
+
+    public String fechas() {
+        String str = "";
+
+        LocalDate fecha = fechaInicio;
+        DateTimeFormatter formateador = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        DateTimeFormatter formateador2 = DateTimeFormatter.ofPattern("dd MMM");
+
+        if(fechaInicio.isAfter(LocalDate.now())) {
+            str = fecha.format(formateador);
+            str += "(quedan " + fechaInicio.compareTo(LocalDate.now()) + " días)\n";
+        }
+        else if (haConcluido()) {
+            str = fecha.format(formateador2);
+            str += " - " + fechaInicio.plusDays(duracion).format(formateador) + " (concluido)\n";
+        }
+        else {
+            str = fecha.format(formateador2);
+            str += " - " + fechaInicio.plusDays(duracion).format(formateador) + " (ON)\n";
+        }
+        return str;
+    }
+
 
     /**
      * Código para probar la clase Festival
@@ -143,13 +164,10 @@ public class Festival {
             System.out.println(f1.getNombre() + " empieza el mismo día que " + f2.getNombre());
         }
 
-//        System.out.println("\nProbando haConcluido()\n");
-//        System.out.println(f4);
-//        System.out.println(f4.getNombre() + " ha concluido? " + f4.haConcluido());
-//        System.out.println(f1);
-//        System.out.println(f1.getNombre() + " ha concluido? " + f1.haConcluido());
- 
-        
-        
+        System.out.println("\nProbando haConcluido()\n");
+        System.out.println(f4);
+        System.out.println(f4.getNombre() + " ha concluido? " + f4.haConcluido());
+        System.out.println(f1);
+        System.out.println(f1.getNombre() + " ha concluido? " + f1.haConcluido());
     }
 }

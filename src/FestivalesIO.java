@@ -36,29 +36,39 @@ public class FestivalesIO {
      * @return el festival creado
      */
     public static Festival parsearLinea(String lineaFestival) {
-      HashSet estilos = new HashSet<Estilo>();
+
        String[] datos = new String[lineaFestival.split(":").length];
        String linea = lineaFestival.trim();
        datos = linea.split(":");
 
-       String nombre = datos[0].trim();
+       String[] nombreCompleto = new String[datos[0].trim().split(" ").length];
+       nombreCompleto =  datos[0].trim().split(" ");
+       String nombre = "";
+        for (String nom:nombreCompleto) {
+            nombre += nom.substring(0, 1).toUpperCase();
+            nombre += nom.substring(1);
+            nombre += " ";
+        }
+        nombre = nombre.trim();
+
        String lugar = datos[1].trim().toUpperCase();
+
        String fecha = datos[2].trim();
-       String[] fechas = new String[fecha.split("-").length];
-       fechas = fecha.split("-");
        LocalDate fecha2 = getFecha(fecha);
 
-
        int duracion = Integer.parseInt(datos[3].trim());
+
+        HashSet<Estilo> estilos = new HashSet<>();
+        Estilo[] estilo = Estilo.values();
         for (int i = 4; i < datos.length; i++) {
-            estilos.add(datos[i].toUpperCase().trim());
+            for (Estilo todos:estilo) {
+                if (String.valueOf(todos).equalsIgnoreCase(datos[i].trim())) {
+                    estilos.add(todos);
+                }
+            }
         }
 
-        System.out.println(nombre + ", " + lugar + ", " + fecha2 + ", " + duracion + ", " + estilos);
-//        System.out.println(lugar);
-//        System.out.println(fecha2);
-//        System.out.println(duracion);
-//        System.out.println(estilos);
+//        System.out.println(nombre + ", " + lugar + ", " + fecha2 + ", " + duracion + ", " + estilos);
 
         Festival festival = new Festival(nombre, lugar, fecha2, duracion, estilos);
         return festival;
