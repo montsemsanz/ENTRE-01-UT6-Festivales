@@ -113,7 +113,6 @@ public class FestivalesIO {
                 }
             }
         }
-        System.out.println(estilos.toString());
         return estilos;
     }
 }

@@ -61,7 +61,7 @@ public class Festival {
         Mes[] meses = Mes.values();
         Mes mes = null;
         for (int i = 0; i < 12; i++) {
-            if(fechaInicio.getMonthValue() == i){
+            if(fechaInicio.getMonthValue() == i + 1){
                 mes = meses[i];
             }
         }
@@ -104,10 +104,34 @@ public class Festival {
      */
     @Override
     public String toString() {
-        String cadena = nombre + "           " + estilos.toString() + "\n";
+        LocalDate fechaFinal = fechaInicio.plusDays(duracion);
+        int diff = fechaInicio.getDayOfYear() - LocalDate.now().getDayOfYear();
+        Mes[] meses = Mes.values();
+        Mes mes = null;
+        String cadena = "\n" + String.format("%-20s %-20s", nombre, estilos.toString()) + "\n";
         cadena += lugar + "\n";
-        cadena += fechaInicio.getDayOfMonth()+ fechaInicio.getMonth().toString() + " - " +
-                fechaInicio.plusDays(duracion).getDayOfMonth() + fechaInicio.plusDays(duracion).getMonth() + fechaInicio.getYear();
+        for(int i = 1; i < 13; i++){
+            if(fechaFinal.getMonthValue() == i){
+                mes = meses[i];
+            }
+        }
+        cadena += fechaInicio.getDayOfMonth()+ " " + getMes();
+        if (duracion == 1){
+            cadena += " " + fechaInicio.getYear();
+        }
+        else{
+            cadena += " - " + fechaFinal.getDayOfMonth() + " " + mes + " " + fechaFinal.getYear();
+        }
+        if(fechaInicio.isBefore(LocalDate.now()) && fechaFinal.isAfter(LocalDate.now())){
+            cadena += " (ON)";
+        }
+        else if(haConcluido()){
+            cadena += " (concluido)";
+        }
+        else{
+            cadena += " (quedan " + diff + " días)";
+        }
+        cadena += "\n----------------------------------------";
         return cadena;
     }
 
@@ -155,8 +179,6 @@ public class Festival {
         System.out.println(f4.getNombre() + " ha concluido? " + f4.haConcluido());
         System.out.println(f1);
         System.out.println(f1.getNombre() + " ha concluido? " + f1.haConcluido());
- 
-        
         
     }
 }
