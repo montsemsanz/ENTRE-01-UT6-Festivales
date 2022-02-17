@@ -1,5 +1,6 @@
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 
 /**
@@ -89,25 +90,20 @@ public class Festival {
      * @return true si el festival ya ha concluido
      */
     public boolean haConcluido() {
-        return fechaInicio.isAfter(LocalDate.now());
+        return fechaInicio.isBefore(LocalDate.now());
     }
-
+    @Override
     /**
      * Representación textual del festival, exactamente
      * como se indica en el enunciado
      *
      */
-    @Override
     public String toString() {
-       StringBuilder sb = new StringBuilder();
-       for (int i = 0; i < 5; i++){
-           sb.append(nombre + "               " + estilos +"\n"+ lugar+"   ");
-       }
-        
-        return sb.toString();
-        
+        String str = String.format("%-25s%.43s\n", nombre, estilos);
+        str += String.format("%s\n", lugar);
+        str += "------------------------------";
+        return str;
     }
-
     /**
      * Código para probar la clase Festival
      *
