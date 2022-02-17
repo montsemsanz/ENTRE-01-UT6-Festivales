@@ -119,9 +119,9 @@ public class Festival {
     @Override
     public String toString() {
 
+        String cadena = "";
         
-        return null;
-        
+        return cadena;
     }
 
     /**

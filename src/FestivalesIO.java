@@ -1,5 +1,6 @@
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -45,7 +46,27 @@ public class FestivalesIO {
         
         return null;
     }
-    
+
+
+    /**
+     * Obtener el nombre
+     */
+    private  String nombreFestival(String lineaFestival) {
+
+        String[] nom = lineaFestival.split(";");
+
+        return nom[0];
+    }
+
+    /**
+     * Obtener el lugar
+     */
+    private  String nombreLugar(String lineaFestival) {
+
+        String[] nom = lineaFestival.split(";");
+
+        return nom[1];
+    }
    
     
     
