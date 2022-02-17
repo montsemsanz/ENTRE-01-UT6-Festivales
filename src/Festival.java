@@ -58,7 +58,11 @@ public class Festival {
      * valor enumerado
      */
     public Mes getMes() {
-        return null;
+        Mes[] mes = Mes.values();
+        int mesNum = fechaInicio.getMonthValue();
+        Mes mes2 = mes[mesNum - 1];
+//        System.out.println(mes2);
+        return mes2;
     }
 
     /**
@@ -95,10 +99,10 @@ public class Festival {
      */
     @Override
     public String toString() {
-        String str = String.format("%s%27s\n", nombre, estilos);
+        String str = String.format("%-20s%.37s\n", nombre, estilos);
         str += String.format("%s\n", lugar);
         str += String.format("%s",fechas());
-        str += String.format("%s", "-");
+        str += "------------------------------";
        return str;
     }
 
