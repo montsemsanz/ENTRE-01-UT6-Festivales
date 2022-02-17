@@ -41,7 +41,6 @@ public class FestivalesIO {
      * @return el festival creado
      */
     public static Festival parsearLinea(String lineaFestival) {
-       //TODO
         String[] linea = lineaFestival.split(":");
         String nombre = "";
         String[] palabras = linea[0].trim().split(" ");
