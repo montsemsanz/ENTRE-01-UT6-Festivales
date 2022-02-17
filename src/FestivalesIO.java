@@ -101,14 +101,12 @@ public class FestivalesIO {
      */
     private static HashSet<Estilo>  consigueEstilo(String cadena) {
         String[] festival = cadena.trim().split(":");
-       HashSet<Estilo>estilos = new HashSet<>();
+        HashSet<Estilo>estilos = new HashSet<>();
+        for (int i = 4; i < festival.length ; i++) {
+            Estilo estilo = Estilo.valueOf(festival[i].trim().toUpperCase());
+            estilos.add(estilo);
 
-       Estilo estilo1 = Estilo.valueOf(festival[4]);
-       Estilo estilo2 = Estilo.valueOf(festival[5]);
-       Estilo estilo3 = Estilo.valueOf(festival[6]);
-       estilos.add(estilo1);
-        estilos.add(estilo2);
-        estilos.add(estilo3);
+        }
         return estilos;
 
     }

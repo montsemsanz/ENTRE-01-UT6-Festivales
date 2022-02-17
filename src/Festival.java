@@ -1,5 +1,6 @@
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.HashSet;
 //@Author Aritz Ciriza
 /**
@@ -65,8 +66,8 @@ public class Festival {
      */
     public Mes getMes() {
 
-        String fechaA = String.valueOf(fechaInicio);
-        Mes mes = Mes.valueOf(fechaA);
+        String fechaA = String.valueOf(fechaInicio.getMonth());
+        Mes mes = Mes.valueOf(fechaA.toUpperCase().trim());
         
         return mes;
         
@@ -80,7 +81,7 @@ public class Festival {
      */
     public boolean empiezaAntesQue(Festival otro) {
 
-        return fechaInicio.compareTo( otro.getFechaInicio()) < 0;
+        return fechaInicio.compareTo(otro.getFechaInicio()) < 0;
         
     }
 
@@ -93,8 +94,7 @@ public class Festival {
     public boolean empiezaDespuesQue(Festival otro) {
 
 
-        return fechaInicio.compareTo( otro.getFechaInicio()) > 0;
-        
+        return fechaInicio.compareTo(otro.getFechaInicio()) > 0;
     }
 
     /**
@@ -102,9 +102,9 @@ public class Festival {
      * @return true si el festival ya ha concluido
      */
     public boolean haConcluido() {
+        LocalDate hoy = LocalDate.now();
 
-
-        return fechaInicio.equals(LocalDate.now());
+        return fechaInicio.isAfter(hoy);
 
     }
 
@@ -115,8 +115,20 @@ public class Festival {
      */
     @Override
     public String toString() {
-       //TODO
-        
+       StringBuilder sb = new StringBuilder();
+       sb.append(nombre + "\t" + "\t" + estilos + "\n");
+       sb.append(lugar + "\n");
+       LocalDate hoy = LocalDate.now();
+        Period p = Period.between(hoy, fechaInicio);
+       int tiemporRestante = p.getDays();
+        LocalDate fechaFinalizacion = fechaInicio.plusDays(duracion);
+       if(duracion == 1){
+           sb.append(fechaInicio + "("+"quedan"+ tiemporRestante +"dias"+")");
+       }
+       else{
+           sb.append(fechaInicio + "fechaFinalizacion" +"("+"quedan"+ tiemporRestante +"dias"+")");
+       }
+
         return null;
         
     }
