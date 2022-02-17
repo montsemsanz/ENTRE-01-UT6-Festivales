@@ -30,7 +30,7 @@ public class Festival {
         
     }
     
-    public String getNombre() {
+    public String  getNombre() {
         return nombre;
     }
     
@@ -79,12 +79,7 @@ public class Festival {
      * en un fecha anterior a otro
      */
     public boolean empiezaAntesQue(Festival otro) {
-        int i = fechaInicio.compareTo(otro.getFechaInicio());
-        if(i<0){
-            return true;}
-        
-        return false;
-        
+        return fechaInicio.compareTo(otro.getFechaInicio()) < 0;
     }
 
     /**
@@ -94,10 +89,7 @@ public class Festival {
      * en un fecha posteior a otro
      */
     public boolean empiezaDespuesQue(Festival otro) {
-        int i = fechaInicio.compareTo(otro.getFechaInicio());
-        if(i>0){
-            return true;}
-        return false;
+        return fechaInicio.compareTo(otro.getFechaInicio()) > 0;
     }
 
     /**
