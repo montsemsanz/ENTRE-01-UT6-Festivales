@@ -47,14 +47,14 @@ public class FestivalesIO {
 
         String lugar = nombreLugar(lineaFestival);
 
-        int duración =
+        int duración = getDuracion(lineaFestival);
 
-        LocalDate fecha = ;
+        LocalDate fecha = getFecha(lineaFestival);
 
-        HashSet<Estilo> estilos = ;
+        HashSet<Estilo> estilos = getEstilos(lineaFestival);
 
 
-        Festival festival = new Festival(nombre, lugar, duración, fecha, estilos);
+        Festival festival = new Festival(nombre, lugar, fecha, duración, estilos);
         
         return festival;
     }
@@ -94,25 +94,42 @@ public class FestivalesIO {
     /**
      * Obtener la fecha
      */
-    private static String getFecha(String lineaFestival) {
+    private static LocalDate getFecha(String lineaFestival) {
 
         String[] fecha = lineaFestival.split(":");
 
-        return fecha[2];
+        String date = fecha[2];
+
+        String[] separada = fecha[2].split("-");
+
+        LocalDate newFecha = LocalDate.of(Integer.parseInt(separada[0]), Integer.parseInt(separada[1]),
+                Integer.parseInt(separada[2]));
+
+        return newFecha;
     }
 
     /**
      * Obtener estilos
      */
-    private static String getEstilos(String lineaFestival) {
+    private static HashSet<Estilo> getEstilos(String lineaFestival) {
 
-        String[] estilo = lineaFestival.split(":");
+        HashSet<Estilo> estilo = new HashSet<>();
 
-        String cadena = "";
+        Estilo[] est = Estilo.values();
 
-        for (int i = 3; i < estilo.length; i++) {
-            cadena += "estilo[i]";
+         String[] estilos = lineaFestival.split(":");
+
+        int j= 0;
+
+        for (int i = 4; i < estilos.length; i++) {
+            if(est[j].equals(estilos[i])) {
+                estilo.add(est[i]);
+                j++;
+            }
         }
-        return cadena;
+
+
+
+        return estilo;
     }
 }
