@@ -9,6 +9,7 @@ import java.time.LocalDate;
  * La clase contiene méodos estáticos que permiten
  * cargar la agenda de festivales leyendo los datos desde
  * un fichero
+ * @author David Sena
  */
 public class FestivalesIO {
 

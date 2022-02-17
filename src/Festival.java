@@ -1,5 +1,6 @@
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
 
 /**
@@ -9,6 +10,7 @@ import java.util.HashSet;
  * en una determinada fecha, dura una serie de días y
  * se engloba en un conjunto determinado de estilos
  *
+ * @author David Sena
  */
 public class Festival {
     private final String nombre;
@@ -64,9 +66,9 @@ public class Festival {
      *
      */
     public Mes getMes() {
-
+        Mes[] mes = Mes.values();
         
-        return null;
+        return mes[getFechaInicio().getMonthValue()-1];
         
     }
 
@@ -99,9 +101,8 @@ public class Festival {
      * @return true si el festival ya ha concluido
      */
     public boolean haConcluido() {
-        //TODO
-        
-        return true;
+        LocalDate fechaNueva =  fechaInicio.plusDays(getDuracion());
+        return fechaNueva.isBefore(LocalDate.now());
 
     }
 
@@ -112,9 +113,34 @@ public class Festival {
      */
     @Override
     public String toString() {
-       //TODO
-        
-        return null;
+        String str = "";
+        str +=   nombre + "\t" + estilos.toString() + "\n"; //Seccion del nombre y los estilos
+        str += lugar + "\n";//Seccion del lugar
+
+
+        long tiempoFalta = fechaInicio.until(LocalDate.now(), ChronoUnit.DAYS); //diferencia de dias
+        LocalDate fechaDuracion = fechaInicio.plusDays(duracion); //fecha final de fin de festival
+
+        //seccion de las fechas
+
+        str += fechaInicio.getDayOfMonth()+ " " + getMes();
+        if (duracion == 1){
+            str += " " + fechaInicio.getYear();
+        }
+        else{
+            str += " - " + fechaDuracion.getDayOfMonth() + " " + fechaDuracion.getMonth() + " " + fechaDuracion.getYear();
+        }
+        if(fechaInicio.isBefore(LocalDate.now()) && fechaDuracion.isBefore(LocalDate.now())){
+            str += "º(quedan " + tiempoFalta + " días)";
+        }
+        else if(fechaInicio.isBefore(LocalDate.now()) && fechaDuracion.isBefore(LocalDate.now())){
+            str += "(ON)";
+        }
+        else if(haConcluido()){
+            str += "(concluido)";
+        }
+        str += "\n----------------------------------------";
+        return str;
         
     }
 
