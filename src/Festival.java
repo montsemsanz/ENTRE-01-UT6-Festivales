@@ -39,10 +39,10 @@ public class Festival {
     }
     
     public LocalDate getFechaInicio() {
-        return fechaInicio;
+        return  fechaInicio;
     }
     
-    public int getDuracion() {
+    public int  getDuracion() {
         return duracion;
     }
     
