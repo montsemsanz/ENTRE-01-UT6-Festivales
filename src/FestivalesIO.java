@@ -41,7 +41,9 @@ public class FestivalesIO {
      */
     public static Festival parsearLinea(String lineaFestival) {
         String [] nombres = lineaFestival.trim().split(":");
-        Festival festival = new Festival();
+        HashSet datos = new HashSet();
+
+        Festival festival = new Festival(nombres[0],nombres[1],nombres[2],nombres[3],nombres[4],nombres[5]);
         return festival;
     }
 
@@ -94,16 +96,16 @@ public class FestivalesIO {
      * devuelve de estilos
      */
     private static HashSet estilo(String lineaFestival) {
+        int x = 0;
         HashSet <Estilo> valores = new HashSet<>();
-
+        Estilo[] estilos = Estilo.values();
         String [] nombres = lineaFestival.trim().split(":");
         for (int i = 4; i < nombres.length;i++){
-            if (nombres[i].equalsIgnoreCase() ){
-
+            if(nombres[i].equalsIgnoreCase(String.valueOf(estilos[x]))){
+                valores.add(estilos[x]);
             }
-             valores.add(nombres[i]);
+            x++;
         }
-        String duracion = nombrefesti  + "días";
-        return duracion;
+        return valores;
     }
 }

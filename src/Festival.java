@@ -2,6 +2,8 @@
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.HashSet;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  *  @author Iñigo Camarero
@@ -60,8 +62,14 @@ public class Festival {
      *
      */
     public Mes getMes() {
-        Month mes = fechaInicio.getMonth();
-        String
+        Mes valorMes = null;
+        Mes [] arrayMes = Mes.values();
+        for (int i = 0; i < arrayMes.length;i++){
+            if(i == fechaInicio.getMonthValue()){
+                valorMes = arrayMes[i];
+            }
+        }
+        return valorMes;
     }
 
     /**
@@ -86,7 +94,7 @@ public class Festival {
      *
      * @return true si el festival ya ha concluido
      */
-    public boolean haConcluido() {
+    public boolean haConcluido(){
        return fechaInicio.plusDays(duracion).compareTo(LocalDate.now()) > 0;
     }
 
@@ -95,10 +103,21 @@ public class Festival {
      * como se indica en el enunciado
      *
      */
-    @Override
-    public String toString() {
+        public String toString () {
 
-        
+            String duracionnom = "";
+            if(haConcluido){
+                duracionnom = "Ha concluido";
+            }
+            else if () (
+                    duracionnom = "ON";
+            )
+            else {
+                duracionnom = "quedan" +  + "dias";
+            }
+        }
+        System.out.println(getNombre() + "               " + getEstilos() + "\n" +
+                getLugar() + "\n" + getFechaInicio() +  "\n" + "\n------------------------------------------------";
     }
 
     /**
