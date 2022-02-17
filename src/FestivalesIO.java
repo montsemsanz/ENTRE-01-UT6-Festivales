@@ -3,6 +3,7 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
@@ -60,14 +61,14 @@ public class FestivalesIO {
 
     public static LocalDate obtenerfecha (String lineaFestival) {
         String[] l = lineaFestival.split(":");
-        LocalDate fechaInicio = LocalDate.parse(l[2].trim()),
-                                DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        return l[2];
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate fechaInicio = LocalDate.parse(l[2].trim(),formatter);
+        return fechaInicio;
     }
 
     public static int obtenerDuracion (String lineaFestival) {
         String[] l = lineaFestival.split(":");
-        return Integer.parseInt(l[3]);
+        return Integer.parseInt(l[3].trim());
     }
 
     public static HashSet<Estilo> obtenerEstilos (String lineaFestival) {
@@ -79,7 +80,14 @@ public class FestivalesIO {
         return estilos;
     }
 
-
+    public static void main(String[] args) {
+        String datosFestival = "Gazpatxo Rock : " +
+                "valencia: 28-02-2022  :1  :rock" +
+                ":punk " +
+                ": hiphop ";
+        Festival f1 = parsearLinea(datosFestival);
+        System.out.println(f1);
+    }
 
 
     
