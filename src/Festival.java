@@ -75,10 +75,7 @@ public class Festival {
      * en un fecha anterior a otro
      */
     public boolean empiezaAntesQue(Festival otro) {
-        //TODO
-        
-        return true;
-        
+        return fechaInicio.isBefore(otro.getFechaInicio());
     }
 
     /**
@@ -88,10 +85,7 @@ public class Festival {
      * en un fecha posteior a otro
      */
     public boolean empiezaDespuesQue(Festival otro) {
-        //TODO
-        
-        return true;
-        
+        return fechaInicio.isAfter(otro.getFechaInicio());
     }
 
     /**
@@ -99,10 +93,8 @@ public class Festival {
      * @return true si el festival ya ha concluido
      */
     public boolean haConcluido() {
-        //TODO
-        
-        return true;
-
+        LocalDate fechaFinal = fechaInicio.plusDays(duracion);
+        return fechaFinal.isBefore(LocalDate.now());
     }
 
     /**
