@@ -1,5 +1,6 @@
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -42,16 +43,27 @@ public class FestivalesIO {
      */
     public static Festival parsearLinea(String lineaFestival) {
 
+        String nombre = nombreFestival(lineaFestival);
 
+        String lugar = nombreLugar(lineaFestival);
+
+        int duración =
+
+        LocalDate fecha = ;
+
+        HashSet<Estilo> estilos = ;
+
+
+        Festival festival = new Festival(nombre, lugar, duración, fecha, estilos);
         
-        return null;
+        return festival;
     }
 
 
     /**
      * Obtener el nombre
      */
-    private  String nombreFestival(String lineaFestival) {
+    private static String nombreFestival(String lineaFestival) {
 
         String[] nom = lineaFestival.split(":");
 
@@ -61,7 +73,7 @@ public class FestivalesIO {
     /**
      * Obtener la fecha
      */
-    private  String nombreLugar(String lineaFestival) {
+    private static String nombreLugar(String lineaFestival) {
 
         String[] lugar = lineaFestival.split(":");
 
@@ -69,9 +81,20 @@ public class FestivalesIO {
     }
 
     /**
+     * Obtener la duración
+     */
+    private static int getDuracion(String lineaFestival) {
+
+        String[] duracion = lineaFestival.split(":");
+
+        return Integer.parseInt(duracion[2]);
+    }
+
+
+    /**
      * Obtener la fecha
      */
-    private  String getFecha(String lineaFestival) {
+    private static String getFecha(String lineaFestival) {
 
         String[] fecha = lineaFestival.split(":");
 
@@ -81,7 +104,7 @@ public class FestivalesIO {
     /**
      * Obtener estilos
      */
-    private  String getEstilos(String lineaFestival) {
+    private static String getEstilos(String lineaFestival) {
 
         String[] estilo = lineaFestival.split(":");
 
