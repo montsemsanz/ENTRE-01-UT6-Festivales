@@ -53,21 +53,43 @@ public class FestivalesIO {
      */
     private  String nombreFestival(String lineaFestival) {
 
-        String[] nom = lineaFestival.split(";");
+        String[] nom = lineaFestival.split(":");
 
         return nom[0];
     }
 
     /**
-     * Obtener el lugar
+     * Obtener la fecha
      */
     private  String nombreLugar(String lineaFestival) {
 
-        String[] nom = lineaFestival.split(";");
+        String[] lugar = lineaFestival.split(":");
 
-        return nom[1];
+        return lugar[1];
     }
-   
-    
-    
+
+    /**
+     * Obtener la fecha
+     */
+    private  String getFecha(String lineaFestival) {
+
+        String[] fecha = lineaFestival.split(":");
+
+        return fecha[2];
+    }
+
+    /**
+     * Obtener estilos
+     */
+    private  String getEstilos(String lineaFestival) {
+
+        String[] estilo = lineaFestival.split(":");
+
+        String cadena = "";
+
+        for (int i = 3; i < estilo.length; i++) {
+            cadena += "estilo[i]";
+        }
+        return cadena;
+    }
 }
