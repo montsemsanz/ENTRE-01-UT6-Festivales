@@ -59,6 +59,7 @@ public class FestivalesIO {
         String nombre = "";
         nombre += aux[0].toUpperCase().charAt(0);
         nombre += aux[0].substring(1);
+        nombre += " ";
         nombre += aux[1].toUpperCase().charAt(0);
         nombre += aux[1].substring(1);
         return nombre;
@@ -81,7 +82,7 @@ public class FestivalesIO {
     private static LocalDate  consigueFecha(String cadena) {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDate fecha = LocalDate.parse(cadena,formatter);
+        LocalDate fecha = LocalDate.parse(cadena.trim(),formatter);
         return fecha;
 
     }

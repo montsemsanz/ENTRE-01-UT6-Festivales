@@ -1,7 +1,11 @@
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.Period;
+import java.time.format.TextStyle;
 import java.util.HashSet;
+import java.util.Locale;
+import static java.time.temporal.ChronoUnit.DAYS;
 //@Author Aritz Ciriza
 /**
  * Un objeto de esta clase almacena los datos de un
@@ -81,7 +85,7 @@ public class Festival {
      */
     public boolean empiezaAntesQue(Festival otro) {
 
-        return fechaInicio.compareTo(otro.getFechaInicio()) < 0;
+        return fechaInicio.isBefore(otro.getFechaInicio());
         
     }
 
@@ -94,7 +98,7 @@ public class Festival {
     public boolean empiezaDespuesQue(Festival otro) {
 
 
-        return fechaInicio.compareTo(otro.getFechaInicio()) > 0;
+        return fechaInicio.isAfter(otro.getFechaInicio()) ;
     }
 
     /**
@@ -119,17 +123,74 @@ public class Festival {
        sb.append(nombre + "\t" + "\t" + estilos + "\n");
        sb.append(lugar + "\n");
        LocalDate hoy = LocalDate.now();
-        Period p = Period.between(hoy, fechaInicio);
-       int tiemporRestante = p.getDays();
-        LocalDate fechaFinalizacion = fechaInicio.plusDays(duracion);
-       if(duracion == 1){
-           sb.append(fechaInicio + "("+"quedan"+ tiemporRestante +"dias"+")");
-       }
-       else{
-           sb.append(fechaInicio + "fechaFinalizacion" +"("+"quedan"+ tiemporRestante +"dias"+")");
-       }
+        Period p = Period.between(fechaInicio, hoy);
+        int tiemporRestante = p.getDays();
 
-        return null;
+        LocalDate fechaFinalizacion = fechaInicio.plusDays(duracion);
+
+        // Obtienes el mes actual
+        Month mes ;
+        mes = fechaInicio.getMonth();
+        Month mes2;
+        mes2 = fechaFinalizacion.getMonth();
+
+        // Obtienes el nombre del mes
+        String nombre = mes.getDisplayName(TextStyle.FULL, new Locale("es", "ES"));
+        String nombre2 = mes2.getDisplayName(TextStyle.FULL, new Locale("es", "ES"));
+
+        long tiempoRestante1 = DAYS.between(hoy, fechaFinalizacion);
+
+        String fechaInicioF = "";
+        fechaInicioF += fechaInicio.getDayOfMonth();
+        fechaInicioF += " ";
+        fechaInicioF += nombre.substring(0,3);
+        fechaInicioF += ".";
+        fechaInicioF += fechaInicio.getYear();
+
+        String fechaFinalizacionF = "";
+        fechaFinalizacionF += fechaFinalizacion.getDayOfMonth();
+        fechaFinalizacionF += " ";
+        fechaFinalizacionF += nombre2.substring(0,3);
+        fechaFinalizacionF += ".";
+        fechaFinalizacionF += fechaFinalizacion.getYear();
+
+        String fechaInicioF2 = "";
+        fechaInicioF2 += fechaInicio.getDayOfMonth();
+        fechaInicioF2 += " ";
+        fechaInicioF2 += nombre.substring(0,3);
+        fechaInicioF2 += ".";
+
+        if(duracion == 1){
+           if(fechaInicio.isAfter(hoy)){
+               sb.append(fechaInicioF + "("+"quedan "+ tiempoRestante1 +" dias"+")");
+           }
+
+           else if ((hoy.isAfter(fechaInicio) && hoy.isBefore(fechaFinalizacion))){
+               sb.append(fechaInicioF + "(ON)");
+           }
+
+           else{
+               sb.append(fechaInicioF + "(CONCLUIDO)");
+           }
+
+       }
+       else {
+            if(fechaInicio.isAfter(hoy)){
+                sb.append(fechaInicioF2 +" - "+ fechaFinalizacionF + "(" + "quedan " + tiempoRestante1 + " dias" + ")");
+            }
+
+            else if ((hoy.isAfter(fechaInicio) && hoy.isBefore(fechaFinalizacion))){
+                sb.append(fechaInicioF2 +" - "+ fechaFinalizacionF + "(ON)");
+            }
+
+            else{
+                sb.append(fechaInicioF2 +" - "+ fechaFinalizacionF + "(CONCLUIDO)");
+            }
+        }
+       sb.append("\n" + "-------------------------------------");
+
+
+        return sb.toString();
         
     }
 
@@ -181,4 +242,5 @@ public class Festival {
         
         
     }
+
 }
