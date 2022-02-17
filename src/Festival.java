@@ -50,7 +50,6 @@ public class Festival {
     
     public void addEstilo(Estilo estilo) {
         this.estilos.add(estilo);
-        
     }
 
     /**
@@ -59,10 +58,14 @@ public class Festival {
      *
      */
     public Mes getMes() {
-        //TODO
-        
-        return null;
-        
+        Mes[] meses = Mes.values();
+        Mes mes = null;
+        for (int i = 0; i < 12; i++) {
+            if(fechaInicio.getMonthValue() == i){
+                mes = meses[i];
+            }
+        }
+        return mes;
     }
 
     /**
