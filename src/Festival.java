@@ -10,7 +10,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
  * Todo festival tiene un nombre, se celebra en un lugar
  * en una determinada fecha, dura una serie de días y
  * se engloba en un conjunto determinado de estilos
- *
+ *@ author Pablo Mosquera
  */
 public class Festival {
     private final String nombre;
@@ -62,8 +62,17 @@ public class Festival {
      */
     public Mes getMes() {
 
+        Mes[] meses = Mes.values();
+        int mes = fechaInicio.getMonthValue();
+        Mes mesInicio = meses[mes - 1];
 
-        
+        for(int i = 0; i < 12; i++) {
+            if (mesInicio.equals(meses[i])){
+                return mesInicio;
+            }
+        }
+
+       return mesInicio;
     }
 
     /**
@@ -74,7 +83,7 @@ public class Festival {
      */
     public boolean empiezaAntesQue(Festival otro) {
 
-        return fechaInicio.compareTo(otro.getFechaInicio()) > 0;
+        return fechaInicio.isAfter(otro.getFechaInicio());
         
     }
 
@@ -86,7 +95,7 @@ public class Festival {
      */
     public boolean empiezaDespuesQue(Festival otro) {
         
-        return fechaInicio.compareTo(otro.getFechaInicio()) <  0;
+        return fechaInicio.isBefore(otro.getFechaInicio());
         
     }
 
@@ -109,7 +118,7 @@ public class Festival {
      */
     @Override
     public String toString() {
-       //TODO
+
         
         return null;
         
