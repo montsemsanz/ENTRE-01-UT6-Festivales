@@ -107,10 +107,23 @@ public class Festival {
      */
     @Override
     public String  toString() {
-       //TODO
-        
-        return null;
-        
+        String str = "";
+        str = getNombre() + "                     " + estilos.toString() + "\n" + getLugar() + "\n" + getFechaInicio().toString();
+            if(haConcluido()){
+                str += " (concluido)";
+            }
+            if(!haConcluido()){
+                str += " (quedan) " + fechaInicio.compareTo(LocalDate.now()) + "dias";
+            }
+            else{
+                str += " (ON)";
+            }
+            str += "--------------------------------------------- ----------------------------\n";
+
+
+        return str;
+
+
     }
 
     /**
