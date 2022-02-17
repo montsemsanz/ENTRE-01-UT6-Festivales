@@ -1,6 +1,10 @@
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 /**
  * Un objeto de esta clase almacena los datos de un
@@ -82,9 +86,8 @@ public class Festival {
      * en un fecha posteior a otro
      */
     public boolean empiezaDespuesQue(Festival otro) {
-        //TODO
-        
-        return true;
+
+        return fechaInicio.isAfter(otro.getFechaInicio());
         
     }
 
@@ -93,9 +96,8 @@ public class Festival {
      * @return true si el festival ya ha concluido
      */
     public boolean haConcluido() {
-        //TODO
-        
-        return true;
+        LocalDate fechaFin = fechaInicio.plusDays(duracion);
+        return fechaFin.isBefore(LocalDate.now());
 
     }
 
@@ -107,8 +109,30 @@ public class Festival {
     @Override
     public String toString() {
        //TODO
-        
-        return null;
+        String str = "";
+        DateTimeFormatter formatter1  = DateTimeFormatter.ofPattern("dd MMM. yyyy");
+        DateTimeFormatter formatter2  = DateTimeFormatter.ofPattern("dd MMM.");
+        String fecha = "";
+        if (duracion == 1) {
+            fecha = fechaInicio.format(formatter1);
+        } else {
+            LocalDate fechaFin = fechaInicio.plusDays(duracion);
+            fecha = fechaInicio.format(formatter2) + " - " + fechaFin.format(formatter1);
+        }
+        String concluye = "";
+        if (haConcluido()) {
+            concluye = "(concluido)";
+        } else if (fechaInicio.isBefore(LocalDate.now())) {
+            concluye = "(ON)";
+        } else {
+            int diasEntre = (int) DAYS.between(LocalDate.now(), fechaInicio);
+            concluye = "(quedan " + diasEntre + " días)";
+        }
+
+        str = String.format("%-30s%s\n%s\n%s %s\n%s", nombre, estilos.toString(), lugar, fecha,
+                concluye, "------------------------------------------------------------")  ;
+        return str;
+
         
     }
 
