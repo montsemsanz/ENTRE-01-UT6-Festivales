@@ -108,7 +108,7 @@ public class Festival {
     public boolean haConcluido() {
         LocalDate hoy = LocalDate.now();
 
-        return fechaInicio.isAfter(hoy);
+        return hoy.isAfter(fechaInicio);
 
     }
 
