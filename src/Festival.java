@@ -1,5 +1,7 @@
 
 import java.time.LocalDate;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 
 /**
@@ -33,7 +35,7 @@ public class Festival {
     }
     
     public String getLugar() {
-        return lugar;
+        return  lugar;
     }
     
     public LocalDate getFechaInicio() {
@@ -58,12 +60,17 @@ public class Festival {
      * valor enumerado
      *
      */
-   // public Mes getMes() {
-        //TODO
-        
-       // return ;
-        
-   // }
+   public Mes getMes() {
+       Mes[] meses = Mes.values();
+       String fecha = fechaInicio.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+       String[] partes = fecha.split("-");
+    for(int i = 0; i<meses.length;i++){
+        if (partes[1].equals(String.valueOf(i)) ){
+            return meses[i];
+        }
+    }
+       return meses[1];
+    }
 
     /**
      *
@@ -72,9 +79,11 @@ public class Festival {
      * en un fecha anterior a otro
      */
     public boolean empiezaAntesQue(Festival otro) {
-        //TODO
+        int i = fechaInicio.compareTo(otro.getFechaInicio());
+        if(i<0){
+            return true;}
         
-        return true;
+        return false;
         
     }
 
@@ -85,10 +94,10 @@ public class Festival {
      * en un fecha posteior a otro
      */
     public boolean empiezaDespuesQue(Festival otro) {
-        //TODO
-        
-        return true;
-        
+        int i = fechaInicio.compareTo(otro.getFechaInicio());
+        if(i>0){
+            return true;}
+        return false;
     }
 
     /**
