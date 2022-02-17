@@ -35,7 +35,7 @@ public class Festival {
     }
     
     public String getLugar() {
-        return  lugar;
+        return lugar;
     }
     
     public LocalDate getFechaInicio() {
