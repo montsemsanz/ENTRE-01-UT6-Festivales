@@ -58,12 +58,12 @@ public class Festival {
      * valor enumerado
      *
      */
-    public Mes getMes() {
+   // public Mes getMes() {
         //TODO
         
-        return null;
+       // return ;
         
-    }
+   // }
 
     /**
      *

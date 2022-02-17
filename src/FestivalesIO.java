@@ -1,5 +1,6 @@
 
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -39,9 +40,43 @@ public class FestivalesIO {
      * @return el festival creado
      */
     public static Festival parsearLinea(String lineaFestival) {
-       //TODO
+        String palabras[] = lineaFestival.split(":");
+       Festival festival = new Festival(getNombreFestival(lineaFestival),getLugar(lineaFestival),getFecha(lineaFestival),getDuracion(lineaFestival),getEstilos(lineaFestival));
         
-        return null;
+        return festival;
+    }
+    public static String getNombreFestival(String lineaFestival) {
+        String palabras[] = lineaFestival.split(":");
+        String nombre = palabras[0];
+        return nombre;
+    }
+    public static String getLugar(String lineaFestival) {
+        String palabras[] = lineaFestival.split(":");
+        String lugar = palabras[1];
+        return lugar;
+
+    }
+    public static LocalDate getFecha(String lineaFestival) {
+        String palabras[] = lineaFestival.split(":");
+        String fecha = palabras[2];
+        LocalDate date = LocalDate.parse(fecha);
+        return date;
+
+    }
+    public static int getDuracion(String lineaFestival) {
+        String palabras[] = lineaFestival.split(":");
+        int duracion = Integer.parseInt(palabras[3]);
+        return duracion;
+
+    }
+    public static HashSet getEstilos(String lineaFestival) {
+        String palabras[] = lineaFestival.split(":");
+        HashSet<String> estilos = new HashSet<String>();
+        for(int i = 4; i < palabras.length;i++ ){
+             estilos.add(palabras[i]);
+        }
+        return estilos;
+
     }
     
    
