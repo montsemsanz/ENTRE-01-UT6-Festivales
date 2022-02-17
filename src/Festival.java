@@ -1,5 +1,6 @@
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.HashSet;
 
 /**
@@ -59,10 +60,10 @@ public class Festival {
      *
      */
     public Mes getMes() {
-
+        Mes[] meses = Mes.values();
 
         
-        return null;
+        return meses[getFechaInicio().getMonthValue()];
         
     }
 
@@ -109,9 +110,10 @@ public class Festival {
      */
     @Override
     public String toString() {
-       //TODO
+       String str = "";
+       str += getNombre() + getEstilos() + "\n" + getLugar() + getFechaInicio() + "(quedan " + getDuracion() + " dias )" ;
         
-        return null;
+        return str;
         
     }
 
