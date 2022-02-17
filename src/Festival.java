@@ -104,10 +104,11 @@ public class Festival {
      */
     @Override
     public String toString() {
-       //TODO
-        
-        return null;
-        
+        String cadena = nombre + "           " + estilos.toString() + "\n";
+        cadena += lugar + "\n";
+        cadena += fechaInicio.getDayOfMonth()+ fechaInicio.getMonth().toString() + " - " +
+                fechaInicio.plusDays(duracion).getDayOfMonth() + fechaInicio.plusDays(duracion).getMonth() + fechaInicio.getYear();
+        return cadena;
     }
 
     /**
