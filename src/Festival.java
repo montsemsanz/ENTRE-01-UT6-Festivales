@@ -100,7 +100,7 @@ public class Festival {
         StringBuilder sb = new StringBuilder();
         sb.append(nombre + String.format("%25s", estilos));
         sb.append("\n" + lugar + "\n");
-
+        sb.append(escribirFechas());
 
         sb.append("---------------------------------------------");
         return sb.toString();
@@ -109,12 +109,16 @@ public class Festival {
 
     private String escribirFechas() {
         String str = "";
-        Festival festival = new Festival(nombre, lugar, fechaInicio, duracion, estilos);
+        int fecha = fechaInicio.plusDays(duracion).getDayOfMonth();
+
         if (haConcluido()) {
             str += (getFechaInicio().getDayOfMonth() + " " + getMes().toString().toLowerCase().substring(0, 3) + ". - " + (getFechaInicio().getDayOfMonth() + duracion)
                     + " " + getMes().toString().toLowerCase().substring(0, 3) + ". " + getFechaInicio().getYear() + " (concluido)" + "\n");
-        } else if (empiezaAntesQue(festival)) {
-            str += (getFechaInicio().getDayOfMonth() + " " + getMes().toString().toLowerCase().substring(0, 3) + ". " + getFechaInicio().getYear() + "(quedan " + getFechaInicio().getDayOfMonth() + "\n");
+        } else if (getFechaInicio().isAfter(LocalDate.now())) {
+            str += (getFechaInicio().getDayOfMonth() + " " + getMes().toString().toLowerCase().substring(0, 3) + ". " + getFechaInicio().getYear() + " (quedan " + (getFechaInicio().getDayOfMonth() - LocalDate.now().getDayOfMonth()) + " dias)" + "\n");
+        } else {
+            str += getFechaInicio().getDayOfMonth() + " " + getMes().toString().toLowerCase().substring(0, 3) + ". - " + (getFechaInicio().plusDays(duracion).getDayOfMonth())
+                    + " " + getFechaInicio().plusDays(duracion).getMonth().toString().toLowerCase().substring(0, 3) + ". " + getFechaInicio().getYear() + " (ON)" + "\n";
         }
         return str;
     }
