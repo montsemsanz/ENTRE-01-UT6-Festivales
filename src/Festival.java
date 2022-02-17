@@ -63,7 +63,7 @@ public class Festival {
         Mes[] meses = Mes.values();
 
         
-        return meses[getFechaInicio().getMonthValue()];
+        return meses[getFechaInicio().getMonthValue() -1 ];
         
     }
 
@@ -111,7 +111,7 @@ public class Festival {
     @Override
     public String toString() {
        String str = "";
-       str += getNombre() + getEstilos() + "\n" + getLugar() + getFechaInicio() + "(quedan " + getDuracion() + " dias )" ;
+       str += getNombre() + "\t" +  getEstilos() + "\n" + getLugar() + getFechaInicio() + "(quedan " + getDuracion() + " dias )" ;
         
         return str;
         
