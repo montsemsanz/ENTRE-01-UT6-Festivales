@@ -50,11 +50,11 @@ public class FestivalesIO {
             festival = festival2;
         }
         else if(nombres.length == 7) {
-            Festival festival2 = new Festival(nombres[0],nombres[1],nombres[2],nombres[3],nombres[4],nombres[5],nombres[6];
+            Festival festival2 = new Festival (nombres[0],nombres[1],nombres[2],nombres[3],nombres[4],nombres[5],nombres[6];
             festival = festival2;
         }
         else{
-            Festival festival2 = new Festival(nombres[0],nombres[1],nombres[2],nombres[3],nombres[4],nombres[5],nombres[6],nombres[7];
+            Festival festival2 = new Festival(nombres[0],nombres[1],nombres[2],nombres[3],nombres[4],nombres[5],nombres[6],nombres[7]);
             festival = festival2;
         }
         return festival;

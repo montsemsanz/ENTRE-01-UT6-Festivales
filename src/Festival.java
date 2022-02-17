@@ -1,7 +1,12 @@
+
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.HashSet;
+import java.util.Date;
+import java.util.Locale;
 
 /**
+ * @author Iñigo Camarero
  * Un objeto de esta clase almacena los datos de un
  * festival.
  * Todo festival tiene un nombre, se celebra en un lugar
@@ -17,8 +22,7 @@ public class Festival {
     private final HashSet<Estilo> estilos;
 
 
-    public Festival(String nombre, String lugar, LocalDate fechaInicio,
-                    int duracion, HashSet<Estilo> estilos) {
+    public Festival(String nombre) {
         this.nombre = nombre;
         this.lugar = lugar;
         this.fechaInicio = fechaInicio;
@@ -30,28 +34,32 @@ public class Festival {
     public String getNombre() {
         return nombre;
     }
-
+    
     public String getLugar() {
         return lugar;
     }
-
+    
     public LocalDate getFechaInicio() {
         return fechaInicio;
     }
-
+    
     public int getDuracion() {
         return duracion;
     }
-
+    
     public HashSet<Estilo> getEstilos() {
         return estilos;
     }
-
+    
     public void addEstilo(Estilo estilo) {
         this.estilos.add(estilo);
-
     }
 
+    /**
+     * devuelve el mes de celebración del festival, como
+     * valor enumerado
+     *
+     */
     public Mes getMes() {
         String mes = String.valueOf(getFechaInicio().getMonth());
         Mes mes2 = Mes.valueOf(mes.toUpperCase().trim());
@@ -76,19 +84,19 @@ public class Festival {
      */
     public boolean empiezaDespuesQue(Festival otro) {
         return getFechaInicio().isAfter(otro.getFechaInicio());
+    /**
+     *
+     * @return true si el festival ya ha concluido
+     */
+    public boolean haConcluido(){
+       return getFechaInicio().plusDays(duracion).compareTo(LocalDate.now()) > 0;
+    }
 
-        /**
-         *
-         * @return true si el festival ya ha concluido
-         */
-        public boolean haConcluido(){
-            return getFechaInicio().plusDays(duracion).compareTo(LocalDate.now()) > 0;
-        }
-        /**
-         * Representación textual del festival, exactamente
-         * como se indica en el enunciado
-         *
-         */
+    /**
+     * Representación textual del festival, exactamente
+     * como se indica en el enunciado
+     *
+     */
         public String toString () {
 
             String duracionnom = "";
@@ -118,23 +126,23 @@ public class Festival {
                 ": hiphop ";
         Festival f1 = FestivalesIO.parsearLinea(datosFestival);
         System.out.println(f1);
-
+        
         datosFestival = "black sound fest:badajoz:05-02-2022:  21" +
                 ":rock" + ":  blues";
         Festival f2 = FestivalesIO.parsearLinea(datosFestival);
         System.out.println(f2);
-
+    
         datosFestival = "guitar bcn:barcelona: 28-01-2022 :  170" +
                 ":indie" + ":pop:fusion";
         Festival f3 = FestivalesIO.parsearLinea(datosFestival);
         System.out.println(f3);
-
+    
         datosFestival = "  benidorm fest:benidorm:26-01-2022:3" +
                 ":indie" + ": pop  :rock";
         Festival f4 = FestivalesIO.parsearLinea(datosFestival);
         System.out.println(f4);
-
-
+      
+        
         System.out.println("\nProbando empiezaAntesQue() empiezaDespuesQue()" +
                 "\n");
         if (f1.empiezaAntesQue(f2)) {
@@ -150,5 +158,8 @@ public class Festival {
         System.out.println(f4.getNombre() + " ha concluido? " + f4.haConcluido());
         System.out.println(f1);
         System.out.println(f1.getNombre() + " ha concluido? " + f1.haConcluido());
+ 
+        
+        
     }
 }
