@@ -42,7 +42,14 @@ public class AgendaFestivales {
      *
      */
     public void addFestival(Festival festival) {
-        //TODO
+        Mes mes = festival.getMes();
+
+        if (!agenda.containsKey(mes)) {
+            ArrayList<Festival> festivales = new ArrayList<>();
+            agenda.put(mes,festivales);
+        }
+        int i = obtenerPosicionDeInsercion(agenda.get(mes),festival);
+        agenda.get(mes).add(i,festival);
         
         
     }
@@ -56,8 +63,12 @@ public class AgendaFestivales {
      */
     private int obtenerPosicionDeInsercion(ArrayList<Festival> festivales,
                                            Festival festival) {
-       //TODO
-        
+        String nombre = festival.getNombre();
+        for (int i = 0; i < festivales.size(); i++) {
+            if(nombre.compareTo(festivales.get(i).getNombre()) < 0){
+                return i;
+            }
+        }
         return 0;
         
     }
