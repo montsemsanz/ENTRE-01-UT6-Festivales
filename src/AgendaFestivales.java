@@ -64,12 +64,14 @@ public class AgendaFestivales {
     private int obtenerPosicionDeInsercion(ArrayList<Festival> festivales,
                                            Festival festival) {
         String nombre = festival.getNombre();
-        for (int i = 0; i < festivales.size(); i++) {
-            if(nombre.compareTo(festivales.get(i).getNombre()) < 0){
+        int i = 0;
+        while (i < festivales.size()){
+            if (nombre.compareTo(festivales.get(i).getNombre()) < 0){
                 return i;
             }
+            i++;
         }
-        return 0;
+        return i;
         
     }
 
