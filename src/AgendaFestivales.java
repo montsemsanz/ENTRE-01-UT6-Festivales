@@ -22,7 +22,7 @@ import java.util.TreeMap;
  */
 public class AgendaFestivales {
     private TreeMap<Mes, ArrayList<Festival>> agenda;
-    
+
     public AgendaFestivales() {
         this.agenda = new TreeMap<>();
     }
@@ -42,9 +42,13 @@ public class AgendaFestivales {
      *
      */
     public void addFestival(Festival festival) {
-        //TODO
-        
-        
+        Mes mes = festival.getMes();
+        if(!agenda.containsKey(mes)){
+            ArrayList<Festival> festivales = new ArrayList<>();
+            agenda.put(mes, festivales);
+        }
+        int posicion = obtenerPosicionDeInsercion(agenda.get(mes), festival);
+        agenda.get(mes).add(posicion, festival);
     }
 
     /**
@@ -56,9 +60,15 @@ public class AgendaFestivales {
      */
     private int obtenerPosicionDeInsercion(ArrayList<Festival> festivales,
                                            Festival festival) {
-       //TODO
-        
-        return 0;
+        int pos = 0;
+        if(!festivales.isEmpty()){
+            for (Festival fes: festivales) {
+                if(fes.getNombre().compareTo(festival.getNombre()) < 0){
+                    pos++;
+                }
+            }
+        }
+        return pos;
         
     }
 
