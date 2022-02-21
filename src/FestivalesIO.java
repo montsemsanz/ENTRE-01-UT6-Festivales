@@ -57,11 +57,7 @@ public class FestivalesIO {
         HashSet<Estilo> estilos = new HashSet<>();
         Estilo[] estilo = Estilo.values();
         for (int i = 4; i < datos.length; i++) {
-            for (Estilo todos:estilo) {
-              if (datos[i].trim().equalsIgnoreCase(String.valueOf(todos))) {
-                    estilos.add(todos);
-                }
-            }
+            estilos.add(Estilo.valueOf(datos[i].trim().toUpperCase()) );
         }
 //        System.out.println(nombre + ", " + lugar + ", " + fecha2 + ", " + duracion + ", " + estilos);
         Festival festival = new Festival(nombre, lugar, fecha2, duracion, estilos);
