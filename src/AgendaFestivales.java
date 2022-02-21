@@ -43,9 +43,14 @@ public class AgendaFestivales {
      *
      */
     public void addFestival(Festival festival) {
-        //TODO
-        
-        
+        if (agenda.containsKey(festival.getMes())){
+            agenda.get(festival.getMes()).add(festival);
+        }
+        else{
+            ArrayList <Festival> festivalesara = new ArrayList<>();
+            agenda.put(festival.getMes(),festivalesara);
+            agenda.get(festival.getMes()).add(obtenerPosicionDeInsercion(festivalesara,festival),festival);
+        }
     }
 
     /**
@@ -55,12 +60,14 @@ public class AgendaFestivales {
      * @return la posición en la que debería ir el nuevo festival
      * de forma que la lista quedase ordenada por nombre
      */
-    private int obtenerPosicionDeInsercion(ArrayList<Festival> festivales,
-                                           Festival festival) {
-       //TODO
-        
-        return 0;
-        
+    private int obtenerPosicionDeInsercion(ArrayList<Festival> festivales, Festival festival) {
+        int pos = 0;
+        for (Festival item:festivales) {
+            if (festival.getNombre().compareTo(item.getNombre()) < 0){
+                pos++;
+            }
+        }
+        return pos;
     }
 
     /**
@@ -70,9 +77,11 @@ public class AgendaFestivales {
      */
     @Override
     public String toString() {
-        //TODO
-        
-        return null;
+        StringBuilder sb = new StringBuilder();
+        for (Festival item:agenda) {
+            sb.append(Festival.);
+        }
+        return sb.toString();
     }
 
     /**
@@ -82,9 +91,11 @@ public class AgendaFestivales {
      * Si el mes no existe se devuelve -1
      */
     public int festivalesEnMes(Mes mes) {
-       //TODO
-        
-        return 0;
+        int festivales = -1;
+        if (agenda.containsKey(mes)) {
+            festivales = agenda.get(mes).size();
+        }
+        return festivales;
     }
 
     /**
@@ -96,12 +107,15 @@ public class AgendaFestivales {
      *
      * Identifica el tipo exacto del valor de retorno
      */
-    public  Map   festivalesPorEstilo() {
-       //TODO
+    public  TreeMap  <String, ArrayList <String>> festivalesPorEstilo() {
+        TreeMap <String, ArrayList <String>> tipos = new TreeMap();
+        for (Festival item:agenda) {
+            if (festival.getNombre().compareTo(item.getNombre()) < 0){
+                pos++;
+            }
+        }
 
-         
-
-        return null;
+        return tipos;
     }
 
     /**
@@ -114,7 +128,7 @@ public class AgendaFestivales {
      * Si al borrar de un mes los festivales el mes queda con 0 festivales
      * se borra la entrada completa del map
      */
-    public int festivalesPorEstilo(HashSet<String> lugares, Mes mes) {
+    public int cancelarFestivales(HashSet<String> lugares, Mes mes) {
        //TODO
         
         return 0;

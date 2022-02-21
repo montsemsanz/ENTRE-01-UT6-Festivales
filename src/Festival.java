@@ -22,7 +22,7 @@ public class Festival {
     private final HashSet<Estilo> estilos;
 
 
-    public Festival(String nombre) {
+    public Festival(String nombre, String lugar, LocalDate fechaInicio, int duracion, HashSet<Estilo> estilos) {
         this.nombre = nombre;
         this.lugar = lugar;
         this.fechaInicio = fechaInicio;
@@ -61,15 +61,12 @@ public class Festival {
      *
      */
     public Mes getMes() {
-        String mes = String.valueOf(getFechaInicio().getMonth());
-        Mes mes2 = Mes.valueOf(mes.toUpperCase().trim());
-        return mes2;
+            return Mes.values()[fechaInicio.getMonthValue() - 1];
     }
 
     /**
      *
-     * @param otro
-     * @return true si el festival actual empieza
+     * true si el festival actual empieza
      * en un fecha anterior a otro
      */
     public boolean empiezaAntesQue(Festival otro) {
@@ -78,15 +75,16 @@ public class Festival {
 
     /**
      *
-     * @param otro
-     * @return true si el festival actual empieza
+     *  otro
+     *  true si el festival actual empieza
      * en un fecha posteior a otro
      */
     public boolean empiezaDespuesQue(Festival otro) {
         return getFechaInicio().isAfter(otro.getFechaInicio());
+    }
     /**
      *
-     * @return true si el festival ya ha concluido
+     *  true si el festival ya ha concluido
      */
     public boolean haConcluido(){
        return getFechaInicio().plusDays(duracion).compareTo(LocalDate.now()) > 0;
@@ -97,21 +95,26 @@ public class Festival {
      * como se indica en el enunciado
      *
      */
-        public String toString () {
-
-            String duracionnom = "";
-            if(haConcluido){
-                duracionnom = "Ha concluido";
+        public String toString() {
+            String resultado = "";
+            resultado += String.format("%1s","%10S\n",getNombre(), getEstilos());
+            resultado += String.format("%1s", getLugar());
+            if(getFechaInicio().isBefore(LocalDate.now())) {
+                resultado += getFechaInicio();
+                resultado += "(Quedan " + getFechaInicio().compareTo(LocalDate.now()) + " días)";
             }
-            else if () (
-                    duracionnom = "ON";
-            )
-            else {
-                duracionnom = "quedan" +  + "dias";
+            else if (getFechaInicio().equals(LocalDate.now())) {
+                resultado += String.format(String.valueOf(getFechaInicio().getDayOfMonth()),getFechaInicio().getMonth(),
+                        LocalDate.now());
+                resultado += "(Concluido)";
             }
-        }
-        System.out.println(getNombre() + "               " + getEstilos() + "\n" +
-                getLugar() + "\n" + getFechaInicio() +  "\n" + "\n------------------------------------------------";
+            else{
+                resultado += String.format(String.valueOf(getFechaInicio().getDayOfMonth()),getFechaInicio().getMonth(),
+                        LocalDate.now());
+                resultado += "(ON)";
+            }
+            resultado += "-----------------------------------";
+            return resultado;
     }
 
     /**
@@ -152,14 +155,10 @@ public class Festival {
         } else {
             System.out.println(f1.getNombre() + " empieza el mismo día que " + f2.getNombre());
         }
-
         System.out.println("\nProbando haConcluido()\n");
         System.out.println(f4);
         System.out.println(f4.getNombre() + " ha concluido? " + f4.haConcluido());
         System.out.println(f1);
         System.out.println(f1.getNombre() + " ha concluido? " + f1.haConcluido());
- 
-        
-        
     }
 }
