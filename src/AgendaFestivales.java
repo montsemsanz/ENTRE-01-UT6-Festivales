@@ -45,7 +45,7 @@ public class AgendaFestivales {
     public void addFestival(Festival festival) {
         Mes mesFestival = festival.getMes();
         if (agenda.containsKey(mesFestival)) {
-            agenda.get(mesFestival).add(festival);
+            agenda.get(mesFestival).add(obtenerPosicionDeInsercion(agenda.get(mesFestival), festival), festival);
         } else {
             ArrayList<Festival> festivales = new ArrayList<>();
             festivales.add(festival);
@@ -63,7 +63,11 @@ public class AgendaFestivales {
      */
     private int obtenerPosicionDeInsercion(ArrayList<Festival> festivales,
                                            Festival festival) {
-       //TODO
+        for (int i = 0; i < festivales.size(); i++) {
+            if (festivales.get(i).getNombre().compareTo(festival.getNombre()) > 0) {
+                return i;
+            }
+        }
         
         return 0;
         
