@@ -69,7 +69,6 @@ public class AgendaFestivales {
             }
         }
         return pos;
-        
     }
 
     /**
@@ -79,9 +78,13 @@ public class AgendaFestivales {
      */
     @Override
     public String toString() {
-        //TODO
-        
-        return null;
+        StringBuilder sb = new StringBuilder();
+        Set<Mes> conjuntoMeses = agenda.keySet();
+        for (Mes mes: conjuntoMeses) {
+            sb.append(mes + "\n");
+            sb.append(agenda.get(mes).toString() + "\n");
+        }
+        return sb.toString();
     }
 
     /**
@@ -91,9 +94,7 @@ public class AgendaFestivales {
      * Si el mes no existe se devuelve -1
      */
     public int festivalesEnMes(Mes mes) {
-       //TODO
-        
-        return 0;
+
     }
 
     /**
