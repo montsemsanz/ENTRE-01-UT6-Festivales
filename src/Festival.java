@@ -1,5 +1,6 @@
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Locale;
 
@@ -98,9 +99,9 @@ public class Festival {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(nombre + String.format("%25s", estilos));
+        sb.append("\n" + nombre + String.format("%25s", estilos));
         sb.append("\n" + lugar + "\n");
-        sb.append(escribirFechas());
+        sb.append(escribirFechas() + "\n");
 
         sb.append("---------------------------------------------");
         return sb.toString();
@@ -110,15 +111,20 @@ public class Festival {
     private String escribirFechas() {
         String str = "";
         int fecha = fechaInicio.plusDays(duracion).getDayOfMonth();
-
-        if (haConcluido()) {
-            str += (getFechaInicio().getDayOfMonth() + " " + getMes().toString().toLowerCase().substring(0, 3) + ". - " + (getFechaInicio().getDayOfMonth() + duracion)
-                    + " " + getMes().toString().toLowerCase().substring(0, 3) + ". " + getFechaInicio().getYear() + " (concluido)" + "\n");
-        } else if (getFechaInicio().isAfter(LocalDate.now())) {
-            str += (getFechaInicio().getDayOfMonth() + " " + getMes().toString().toLowerCase().substring(0, 3) + ". " + getFechaInicio().getYear() + " (quedan " + (getFechaInicio().getDayOfMonth() - LocalDate.now().getDayOfMonth()) + " dias)" + "\n");
+        DateTimeFormatter formateador1 = DateTimeFormatter.ofPattern("dd MMM. yyyy");
+        DateTimeFormatter formateador2 = DateTimeFormatter.ofPattern("dd MMM.");
+        if (duracion == 1) {
+            str += (getFechaInicio().format(formateador1));
         } else {
-            str += getFechaInicio().getDayOfMonth() + " " + getMes().toString().toLowerCase().substring(0, 3) + ". - " + (getFechaInicio().plusDays(duracion).getDayOfMonth())
-                    + " " + getFechaInicio().plusDays(duracion).getMonth().toString().toLowerCase().substring(0, 3) + ". " + getFechaInicio().getYear() + " (ON)" + "\n";
+            str += (getFechaInicio().format(formateador2) + " - " + (getFechaInicio().plusDays(duracion).format(formateador1)));
+        }
+        if (haConcluido()) {
+            str += " (concluido)";
+        } else if (getFechaInicio().isBefore(LocalDate.now())) {
+            str += " (ON)";
+
+        } else {
+            str += " (quedan " + (getFechaInicio().getDayOfMonth() - LocalDate.now().getDayOfMonth()) + " dias)";
         }
         return str;
     }
