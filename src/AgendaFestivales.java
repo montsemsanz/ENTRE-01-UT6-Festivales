@@ -43,8 +43,14 @@ public class AgendaFestivales {
      *
      */
     public void addFestival(Festival festival) {
-        //TODO
-        
+        Mes mesFestival = festival.getMes();
+        if (agenda.containsKey(mesFestival)) {
+            agenda.get(mesFestival).add(festival);
+        } else {
+            ArrayList<Festival> festivales = new ArrayList<>();
+            festivales.add(festival);
+            agenda.put(mesFestival, festivales);
+        }
         
     }
 
