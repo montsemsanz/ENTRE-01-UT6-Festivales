@@ -71,14 +71,7 @@ public class FestivalesIO {
         String[] pala = lineaFestival.split(":");
         pala[1] = pala[1].trim();
         String del = "[.\\s\\-]+";
-        String[] pala2 = pala[1].split(del);
-        String lugar = "";
-        for (int i = 0; i < pala2.length; i++){
-            lugar += pala2[i].toUpperCase();
-            if(i + 1 < pala2.length){
-                lugar += " ";
-            }
-        }
+        String lugar = pala[1].toUpperCase();
         return lugar;
     }
     public static LocalDate obtenerFecha(String lineaFestival){

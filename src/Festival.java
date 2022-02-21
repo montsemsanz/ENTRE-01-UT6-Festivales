@@ -1,5 +1,6 @@
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 
 /**
@@ -59,12 +60,7 @@ public class Festival {
      */
     public Mes getMes() {
         Mes[] meses = Mes.values();
-        Mes mes = null;
-        for (int i = 0; i < 12; i++) {
-            if(fechaInicio.getMonthValue() == i + 1){
-                mes = meses[i];
-            }
-        }
+        Mes mes = meses[fechaInicio.getMonthValue() - 1];
         return mes;
     }
 
@@ -104,23 +100,16 @@ public class Festival {
      */
     @Override
     public String toString() {
+        DateTimeFormatter formt = DateTimeFormatter.ofPattern("dd MMM'.' yyyy");
         LocalDate fechaFinal = fechaInicio.plusDays(duracion);
         int diff = fechaInicio.getDayOfYear() - LocalDate.now().getDayOfYear();
         Mes[] meses = Mes.values();
-        Mes mes = null;
+        Mes mes = meses[fechaFinal.getMonthValue() - 1];
         String cadena = "\n" + String.format("%-20s %-20s", nombre, estilos.toString()) + "\n";
         cadena += lugar + "\n";
-        for(int i = 1; i < 13; i++){
-            if(fechaFinal.getMonthValue() == i){
-                mes = meses[i];
-            }
-        }
-        cadena += fechaInicio.getDayOfMonth()+ " " + getMes();
-        if (duracion == 1){
-            cadena += " " + fechaInicio.getYear();
-        }
-        else{
-            cadena += " - " + fechaFinal.getDayOfMonth() + " " + mes + " " + fechaFinal.getYear();
+        cadena += formt.format(fechaInicio);
+        if (duracion != 1){
+            cadena += " - " + formt.format(fechaFinal);
         }
         if(fechaInicio.isBefore(LocalDate.now()) && fechaFinal.isAfter(LocalDate.now())){
             cadena += " (ON)";
