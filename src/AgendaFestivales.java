@@ -115,12 +115,26 @@ public class AgendaFestivales {
      *
      * Identifica el tipo exacto del valor de retorno
      */
-    public  Map   festivalesPorEstilo() {
-       //TODO
+    public  TreeMap<Estilo,TreeSet<String>>   festivalesPorEstilo() {
+        TreeMap<Estilo,TreeSet<String>> porEstilos = new TreeMap<>();
+        Set<Mes> meses = agenda.keySet();
+        for (Mes mes:meses) { /* foreach para obtener los festivales que hay en cada mes*/
+            ArrayList<Festival> festival = agenda.get(mes);
+            for (int i = 0; i < festival.size(); i++) { /* for para obtener los estilos de cada festival*/
+                HashSet<Estilo> estilos = festival.get(i).getEstilos();
+                String nombre = festival.get(i).getNombre();
+                for (Estilo estilo:estilos) { /* foreach para añadir estilos y festivales al TreeMap final*/
+                    if (!porEstilos.containsKey(estilo)){
+                        TreeSet<String> nombres = new TreeSet<>();
+                        porEstilos.put(estilo,nombres);
+                    }
+                    porEstilos.get(estilo).add(nombre);
+                }
+            }
 
-         
+        }
 
-        return null;
+        return porEstilos;
     }
 
     /**
@@ -149,7 +163,7 @@ public class AgendaFestivales {
         totalEnMes(agenda.festivalesEnMes(Mes.FEBRERO));
         totalEnMes(agenda.festivalesEnMes(Mes.MARZO));
         System.out.println(agenda.toString());
-
+        System.out.println(agenda.festivalesPorEstilo());
     }
 
     public static void totalEnMes(int i) {
