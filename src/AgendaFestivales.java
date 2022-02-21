@@ -42,9 +42,19 @@ public class AgendaFestivales {
      *
      */
     public void addFestival(Festival festival) {
-        //TODO
-        
-        
+        // objeto de tipo mes
+        Mes hilabetea = festival.getMes();
+        // Si no encuntra el mes como clave
+        if (!agenda.containsKey(hilabetea)) {
+            // crea un nuevo arraylist de tipo Festival
+            ArrayList<Festival> festivales = new ArrayList<>();
+            // añade a la agenda el mes como clave y el array como objetos de es clave
+            agenda.put(hilabetea,festivales);
+        }
+        // llamada al metodo obtenerPosicionDeInsercion
+        int aux = obtenerPosicionDeInsercion(agenda.get(hilabetea),festival);
+        // Se añade en el mes correspondiente el festival que se quiere añadir en su posicion correspondiente
+        agenda.get(hilabetea).add(aux,festival);
     }
 
     /**
@@ -54,12 +64,23 @@ public class AgendaFestivales {
      * @return la posición en la que debería ir el nuevo festival
      * de forma que la lista quedase ordenada por nombre
      */
-    private int obtenerPosicionDeInsercion(ArrayList<Festival> festivales,
-                                           Festival festival) {
-       //TODO
-        
-        return 0;
-        
+    private int obtenerPosicionDeInsercion(ArrayList<Festival> festivales, Festival festival) {
+        // Variable para sacar el nombre del festival
+        String izena = festival.getNombre();
+        // Variable que se inicializa ha 0
+        int i = 0;
+        // Bucle que mientras i < la longuitud de festivales entre
+        while (i < festivales.size()){
+            // Se compara el nombre con el nombre de la posicion i
+            if (izena.compareTo(festivales.get(i).getNombre()) < 0){
+                // Devuelve la i
+                return i;
+            }
+            // suma uno mas a la i
+            i++;
+        }
+        // Devuelve la i
+        return i;
     }
 
     /**

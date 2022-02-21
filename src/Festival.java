@@ -60,9 +60,7 @@ public class Festival {
      *
      */
     public Mes getMes() {
-        String data = String.valueOf(fechaInicio);
-        Mes hilabetea = Mes.valueOf(data);
-        return hilabetea;
+            return Mes.values()[fechaInicio.getMonthValue() - 1];
     }
 
     /**
@@ -90,7 +88,7 @@ public class Festival {
      * @return true si el festival ya ha concluido
      */
     public boolean haConcluido() {
-        return fechaInicio.isBefore(LocalDate.now());
+        return this.fechaInicio.plusDays(duracion).isBefore(LocalDate.now());
     }
     @Override
     /**
