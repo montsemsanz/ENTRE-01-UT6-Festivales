@@ -99,9 +99,10 @@ public class AgendaFestivales {
      * Si el mes no existe se devuelve -1
      */
     public int festivalesEnMes(Mes mes) {
-       //TODO
-        
-        return 0;
+       if (agenda.containsKey(mes)) {
+           return agenda.get(mes).size();
+       }
+        return -1;
     }
 
     /**
