@@ -19,6 +19,7 @@ import java.util.TreeMap;
  *
  * Las claves se recuperan en orden alfabéico
  *
+ *  @AUTHOR Rubén Saiz
  */
 public class AgendaFestivales {
     private TreeMap<Mes, ArrayList<Festival>> agenda;

@@ -13,6 +13,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
  * en una determinada fecha, dura una serie de días y
  * se engloba en un conjunto determinado de estilos
  *
+ * @AUTHOR Rubén Saiz
  */
 public class Festival {
     private final String nombre;
@@ -108,7 +109,6 @@ public class Festival {
      */
     @Override
     public String toString() {
-       //TODO
         String str = "";
         DateTimeFormatter formatter1  = DateTimeFormatter.ofPattern("dd MMM. yyyy");
         DateTimeFormatter formatter2  = DateTimeFormatter.ofPattern("dd MMM.");
