@@ -1,11 +1,7 @@
 
 import com.sun.tools.javac.Main;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 
 
 /**
@@ -85,9 +81,16 @@ public class AgendaFestivales {
      */
     @Override
     public String toString() {
-        //TODO
-        
-        return null;
+        StringBuilder sb = new StringBuilder();
+        Set<Map.Entry<Mes,ArrayList<Festival>>> festivales = agenda.entrySet();
+        Iterator<Map.Entry<Mes,ArrayList<Festival>>> it = festivales.iterator();
+        sb.append("Meses y nº festivales en ese mes\n\n");
+        while (it.hasNext()) {
+            Map.Entry<Mes, ArrayList<Festival>> festival =  it.next();
+            sb.append(festival.getKey() + ": " + festival.getValue().size() + "\n");
+        }
+
+        return sb.toString();
     }
 
     /**
@@ -132,7 +135,7 @@ public class AgendaFestivales {
      */
     public int festivalesPorEstilo(HashSet<String> lugares, Mes mes) {
        //TODO
-        
+
         return 0;
     }
 
@@ -140,7 +143,16 @@ public class AgendaFestivales {
         AgendaFestivales agenda = new AgendaFestivales();
         agenda.addFestival(FestivalesIO.parsearLinea("Gazpatxo Rock : valencia: 28-02-2022  :1  :rock :punk : hiphop"));
         agenda.addFestival(FestivalesIO.parsearLinea("black sound fest:badajoz:05-02-2022:  21 :rock :  blues"));
-        int i = agenda.festivalesEnMes(Mes.MARZO);
+        agenda.addFestival(FestivalesIO.parsearLinea("guitar bcn:barcelona: 28-01-2022 :  170 :indie :pop:fusion"));
+        agenda.addFestival(FestivalesIO.parsearLinea("el bosque sonoro: zaragoza:17-06-2022:3 : indie: pop"));
+        agenda.addFestival(FestivalesIO.parsearLinea("festival vintoro: mallorca: 17-06-2022: 2: rock"));
+        totalEnMes(agenda.festivalesEnMes(Mes.FEBRERO));
+        totalEnMes(agenda.festivalesEnMes(Mes.MARZO));
+        System.out.println(agenda.toString());
+
+    }
+
+    public static void totalEnMes(int i) {
         if (i != -1){
             System.out.println("En febrero hay " + i + " festivales");
         }
