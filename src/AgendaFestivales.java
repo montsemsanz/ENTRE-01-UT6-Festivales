@@ -129,8 +129,22 @@ public class AgendaFestivales {
      * se borra la entrada completa del map
      */
     public int cancelarFestivales(HashSet<String> lugares, Mes mes) {
-       //TODO
-        
-        return 0;
+        int pos = 0;
+       if(!agenda.containsKey(mes)){
+           pos = -1;
+       }
+       ArrayList <Festival> festivaleslugares =  agenda.get(mes);
+       int i = 0;
+        for (String item : lugares) {
+           if (item == festivaleslugares.get(i).getLugar()) {
+               for (){
+                   if(){
+                       agenda.remove(mes);
+                   }
+               }
+           }
+           i++;
+        }
+       return pos;
     }
 }
