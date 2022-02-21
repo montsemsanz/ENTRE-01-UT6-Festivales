@@ -1,9 +1,5 @@
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 
 
 /**
@@ -110,11 +106,22 @@ public class AgendaFestivales {
      *
      * Identifica el tipo exacto del valor de retorno
      */
-    public  Map   festivalesPorEstilo() {
-       //TODO
-
-         
-
+    public LinkedHashMap<Estilo, TreeSet<String>> festivalesPorEstilo() {
+        LinkedHashMap<Estilo, TreeSet<String>> tipos = new LinkedHashMap<>();
+        Set<Mes> conjuntoMeses = agenda.keySet();
+        for (Mes mes: conjuntoMeses) {
+            ArrayList<Festival> festivales = agenda.get(mes);
+            for (Festival festival: festivales) {
+                HashSet<Estilo> estilos = festival.getEstilos();
+                for (Estilo estilo: estilos) {
+                    if(!tipos.containsKey(estilo)){
+                        TreeSet<String> nombres = new TreeSet<>();
+                        tipos.put(estilo, nombres);
+                    }
+                    tipos.get(estilo).add(festival.getNombre());
+                }
+            }
+        }
         return null;
     }
 
