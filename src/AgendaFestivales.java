@@ -1,4 +1,6 @@
 
+import com.sun.tools.javac.Main;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Map;
@@ -19,6 +21,7 @@ import java.util.TreeMap;
  *
  * Las claves se recuperan en orden alfabéico
  *
+ * @author Asier Galisteo
  */
 public class AgendaFestivales {
     private TreeMap<Mes, ArrayList<Festival>> agenda;
@@ -94,9 +97,10 @@ public class AgendaFestivales {
      * Si el mes no existe se devuelve -1
      */
     public int festivalesEnMes(Mes mes) {
-       //TODO
-        
-        return 0;
+        if (agenda.containsKey(mes)){
+            return agenda.get(mes).size();
+        }
+        return -1;
     }
 
     /**
@@ -131,4 +135,19 @@ public class AgendaFestivales {
         
         return 0;
     }
+
+    public static void main(String[] args) {
+        AgendaFestivales agenda = new AgendaFestivales();
+        agenda.addFestival(FestivalesIO.parsearLinea("Gazpatxo Rock : valencia: 28-02-2022  :1  :rock :punk : hiphop"));
+        agenda.addFestival(FestivalesIO.parsearLinea("black sound fest:badajoz:05-02-2022:  21 :rock :  blues"));
+        int i = agenda.festivalesEnMes(Mes.MARZO);
+        if (i != -1){
+            System.out.println("En febrero hay " + i + " festivales");
+        }
+        else{
+            System.out.println("Aún no hay festivales en ese mes registrados");
+        }
+    }
+
+
 }

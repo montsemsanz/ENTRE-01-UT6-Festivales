@@ -9,6 +9,7 @@ import java.util.HashSet;
  * La clase contiene méodos estáticos que permiten
  * cargar la agenda de festivales leyendo los datos desde
  * un fichero
+ * @author Asier Galisteo
  */
 public class FestivalesIO {
 
