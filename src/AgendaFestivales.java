@@ -1,9 +1,5 @@
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 
 
 /**
@@ -81,8 +77,12 @@ public class AgendaFestivales {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (Map.Entry<Mes, ArrayList<Festival>> entrada: agenda.entrySet()) {
-            sb.append(entrada.getKey()).append("\n");
-            sb.append(entrada.getValue()).append("\n");
+            sb.append(entrada.getKey()).append("  (" + festivalesEnMes(entrada.getKey())).append(" festival/es)\n");
+            Iterator<Festival> it = entrada.getValue().iterator();
+            while (it.hasNext()) {
+                sb.append(it.next()).append("\n");
+            }
+            sb.append("\n");
         }
         return sb.toString();
     }
@@ -94,9 +94,13 @@ public class AgendaFestivales {
      * Si el mes no existe se devuelve -1
      */
     public int festivalesEnMes(Mes mes) {
-       //TODO
-        
-        return 0;
+        int suma = 0;
+        if (agenda.containsKey(mes)) {
+            for (int i = 0; i < agenda.get(mes).size(); i++) {
+                suma++;
+            }
+        }
+        return suma;
     }
 
     /**
