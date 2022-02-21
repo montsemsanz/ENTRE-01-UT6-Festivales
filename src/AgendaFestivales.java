@@ -42,9 +42,15 @@ public class AgendaFestivales {
      *
      */
     public void addFestival(Festival festival) {
-        //TODO
-        
-        
+        ArrayList<Festival> festivales = new ArrayList<>();
+        if (!agenda.containsKey(festival.getMes())) {
+            festivales.add(festival);
+            agenda.put(festival.getMes(), festivales);
+        }
+
+        if (!agenda.get(festival.getMes()).contains(festival)) {
+            agenda.get(festival.getMes()).add(obtenerPosicionDeInsercion(agenda.get(festival.getMes()), festival), festival);
+        }
     }
 
     /**
@@ -56,9 +62,13 @@ public class AgendaFestivales {
      */
     private int obtenerPosicionDeInsercion(ArrayList<Festival> festivales,
                                            Festival festival) {
-       //TODO
-        
-        return 0;
+        int pos = 0;
+        for (int i = 0; i < festivales.size(); i++) {
+            if (festivales.get(i).getNombre().compareTo(festival.getNombre()) < 0) {
+                pos++;
+            }
+        }
+        return pos;
         
     }
 
@@ -69,9 +79,12 @@ public class AgendaFestivales {
      */
     @Override
     public String toString() {
-        //TODO
-        
-        return null;
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<Mes, ArrayList<Festival>> entrada: agenda.entrySet()) {
+            sb.append(entrada.getKey()).append("\n");
+            sb.append(entrada.getValue()).append("\n");
+        }
+        return sb.toString();
     }
 
     /**
