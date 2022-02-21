@@ -69,7 +69,7 @@ public class AgendaFestivales {
             }
         }
         
-        return 0;
+        return festivales.size();
         
     }
 
@@ -80,9 +80,16 @@ public class AgendaFestivales {
      */
     @Override
     public String toString() {
-        //TODO
-        
-        return null;
+        StringBuilder sb = new StringBuilder();
+        Set<Map.Entry<Mes, ArrayList<Festival>>> conjuntoEntradas = agenda.entrySet();
+        for (Map.Entry<Mes, ArrayList<Festival>> entrada : conjuntoEntradas) {
+            sb.append(entrada.getKey().toString()).append(" (").append(festivalesEnMes(entrada.getKey()))
+                    .append(" festival/es)\n");
+            for (Festival festivals : entrada.getValue()) {
+                sb.append(festivals.toString()).append("\n");
+            }
+        }
+        return sb.toString();
     }
 
     /**

@@ -23,9 +23,9 @@ public class TestAgendaFestivales {
     
     
     private static void testCargarAgenda(AgendaFestivales agenda) {
-        // FestivalesIO.cargarFestivales(agenda);
-        // System.out.println(agenda);
-        // System.out.println();
+        FestivalesIO.cargarFestivales(agenda);
+        System.out.println(agenda);
+        System.out.println();
     }
     
     
