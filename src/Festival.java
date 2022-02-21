@@ -130,14 +130,14 @@ public class Festival {
         else{
             str += " - " + fechaDuracion.getDayOfMonth() + " " + fechaDuracion.getMonth() + " " + fechaDuracion.getYear();
         }
-        if(fechaInicio.isBefore(LocalDate.now()) && fechaDuracion.isBefore(LocalDate.now())){
-            str += "º(quedan " + tiempoFalta + " días)";
+        if(haConcluido()){
+            str += "(concluido)";
         }
-        else if(fechaInicio.isBefore(LocalDate.now()) && fechaDuracion.isBefore(LocalDate.now())){
+        else if(fechaInicio.isBefore(LocalDate.now()) && fechaDuracion.isAfter(LocalDate.now())){
             str += "(ON)";
         }
-        else if(haConcluido()){
-            str += "(concluido)";
+        else if(fechaInicio.isBefore(LocalDate.now()) && fechaDuracion.isBefore(LocalDate.now())){
+            str += "º(quedan " + tiempoFalta + " días)";
         }
         str += "\n----------------------------------------";
         return str;

@@ -52,19 +52,15 @@ public class FestivalesIO {
 
     String lugar = datos[1].toUpperCase(); //datos del lugar
 
-    String [] fechadato = datos[0].trim().split("-") ; // divide ls linea de datos de la fecha y la convierte en un tipo fecha
+        String [] fechadato = datos[2].trim().split("-") ;  // divide ls linea de datos de la fecha y la convierte en un tipo fecha
     LocalDate fecha= LocalDate.of(Integer.parseInt(fechadato[2]),Integer.parseInt(fechadato[1]),Integer.parseInt(fechadato[0]));
 
     HashSet<Estilo> estiloDato = new HashSet<>();
     Estilo[] estilos = Estilo.values();
     for (int i = 4; i< datos.length-1; i++) {
-        for (Estilo estiloBu : estilos) {
-            if (datos[i].equalsIgnoreCase(String.valueOf(estiloBu))) {
-                estiloDato.add(estiloBu);
-            }
-        }
+            estiloDato.add(Estilo.valueOf(datos[i].trim().toUpperCase()) );
     }
-        return new Festival(nombre, lugar,fecha,Integer.parseInt(datos[3]),estiloDato);
+        return new Festival(nombre, lugar,fecha,Integer.parseInt(datos[3].trim()),estiloDato);
     }
 
 }
