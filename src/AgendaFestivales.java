@@ -74,10 +74,10 @@ public class AgendaFestivales {
      */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("Festivales\n");
+        StringBuilder sb = new StringBuilder("Festivales");
         Set<Mes> conjuntoMeses = agenda.keySet();
         for (Mes mes: conjuntoMeses) {
-            sb.append("\n" + mes + "(" + agenda.get(mes).size() + " festival/es)");
+            sb.append("\n\n" + mes + " (" + agenda.get(mes).size() + " festival/es)");
             for (Festival festival: agenda.get(mes)) {
                 sb.append(festival.toString());
             }
@@ -92,7 +92,7 @@ public class AgendaFestivales {
      * Si el mes no existe se devuelve -1
      */
     public int festivalesEnMes(Mes mes) {
-        int cantidad = -1;
+        int cantidad = 0; //No devuelve -1 por que en el ejemplo sale Septiembre: 0
         if(agenda.containsKey(mes)){
             cantidad = agenda.get(mes).size();
         }
