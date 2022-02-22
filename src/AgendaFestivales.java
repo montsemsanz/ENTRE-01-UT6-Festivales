@@ -1,9 +1,5 @@
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 
 
 /**
@@ -90,9 +86,20 @@ public class AgendaFestivales {
      */
     @Override
     public String toString() {
-        //TODO
-        
-        return null;
+        // Creamos el StringBuilder
+        StringBuilder sb = new StringBuilder();
+        Set<Map.Entry<Mes,ArrayList<Festival>>> jaialdiak = agenda.entrySet();
+        // Creamos el Iterator
+        Iterator<Map.Entry<Mes,ArrayList<Festival>>> it = jaialdiak.iterator();
+        // Se añade texto al StringBuilder
+        sb.append("Meses y nº festivales en ese mes\n\n\n");
+        // While para recorrer el Iterator
+        while (it.hasNext()) {
+            Map.Entry<Mes, ArrayList<Festival>> jaialdia =  it.next();
+            // Se añade el Mes y cuantos festivales hay en ese mes
+            sb.append(jaialdia.getKey() + ": " + jaialdia.getValue().size() + "\n");
+        }
+        return sb.toString();
     }
 
     /**
@@ -102,9 +109,11 @@ public class AgendaFestivales {
      * Si el mes no existe se devuelve -1
      */
     public int festivalesEnMes(Mes mes) {
-       //TODO
-        
-        return 0;
+        // Adaptado de  un metodo de Actividad de Moodle Actividad V (Paises e idiomas)
+        if (agenda.containsKey(mes)){
+            return agenda.get(mes).size();
+        }
+        return -1;
     }
 
     /**
@@ -116,7 +125,7 @@ public class AgendaFestivales {
      *
      * Identifica el tipo exacto del valor de retorno
      */
-    public  Map   festivalesPorEstilo() {
+    public  TreeMap<Estilo, TreeSet<String>> festivalesPorEstilo() {
        //TODO
 
          
