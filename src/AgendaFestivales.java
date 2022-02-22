@@ -43,15 +43,16 @@ public class AgendaFestivales {
      */
     public void addFestival(Festival festival) {
         ArrayList<Festival> aux = new ArrayList<>();
-        aux.addAll(agenda.values());
         Mes mesFestival = festival.getMes();
+        int posicion = obtenerPosicionDeInsercion(agenda.get(mesFestival),festival);
+
         if (agenda.containsKey(mesFestival)){
-            agenda.get(mesFestival).add(festival);
+            agenda.get(mesFestival).add(posicion,festival);
         }
         else{
-            ArrayList<Festival> festivalesN =new ArrayList<>();              /*festivalesN de festivalesNuevos que vamos a crear*/
-            festivalesN.add(festival);
-            agenda.put(mesFestival,festivalesN);
+            ArrayList<Festival> festivalesNuevos =new ArrayList<>();
+            festivalesNuevos.add(festival);
+            agenda.put(mesFestival,festivalesNuevos);
         }
 
         
@@ -98,9 +99,7 @@ public class AgendaFestivales {
      * Si el mes no existe se devuelve -1
      */
     public int festivalesEnMes(Mes mes) {
-       //TODO
-        
-        return 0;
+        return agenda.get(mes).size();
     }
 
     /**
