@@ -44,34 +44,41 @@ public class FestivalesIO {
      * @return el festival creado
      */
     public static Festival parsearLinea(String lineaFestival) {
+        FestivalesIO festivales = new FestivalesIO();
         Festival festival = new Festival(obtenerNombre(lineaFestival),obtenerLugar(lineaFestival),
                 obtenerfecha(lineaFestival),obtenerDuracion(lineaFestival),obtenerEstilos(lineaFestival));
         return festival;
     }
 
-    public static String obtenerNombre (String lineaFestival) {
-        String[] n = lineaFestival.split(":");
-        return n[0];
+    public static String obtenerNombre(String lineaFestival) {
+        String[] palabras = lineaFestival.split(": ");
+        String nombre = palabras[0];
+        String[] nom = nombre.split(" ");
+        String n = "";
+        for (int i = 0; i < nom.length; i++) {
+            n += nom[i].substring(0, 1).toUpperCase() + nom[i].substring(1,nom[i].length()).toLowerCase() + " ";
+        }
+        return n;
     }
 
-    public static String obtenerLugar (String lineaFestival) {
+    public static String obtenerLugar(String lineaFestival) {
         String[] l = lineaFestival.split(":");
-        return l[1];
+        return l[1].toUpperCase();
     }
 
-    public static LocalDate obtenerfecha (String lineaFestival) {
+    public static LocalDate obtenerfecha(String lineaFestival) {
         String[] l = lineaFestival.split(":");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate fechaInicio = LocalDate.parse(l[2].trim(),formatter);
         return fechaInicio;
     }
 
-    public static int obtenerDuracion (String lineaFestival) {
+    public static int obtenerDuracion(String lineaFestival) {
         String[] l = lineaFestival.split(":");
         return Integer.parseInt(l[3].trim());
     }
 
-    public static HashSet<Estilo> obtenerEstilos (String lineaFestival) {
+    public static HashSet<Estilo> obtenerEstilos(String lineaFestival) {
         HashSet<Estilo> estilos = new HashSet<>();
         String[] l = lineaFestival.split(":");
         for (int i = 4; i < l.length; i++) {
@@ -81,15 +88,11 @@ public class FestivalesIO {
     }
 
     public static void main(String[] args) {
-        String datosFestival = "Gazpatxo Rock : " +
+        String datosFestival = "gazpacho rock festival: " +
                 "valencia: 28-02-2022  :1  :rock" +
                 ":punk " +
                 ": hiphop ";
         Festival f1 = parsearLinea(datosFestival);
         System.out.println(f1);
     }
-
-
-    
-    
 }

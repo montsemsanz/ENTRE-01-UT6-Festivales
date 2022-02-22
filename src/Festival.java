@@ -17,6 +17,7 @@ import java.util.Locale;
 
 // Cambiar fechaInicio a tipo LocalDate
 public class Festival {
+
     private final String nombre;
     private final String lugar;
     private final LocalDate fechaInicio;
@@ -65,7 +66,6 @@ public class Festival {
      *
      */
     public Mes getMes() {
-        //TODO
         Month month = fechaInicio.getMonth();
         String m = month.getDisplayName(TextStyle.FULL,new Locale("es","ES"));
         Mes mes = Mes.valueOf(m.trim().toUpperCase());
@@ -80,7 +80,6 @@ public class Festival {
      * en un fecha anterior a otro
      */
     public boolean empiezaAntesQue(Festival otro) {
-        //TODO
         if (fechaInicio.isBefore(otro.getFechaInicio())) {
             return true;
         }
@@ -95,12 +94,10 @@ public class Festival {
      * en un fecha posteior a otro
      */
     public boolean empiezaDespuesQue(Festival otro) {
-        //TODO
         if (!fechaInicio.isBefore(otro.getFechaInicio())) {
             return true;
         }
         return false;
-
     }
 
     /**
@@ -108,12 +105,10 @@ public class Festival {
      * @return true si el festival ya ha concluido
      */
     public boolean haConcluido() {
-        //TODO
         if (fechaInicio.plusDays(duracion).compareTo(LocalDate.now()) > 0) {
             return true;
         }
         return false;
-
     }
 
     /**
@@ -124,7 +119,6 @@ public class Festival {
     @Override
     public String toString() {
        //TODO
-        
         return null;
         
     }
