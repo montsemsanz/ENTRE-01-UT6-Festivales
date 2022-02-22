@@ -1,4 +1,5 @@
 
+import java.time.LocalDate;
 import java.util.*;
 
 
@@ -140,9 +141,24 @@ public class AgendaFestivales {
      * Si al borrar de un mes los festivales el mes queda con 0 festivales
      * se borra la entrada completa del map
      */
-    public int festivalesPorEstilo(HashSet<String> lugares, Mes mes) {
-       //TODO
-        
-        return 0;
+    public int cancelarFestivales(HashSet<String> lugares, Mes mes) {
+        int cancelados = 0;
+        ArrayList<Festival> festivalEnMes = agenda.get(mes);
+        for (Festival festival : festivalEnMes) {
+            for (String lugar : lugares) {
+                if (festival.getLugar().equalsIgnoreCase(lugar) && festival.getFechaInicio().isBefore(LocalDate.now())
+                        && !festival.haConcluido())  {
+                    cancelados++;
+                    festivalEnMes.remove(lugar);
+                }
+            }
+        }
+        if (festivalEnMes.isEmpty()) {
+            agenda.remove(mes);
+        }
+        if (cancelados == 0) {
+            return -1;
+        }
+        return cancelados;
     }
 }
