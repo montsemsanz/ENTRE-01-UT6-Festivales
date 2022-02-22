@@ -1,4 +1,5 @@
 
+import java.time.LocalDate;
 import java.util.*;
 
 
@@ -81,9 +82,54 @@ public class AgendaFestivales {
      */
     @Override
     public String toString() {
-        //TODO
 
-        return null;
+        Mes[] mes = Mes.values();
+        Estilo[] estilos = Estilo.values();
+
+        String cadena = "";
+        for (Festival festival: agenda.get(mes)) {
+            cadena += "Meses y nºfestivales en ese mes\n";
+            cadena +=  String.format("%1s","%1s\n",mes, festivalesEnMes(festival.getMes()));
+            cadena += "Nombres de festivales agrupados por estilos\n";
+            for (Estilo estilo: estilos){
+                cadena += String.format("%1s","%1s\n",estilo, festivalesPorEstilo());
+            }
+            cadena += String.format("%1s","%1s","%10S\n",festival.getNombre(), festivalesPorEstilo(), festival.getLugar() );
+            cadena += String.format("%1s", festival.getLugar());
+            cadena += String.format("%1s", obtenerFecha());
+            cadena += "******************************";
+        }
+
+        return cadena;
+    }
+
+    private  String obtenerFecha(){
+        Mes[] mes = Mes.values();
+
+        String cadena = "";
+
+        for (Festival festival: agenda.get(mes)) {
+
+            LocalDate inicio = festival.getFechaInicio();
+
+            LocalDate hoy = LocalDate.now();
+
+            if (inicio.isAfter(hoy)) {
+                cadena += festival.getFechaInicio();
+                cadena += "(Quedan " + inicio.compareTo(hoy) + " días)";
+            }
+
+            if (inicio.equals(hoy)) {
+                cadena += String.format(String.valueOf(inicio.getDayOfMonth()), inicio.getMonth(),
+                        hoy);
+                cadena += "(Concluido)";
+            } else {
+                cadena += String.format(String.valueOf(inicio.getDayOfMonth()), inicio.getMonth(),
+                        hoy);
+                cadena += "(ON)";
+            }
+        }
+        return cadena;
     }
 
     /**
