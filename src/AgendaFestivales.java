@@ -71,7 +71,7 @@ public class AgendaFestivales {
             }
         }
 
-        return 0;
+        return pos;
 
     }
 
