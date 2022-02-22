@@ -99,16 +99,21 @@ public class Festival {
      */
     @Override
     public String toString() {
-        DateTimeFormatter formt = DateTimeFormatter.ofPattern("dd MMM'.' yyyy");
+        DateTimeFormatter formt = DateTimeFormatter.ofPattern("dd MMM yyyy");
         LocalDate fechaFinal = fechaInicio.plusDays(duracion);
         int diff = fechaInicio.getDayOfYear() - LocalDate.now().getDayOfYear();
         Mes[] meses = Mes.values();
         Mes mes = meses[fechaFinal.getMonthValue() - 1];
         String cadena = "\n" + String.format("%-20s %-20s", nombre, estilos.toString()) + "\n";
         cadena += lugar + "\n";
-        cadena += formt.format(fechaInicio);
         if (duracion != 1){
+            formt = DateTimeFormatter.ofPattern("dd MMM");
+            cadena += formt.format(fechaInicio);
+            formt = DateTimeFormatter.ofPattern("dd MMM yyyy");
             cadena += " - " + formt.format(fechaFinal);
+        }
+        else{
+            cadena += formt.format(fechaInicio);
         }
         if(fechaInicio.isBefore(LocalDate.now()) && fechaFinal.isAfter(LocalDate.now())){
             cadena += " (ON)";
