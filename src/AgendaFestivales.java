@@ -1,9 +1,5 @@
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 
 
 /**
@@ -126,12 +122,32 @@ public class AgendaFestivales {
      *
      * Identifica el tipo exacto del valor de retorno
      */
-    public  Map   festivalesPorEstilo() {
-       //TODO
+    public LinkedHashMap<Estilo,TreeSet<String>> festivalesPorEstilo() {
+       LinkedHashMap<Estilo,TreeSet<String>> porEstilo = new LinkedHashMap<>();
+        TreeSet<String> nombres = new TreeSet<>();
 
-         
+       Set<Mes> claves = agenda.keySet();
+        for(Mes mes : claves){
 
-        return null;
+            ArrayList<Festival> festivales = agenda.get(mes);
+            for(Festival festival : festivales){
+                String nombre = festival.getNombre();
+                nombres.add(nombre);
+                HashSet <Estilo> estilos = festival.getEstilos();
+                for(Estilo estilo : estilos){
+                    if(!porEstilo.containsKey(estilo)){
+                        porEstilo.put(estilo,nombres);
+                    }
+                    else{
+                        porEstilo.get(estilo).add(nombre);
+                    }
+
+                }
+
+            }
+        }
+
+        return porEstilo;
     }
 
     /**
@@ -144,8 +160,9 @@ public class AgendaFestivales {
      * Si al borrar de un mes los festivales el mes queda con 0 festivales
      * se borra la entrada completa del map
      */
-    public int festivalesPorEstilo(HashSet<String> lugares, Mes mes) {
-       //TODO
+    public int cancelarFestival(HashSet<String> lugares, Mes mes) {
+       int cancelados = 0;
+
         
         return 0;
     }

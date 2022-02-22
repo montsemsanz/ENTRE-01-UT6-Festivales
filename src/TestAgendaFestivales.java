@@ -16,39 +16,39 @@ public class TestAgendaFestivales {
         testCargarAgenda(agenda);
         testFestivalesEnMes(agenda);
         testFestivalesPorEstilo(agenda);
-        testCancelarFestivales(agenda);
+        /** testCancelarFestivales(agenda);*/
         
         
     }
     
     
     private static void testCargarAgenda(AgendaFestivales agenda) {
-        // FestivalesIO.cargarFestivales(agenda);
-        // System.out.println(agenda);
-        // System.out.println();
+         FestivalesIO.cargarFestivales(agenda);
+         System.out.println(agenda);
+         System.out.println();
     }
     
     
     private static void testFestivalesEnMes(AgendaFestivales agenda) {
-        // System.out.println("Meses y nº festivales en ese mes\n");
-        // Mes[] meses = {Mes.FEBRERO, Mes.ABRIL, Mes.MAYO, Mes.JUNIO,
-                // Mes.SEPTIEMBRE, Mes.OCTUBRE};
-        // for (Mes mes : meses) {
-            // System.out.println(mes + ": " + agenda.festivalesEnMes(mes));
+         System.out.println("Meses y nº festivales en ese mes\n");
+         Mes[] meses = {Mes.FEBRERO, Mes.ABRIL, Mes.MAYO, Mes.JUNIO,
+                 Mes.SEPTIEMBRE, Mes.OCTUBRE};
+         for (Mes mes : meses) {
+             System.out.println(mes + ": " + agenda.festivalesEnMes(mes));
             
-        // }
-        // System.out.println();
+         }
+         System.out.println();
     }
     
     
     private static void testFestivalesPorEstilo(AgendaFestivales agenda) {
-        // System.out.println("Nombres de festivales agrupados por estilos\n");
-        // for (Map.Entry<Estilo, TreeSet<String>> entrada :
-                // agenda.festivalesPorEstilo().entrySet()) {
-            // System.out.println(entrada.getKey() + " - " + entrada.getValue());
+         System.out.println("Nombres de festivales agrupados por estilos\n");
+         for (Map.Entry<Estilo, TreeSet<String>> entrada :
+                agenda.festivalesPorEstilo().entrySet()) {
+             System.out.println(entrada.getKey() + " - " + entrada.getValue());
             
-        // }
-        // System.out.println();
+         }
+         System.out.println();
     }
     
     private static void testCancelarFestivales(AgendaFestivales agenda) {
