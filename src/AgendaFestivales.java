@@ -106,14 +106,14 @@ public class AgendaFestivales {
     /**
      * Se cancelan todos los festivales organizados en alguno de los
      * lugares que indica el conjunto en el mes indicado. Los festivales
-     * concluidos o que no empezados no se tienen en cuenta
+     * concluidos no se tienen en cuenta
      * Hay que borrarlos de la agenda
      * Si el mes no existe se devuelve -1
      *
      * Si al borrar de un mes los festivales el mes queda con 0 festivales
      * se borra la entrada completa del map
      */
-    public int festivalesPorEstilo(HashSet<String> lugares, Mes mes) {
+    public int cancelarFestivales(HashSet<String> lugares, Mes mes) {
        //TODO
         
         return 0;
