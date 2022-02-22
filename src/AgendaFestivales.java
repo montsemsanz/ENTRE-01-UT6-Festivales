@@ -88,9 +88,18 @@ public class AgendaFestivales {
      */
     @Override
     public String toString() {
-        //TODO
-        
-        return null;
+        StringBuilder sb = new StringBuilder();
+
+        for (Map.Entry<Mes, ArrayList<Festival>> entrada : agenda.entrySet()) {
+
+            sb.append("\n" + entrada.getKey()).append(" (").append(festivalesEnMes(entrada.getKey())).append(" festival/es)\n");
+
+            for (Festival festival : entrada.getValue()) {
+
+                sb.append(festival).append("\n");
+            }
+        }
+        return sb.toString();
     }
 
     /**
@@ -100,7 +109,10 @@ public class AgendaFestivales {
      * Si el mes no existe se devuelve -1
      */
     public int festivalesEnMes(Mes mes) {
-       //TODO
+
+       if(agenda.containsKey(mes)){
+           return agenda.get(mes).size();
+       }
         
         return 0;
     }
