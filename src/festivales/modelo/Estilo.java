@@ -1,3 +1,5 @@
+package festivales.modelo;
+
 /** @author Asier Galisteo */
 
 public enum Estilo {
