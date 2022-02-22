@@ -1,9 +1,9 @@
+package festivales.modelo;
+
+import festivales.io.FestivalesIO;
 
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.HashSet;
-import java.util.Date;
-import java.util.Locale;
 
 /**
  * @author Iñigo Camarero
@@ -97,32 +97,16 @@ public class Festival {
      */
         public String toString() {
             String resultado = "";
-            resultado += String.format("%1s","%10S\n",getNombre(), getEstilos());
-            resultado += String.format("%1s", getLugar());
-            if(getFechaInicio().isBefore(LocalDate.now())) {
-                resultado += getFechaInicio();
-                resultado += "(Quedan " + getFechaInicio().compareTo(LocalDate.now()) + " días)";
-            }
-            else if (getFechaInicio().equals(LocalDate.now())) {
-                resultado += String.format(String.valueOf(getFechaInicio().getDayOfMonth()),getFechaInicio().getMonth(),
-                        LocalDate.now());
-                resultado += "(Concluido)";
-            }
-            else{
-                resultado += String.format(String.valueOf(getFechaInicio().getDayOfMonth()),getFechaInicio().getMonth(),
-                        LocalDate.now());
-                resultado += "(ON)";
-            }
-            resultado += "-----------------------------------";
+
             return resultado;
     }
 
     /**
-     * Código para probar la clase Festival
+     * Código para probar la clase festivales.modelo.Festival
      *
      */
     public static void main(String[] args) {
-        System.out.println("Probando clase Festival");
+        System.out.println("Probando clase festivales.modelo.Festival");
         String datosFestival = "Gazpatxo Rock : " +
                 "valencia: 28-02-2022  :1  :rock" +
                 ":punk " +

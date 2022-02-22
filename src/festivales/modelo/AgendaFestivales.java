@@ -1,9 +1,10 @@
+package festivales.modelo;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import festivales.modelo.Festival;
+import festivales.modelo.Mes;
+
+import java.time.LocalDate;
+import java.util.*;
 
 
 /**
@@ -12,7 +13,7 @@ import java.util.TreeMap;
  * en una serie de meses
  *
  * La agenda guardalos festivales en una colección map
- * La clave del map es el mes (un enumerado festivales.modelo.Mes)
+ * La clave del map es el mes (un enumerado festivales.modelo.festivales.modelo.Mes)
  * Cada mes tiene asociados en una colección ArrayList
  * los festivales  de ese mes
  *
@@ -78,9 +79,7 @@ public class AgendaFestivales {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (Festival item:agenda) {
-            sb.append(Festival.);
-        }
+
         return sb.toString();
     }
 
@@ -130,21 +129,26 @@ public class AgendaFestivales {
      */
     public int cancelarFestivales(HashSet<String> lugares, Mes mes) {
         int pos = 0;
-       if(!agenda.containsKey(mes)){
+        if(!agenda.containsKey(mes)){
            pos = -1;
        }
-       ArrayList <Festival> festivaleslugares =  agenda.get(mes);
-       int i = 0;
+        ArrayList<Festival> festivalesLugares = agenda.get(mes);
+        Iterator<Festival> it = festivalesLugares.iterator();
+        int i = 0;
         for (String item : lugares) {
-           if (item == festivaleslugares.get(i).getLugar()) {
-               for (){
-                   if(){
+           if (item == festivalesLugares.get(i).getLugar()) {
+               Festival festival = it.next();
+               while (it.hasNext()) {
+                   if(!festival.haConcluido() && festival.getFechaInicio().isBefore(LocalDate.now())){
+                       it.remove();
+                   }
+                   if (agenda.get(mes).size() == 0) {
                        agenda.remove(mes);
                    }
                }
            }
            i++;
         }
-       return pos;
-    }
+        return pos;
+}
 }
