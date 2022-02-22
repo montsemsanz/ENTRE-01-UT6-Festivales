@@ -30,25 +30,25 @@ public class TestAgendaFestivales {
     
     
     private static void testFestivalesEnMes(AgendaFestivales agenda) {
-        // System.out.println("Meses y nº festivales en ese mes\n");
-        // Mes[] meses = {Mes.FEBRERO, Mes.ABRIL, Mes.MAYO, Mes.JUNIO,
-                // Mes.SEPTIEMBRE, Mes.OCTUBRE};
-        // for (Mes mes : meses) {
-            // System.out.println(mes + ": " + agenda.festivalesEnMes(mes));
-            
-        // }
-        // System.out.println();
+        System.out.println("Meses y nº festivales en ese mes\n");
+        Mes[] meses = {Mes.FEBRERO, Mes.ABRIL, Mes.MAYO, Mes.JUNIO,
+                Mes.SEPTIEMBRE, Mes.OCTUBRE};
+         for (Mes mes : meses) {
+            System.out.println(mes + ": " + agenda.festivalesEnMes(mes));
+
+         }
+        System.out.println();
     }
     
     
     private static void testFestivalesPorEstilo(AgendaFestivales agenda) {
-        // System.out.println("Nombres de festivales agrupados por estilos\n");
-        // for (Map.Entry<Estilo, TreeSet<String>> entrada :
-                // agenda.festivalesPorEstilo().entrySet()) {
-            // System.out.println(entrada.getKey() + " - " + entrada.getValue());
+        System.out.println("Nombres de festivales agrupados por estilos\n");
+        for (Map.Entry<Estilo, TreeSet<String>> entrada :
+                agenda.festivalesPorEstilo().entrySet()) {
+            System.out.println(entrada.getKey() + " - " + entrada.getValue());
             
-        // }
-        // System.out.println();
+        }
+        System.out.println();
     }
     
     private static void testCancelarFestivales(AgendaFestivales agenda) {
