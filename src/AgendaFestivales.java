@@ -18,7 +18,7 @@ import java.util.TreeMap;
  * Solo aparecen los meses que incluyen algún festival
  *
  * Las claves se recuperan en orden alfabéico
- *
+ * @autor - Christhoper Pinday Delgado
  */
 public class AgendaFestivales {
     private TreeMap<Mes, ArrayList<Festival>> agenda;
@@ -42,9 +42,17 @@ public class AgendaFestivales {
      *
      */
     public void addFestival(Festival festival) {
-        //TODO
-        
-        
+        Mes mes = festival.getMes();
+        if (!agenda.containsKey(mes)) {
+            ArrayList<Festival> nuevo = new ArrayList<Festival>();
+            nuevo.add(festival);
+            agenda.put(mes, nuevo);
+        }
+        else {// si el mes ya exista...
+            //añadir festival
+            int posicion = obtenerPosicionDeInsercion(agenda.get(mes), festival);
+            agenda.get(mes).add(posicion, festival);
+        }
     }
 
     /**
