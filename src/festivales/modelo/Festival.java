@@ -1,10 +1,14 @@
+package festivales.modelo;
+
+import festivales.io.FestivalesIO;
+import festivales.modelo.AgendaFestivales;
+import festivales.modelo.Mes;
+import festivales.modelo.Estilo;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
 import java.util.HashSet;
-import java.util.Locale;
 
 /**
  * Un objeto de esta clase almacena los datos de un
@@ -12,6 +16,7 @@ import java.util.Locale;
  * Todo festival tiene un nombre, se celebra en un lugar
  * en una determinada fecha, dura una serie de días y
  * se engloba en un conjunto determinado de estilos
+ *  @author aimar monreal
  *
  */
 public class Festival {
@@ -63,14 +68,10 @@ public class Festival {
      *
      */
     public Mes getMes() {
-        Mes meses[] = Mes.values();
-        for(Mes mes: meses){
-            if(mes.toString().equalsIgnoreCase(this.fechaInicio.getMonth().toString())){
-                return mes;
-            }
-        }
+        Mes[] meses = Mes.values();
 
-        return null;
+        Mes m = meses[fechaInicio.getMonthValue()-1];
+        return m;
 
     }
 
@@ -156,11 +157,11 @@ public class Festival {
     }
 
     /**
-     * Código para probar la clase Festival
+     * Código para probar la clase festivales.modelo.Festival
      *
      */
     public static void main(String[] args) {
-        System.out.println("Probando clase Festival");
+        System.out.println("Probando clase festivales.modelo.Festival");
 
 
         String datosFestival = "Gazpatxo Rock : " +

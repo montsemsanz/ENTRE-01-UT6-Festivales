@@ -1,5 +1,10 @@
+package festivales.modelo;
 
 import java.util.*;
+import festivales.io.FestivalesIO;
+import festivales.modelo.Festival;
+import festivales.modelo.Mes;
+import festivales.modelo.Estilo;
 
 
 /**
@@ -7,13 +12,15 @@ import java.util.*;
  * en una serie de meses
  *
  * La agenda guardalos festivales en una colección map
- * La clave del map es el mes (un enumerado festivales.modelo.Mes)
+ * La clave del map es el mes (un enumerado festivales.modelo.festivales.modelo.Mes)
  * Cada mes tiene asociados en una colección ArrayList
  * los festivales  de ese mes
  *
  * Solo aparecen los meses que incluyen algún festival
  *
  * Las claves se recuperan en orden alfabéico
+ *
+ *  @author aimar monreal
  *
  */
 public class AgendaFestivales {
@@ -38,14 +45,15 @@ public class AgendaFestivales {
      *
      */
     public void addFestival(Festival festival) {
-        ArrayList<Festival> festivales = new ArrayList<>();
-        if (!agenda.containsKey(festival.getMes())){
-            agenda.put(festival.getMes(),festivales);
-            festivales.add(festival);
+
+        Mes m = festival.getMes();
+
+        if(!agenda.containsKey(m))
+        {
+            ArrayList<Festival> festivals = new ArrayList<>();
+            agenda.put(m, festivals);
         }
-        else {
-            festivales.add(obtenerPosicionDeInsercion(festivales,festival),festival);
-        }
+        agenda.get(m).add(obtenerPosicionDeInsercion(agenda.get(m), festival), festival);
     }
 
     /**
@@ -58,14 +66,15 @@ public class AgendaFestivales {
     private int obtenerPosicionDeInsercion(ArrayList<Festival> festivales,
                                            Festival festival) {
         int i = 0;
+        if (festivales.isEmpty()){return i;}
         for (Festival festi :festivales){
             if (festival.getNombre().compareTo(festi.getNombre()) > 0){
-                return i;
+
             }
             i++;
 
         }
-        return -1;
+        return i-1;
     }
 
     /**
@@ -73,12 +82,12 @@ public class AgendaFestivales {
      * De forma eficiente
      *  Usa el conjunto de entradas par recorrer el map
      */
-    @Override
+
     public String toString() {
         StringBuilder sb = new StringBuilder();
         Set<Map.Entry<Mes,ArrayList<Festival>>> entradas = agenda.entrySet();
         for (Map.Entry<Mes,ArrayList<Festival>> entrada :entradas) {
-            sb.append(entrada.getKey() + " ");
+            sb.append("\n\n" + entrada.getKey() + " ");
             sb.append(entrada.getValue().toString());}
         return sb.toString();
     }
@@ -91,7 +100,7 @@ public class AgendaFestivales {
      */
     public int festivalesEnMes(Mes mes) {
        if (!agenda.containsKey(mes)){
-           return -1;
+           return 0; //voy a devolver 0 para que en el print salga que hay 0 festivales en ved de -1
        }
         return agenda.get(mes).size();
     }
@@ -105,19 +114,30 @@ public class AgendaFestivales {
      *
      * Identifica el tipo exacto del valor de retorno
      */
-    public  HashMap   festivalesPorEstilo() {
-        HashMap<Estilo,TreeSet<String>> estilos = new HashMap<>();
 
-        Set<Map.Entry<Mes,ArrayList<Festival>>> entradas = agenda.entrySet();
-        for (Map.Entry<Mes,ArrayList<Festival>> entrada :entradas) {
-            for (int i = 0; i < entrada.getValue().size(); i++){
-                String[] datos = entrada.getValue().toString().split(";");
-                TreeSet<Festival> festivales = new TreeSet<>();
-                if (entrada.getValue().contains(Estilo.BLUES))
+    public HashMap<Estilo, TreeSet<String>> festivalesPorEstilo() {
+        HashMap<Estilo, TreeSet<String>> estilos = new HashMap<>();
+
+        Set<Mes> claves = agenda.keySet();
+
+        for (Mes m: claves) {
+            ArrayList<Festival> festivales = agenda.get(m);
+            for (Festival festival: festivales) {
+
+                HashSet<Estilo> est = festival.getEstilos();
+
+                for (Estilo estilo: est) {
+
+                    if(!estilos.containsKey(estilo)){
+                        TreeSet<String> festivaln = new TreeSet<>();
+                        estilos.put(estilo, festivaln);
+                    }
+
+                    estilos.get(estilo).add(festival.getNombre());
+                }
             }
         }
-
-        return null;
+        return estilos;
     }
 
     /**
@@ -130,9 +150,26 @@ public class AgendaFestivales {
      * Si al borrar de un mes los festivales el mes queda con 0 festivales
      * se borra la entrada completa del map
      */
-    public int festivalesPorEstilo(HashSet<String> lugares, Mes mes) {
-       //TODO
-        
-        return 0;
+    public int cancelarFestivales(HashSet<String> lugares, Mes mes) {
+        if (!agenda.containsKey(mes)){
+            return -1;
+        }
+        HashSet<Festival> FestivalesABorrar = new HashSet<>();
+        int count = 0;
+        if (agenda.containsKey(mes)) {
+            ArrayList<Festival> festivales = agenda.get(mes);
+            for (int i = 0; i < festivales.size(); i++) {
+                if (lugares.contains(festivales.get(i).getLugar()) && !festivales.get(i).haConcluido()){
+                    FestivalesABorrar.add(festivales.get(i));
+                    count++;
+                }
+            }
+            agenda.get(mes).removeAll(FestivalesABorrar);
+            if (agenda.get(mes).isEmpty()){
+                agenda.remove(mes);
+            }
+        }
+
+        return count;
     }
 }

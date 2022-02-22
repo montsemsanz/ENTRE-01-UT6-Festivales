@@ -1,7 +1,8 @@
+package festivales.io;
 
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import festivales.modelo.AgendaFestivales;
+import festivales.modelo.Festival;
+import festivales.modelo.Estilo;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -10,6 +11,7 @@ import java.util.*;
  * La clase contiene méodos estáticos que permiten
  * cargar la agenda de festivales leyendo los datos desde
  * un fichero
+ * @author aimar monreal
  */
 public class FestivalesIO {
 
@@ -36,7 +38,7 @@ public class FestivalesIO {
 
     /**
      * se parsea la línea extrayendo sus datos y creando y
-     * devolviendo un objeto Festival
+     * devolviendo un objeto festivales.modelo.Festival
      * @param lineaFestival los datos de un festival
      * @return el festival creado
      */
@@ -75,7 +77,7 @@ public class FestivalesIO {
         for (int i = 4; i < datos.length; i++) {
             estilos.add(Estilo.valueOf(datos[i].trim().toUpperCase()) );}
 
-        // Creacion de objeto Festival
+        // Creacion de objeto festivales.modelo.Festival
         Festival fest = new Festival(nombre, lugar, fechaInicio, duracion, estilos);
 
         return fest;
