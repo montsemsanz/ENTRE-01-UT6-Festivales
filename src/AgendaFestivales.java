@@ -68,12 +68,15 @@ public class AgendaFestivales {
      */
     private int obtenerPosicionDeInsercion(ArrayList<Festival> festivales,
                                            Festival festival) {
-        /*
+
         int pos = 0;
         for(int i = 0; i < festivales.size(); i++){
-            if()
+            if(festivales.get(i).getNombre().compareToIgnoreCase(festival.getNombre()) < 0) {
+                    festivales.add(i, festival);
+                    pos = i;
+            }
         }
-        */
+
         return 0;
 
     }
