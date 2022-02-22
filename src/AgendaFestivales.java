@@ -64,10 +64,33 @@ public class AgendaFestivales {
      */
     private int obtenerPosicionDeInsercion(ArrayList<Festival> festivales,
                                            Festival festival) {
-       //TODO
-        
-        return 0;
-        
+        for (int i = 0; i < festivales.size() - 1; i++) {
+            int posmin = i;
+            for (int j = i + 1; j < festivales.size(); j++) {
+                if (festivales.get(j).getNombre().compareTo(festivales.get(posmin).getNombre()) < 0) {
+                    posmin = j;
+                }
+            }
+            //intercambiar valores del ArrayList
+            Festival aux = festivales.get(i);
+            //eliminamos ese
+            // festivales.remove(i);
+            //colocamos el correspondiente en esa posicion y desplaza a la derecha...
+            festivales.add(i, festivales.get(posmin));
+            festivales.remove(i + 1);
+            // ahora borramos...
+            // festivales.remove(posmin);
+            //ksa
+            festivales.add(posmin, aux);
+            festivales.remove(posmin + 1);
+        }
+        //buscar posicion de inserccion...
+        int i = festivales.size() - 1;
+        while (i >= 0 && festivales.get(i).getNombre().compareTo(festival.getNombre()) > 0) {
+            i--;
+        }
+        //posicion de inserccion hallada
+        return i + 1;
     }
 
     /**
