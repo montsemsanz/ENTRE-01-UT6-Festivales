@@ -84,10 +84,13 @@ public class AgendaFestivales {
         StringBuilder sb = new StringBuilder();
         Set<Map.Entry<Mes,ArrayList<Festival>>> festivales = agenda.entrySet();
         Iterator<Map.Entry<Mes,ArrayList<Festival>>> it = festivales.iterator();
-        sb.append("Meses y nº festivales en ese mes\n\n");
         while (it.hasNext()) {
             Map.Entry<Mes, ArrayList<Festival>> festival =  it.next();
-            sb.append(festival.getKey() + ": " + festival.getValue().size() + "\n");
+            sb.append(festival.getKey() + " (" + festival.getValue().size() + " festival/les)" + "\n");
+            ArrayList<Festival> nuevo = festival.getValue();
+            for (int i = 0; i < nuevo.size(); i++) {
+                sb.append(nuevo.get(i) + "\n");
+            }
         }
 
         return sb.toString();
@@ -97,13 +100,13 @@ public class AgendaFestivales {
      *
      * @param mes el mes a considerar
      * @return la cantidad de festivales que hay en ese mes
-     * Si el mes no existe se devuelve -1
+     * Si el mes no existe se devuelve 0
      */
     public int festivalesEnMes(Mes mes) {
         if (agenda.containsKey(mes)){
             return agenda.get(mes).size();
         }
-        return -1;
+        return 0;
     }
 
     /**
@@ -119,10 +122,10 @@ public class AgendaFestivales {
         TreeMap<Estilo,TreeSet<String>> porEstilos = new TreeMap<>();
         Set<Mes> meses = agenda.keySet();
         for (Mes mes:meses) { /* foreach para obtener los festivales que hay en cada mes*/
-            ArrayList<Festival> festival = agenda.get(mes);
-            for (int i = 0; i < festival.size(); i++) { /* for para obtener los estilos de cada festival*/
-                HashSet<Estilo> estilos = festival.get(i).getEstilos();
-                String nombre = festival.get(i).getNombre();
+            ArrayList<Festival> festivales = agenda.get(mes);
+            for (int i = 0; i < festivales.size(); i++) { /* for para obtener los estilos de cada festival*/
+                HashSet<Estilo> estilos = festivales.get(i).getEstilos();
+                String nombre = festivales.get(i).getNombre();
                 for (Estilo estilo:estilos) { /* foreach para añadir estilos y festivales al TreeMap final*/
                     if (!porEstilos.containsKey(estilo)){
                         TreeSet<String> nombres = new TreeSet<>();
@@ -147,11 +150,33 @@ public class AgendaFestivales {
      * Si al borrar de un mes los festivales el mes queda con 0 festivales
      * se borra la entrada completa del map
      */
-    public int festivalesPorEstilo(HashSet<String> lugares, Mes mes) {
-       //TODO
+    public int cancelarFestivales(HashSet<String> lugares, Mes mes) {
+        int total = 0;
+        ArrayList<Festival> festivales = agenda.get(mes);
 
-        return 0;
+        if(agenda.containsKey(mes)){
+            Iterator<String> it = lugares.iterator();
+            while (it.hasNext()) { /* se obtienen cada uno de los lugares del HashSet */
+                String lugar =  it.next();
+                for (int i = 0; i < festivales.size(); i++) { /* Se recorre el ArrayList festivales para ver que festivales se celebran en un determinado lugar*/
+                    Festival festival = festivales.get(i);
+                    if (festival.getLugar().equalsIgnoreCase(lugar) && !festival.haConcluido()){
+                        festivales.remove(festival);
+                        total++;
+                    }
+                }
+            }
+            if(festivales.size() == 0){
+                agenda.remove(mes);
+            }
+            return total;
+        }
+
+
+        return -1;
     }
+
+    /** Código para probar la clase */
 
     public static void main(String[] args) {
         AgendaFestivales agenda = new AgendaFestivales();
@@ -164,6 +189,7 @@ public class AgendaFestivales {
         totalEnMes(agenda.festivalesEnMes(Mes.MARZO));
         System.out.println(agenda.toString());
         System.out.println(agenda.festivalesPorEstilo());
+        System.out.println(agenda);
     }
 
     public static void totalEnMes(int i) {
