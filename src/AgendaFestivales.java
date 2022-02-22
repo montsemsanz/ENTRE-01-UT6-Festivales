@@ -90,7 +90,7 @@ public class AgendaFestivales {
      * Si el mes no existe se devuelve -1
      */
     public int festivalesEnMes(Mes mes) {
-        int cantidad = 0;
+        int cantidad = -1;
         if(agenda.containsKey(mes)){
             cantidad = agenda.get(mes).size();
         }
@@ -122,7 +122,7 @@ public class AgendaFestivales {
                 }
             }
         }
-        return null;
+        return tipos;
     }
 
     /**
@@ -135,9 +135,25 @@ public class AgendaFestivales {
      * Si al borrar de un mes los festivales el mes queda con 0 festivales
      * se borra la entrada completa del map
      */
-    public int festivalesPorEstilo(HashSet<String> lugares, Mes mes) {
-       //TODO
-        
-        return 0;
+    public int cancelarFestivales(HashSet<String> lugares, Mes mes) {
+        int borrados = 0;
+        if(agenda.containsKey(mes)){
+            for(String lugar: lugares){
+                ArrayList<Festival> festivales =  agenda.get(mes);
+                for (Festival festival: festivales){
+                    if(lugar.equalsIgnoreCase(festival.getLugar())){
+                        agenda.get(mes).remove(festival);
+                        borrados++;
+                        if(agenda.get(mes).isEmpty()){
+                            agenda.remove(mes);
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            borrados = -1;
+        }
+        return borrados;
     }
 }
