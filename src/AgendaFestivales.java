@@ -138,19 +138,20 @@ public class AgendaFestivales {
      * se borra la entrada completa del map
      */
     public int cancelarFestivales(HashSet<String> lugares, Mes mes) {
+        ArrayList<Festival> festivales = new ArrayList<>();
         int borrados = 0;
         if(agenda.containsKey(mes)){
             for(String lugar: lugares){
-                ArrayList<Festival> festivales =  agenda.get(mes);
-                for (Festival festival: festivales){
-                    if(lugar.equalsIgnoreCase(festival.getLugar())){
-                        agenda.get(mes).remove(festival);
+                for (Festival festival: agenda.get(mes)){
+                    if(lugar.equalsIgnoreCase(festival.getLugar()) && !festival.haConcluido()){
+                        festivales.add(festival);
                         borrados++;
-                        if(agenda.get(mes).isEmpty()){
-                            agenda.remove(mes);
-                        }
                     }
                 }
+            }
+            agenda.get(mes).removeAll(festivales);
+            if(agenda.get(mes).isEmpty()){
+                agenda.remove(mes);
             }
         }
         else {
