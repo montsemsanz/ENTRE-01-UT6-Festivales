@@ -79,7 +79,10 @@ public class AgendaFestivales {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-
+        Set<Mes> meses = agenda.keySet();
+        for (Mes mes:meses) {
+            sb.append(" "+ mes + agenda.get(mes).size() + "festival" + "\n");
+        }
         return sb.toString();
     }
 
@@ -108,11 +111,6 @@ public class AgendaFestivales {
      */
     public  TreeMap  <String, ArrayList <String>> festivalesPorEstilo() {
         TreeMap <String, ArrayList <String>> tipos = new TreeMap();
-        for (Festival item:agenda) {
-            if (festival.getNombre().compareTo(item.getNombre()) < 0){
-                pos++;
-            }
-        }
 
         return tipos;
     }
