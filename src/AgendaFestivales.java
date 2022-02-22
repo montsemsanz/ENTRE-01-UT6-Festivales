@@ -112,12 +112,35 @@ public class AgendaFestivales {
      *
      * Identifica el tipo exacto del valor de retorno
      */
-    public  Map   festivalesPorEstilo() {
-       //TODO
+    public TreeMap<Estilo,TreeSet<String>> festivalesPorEstilo() {
+        TreeMap<Estilo,TreeSet<String>> porEstilos = new TreeMap<>();
 
-         
+        ArrayList<Festival> festivales = new ArrayList<>();                     // festivales = un ArrayList con todos los festivales
+        for (Map.Entry<Mes,ArrayList<Festival>> entrada:agenda.entrySet()) {
+            Iterator<Festival> it = entrada.getValue().iterator();
+            while (it.hasNext()) {
+                festivales.add(it.next());
+            }
+        }
 
-        return null;
+        // Ahora quiero sacar el nombre y estilos de cada festival.
+        String nombre = "";
+        HashSet<Estilo> estilosDeCadaFestival = new HashSet<>();
+        for (Festival festival:festivales) {
+
+            estilosDeCadaFestival = festival.getEstilos();               // Sacamos los estilos de cada festival
+
+            for (Estilo cadaEstilo: estilosDeCadaFestival) {
+                nombre = festival.getNombre();                          //Sacamos el nombre de cada festival
+                TreeSet<String> nombres = new TreeSet<>();
+                nombres.add(nombre);
+                if (!porEstilos.containsKey(cadaEstilo)) {
+                    porEstilos.put(cadaEstilo, nombres);
+                }
+                    porEstilos.get(cadaEstilo).add(nombre);
+            }
+        }
+        return porEstilos;
     }
 
     /**
@@ -130,7 +153,7 @@ public class AgendaFestivales {
      * Si al borrar de un mes los festivales el mes queda con 0 festivales
      * se borra la entrada completa del map
      */
-    public int festivalesPorEstilo(HashSet<String> lugares, Mes mes) {
+    public int cancelarFestival(HashSet<String> lugares, Mes mes) {
        //TODO
         
         return 0;
