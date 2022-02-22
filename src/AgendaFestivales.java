@@ -1,5 +1,5 @@
 
-import javax.print.DocFlavor;
+import java.lang.reflect.Array;
 import java.util.*;
 
 
@@ -116,11 +116,28 @@ public class AgendaFestivales {
      * <p>
      * Identifica el tipo exacto del valor de retorno
      */
-    public Map festivalesPorEstilo() {
-        //TODO
+    public TreeMap<Estilo, TreeSet<String>> festivalesPorEstilo() {
+        TreeMap<Estilo, TreeSet<String>> festivalesEstilo = new TreeMap<>();
+        Set<Mes> conjunto = agenda.keySet();
+        for (Mes mes : conjunto) {
+            ArrayList<Festival> festivales = agenda.get(mes);
+            TreeSet<String> nombres = new TreeSet<>();
+            for (Festival festival : festivales) {
+                HashSet<Estilo> estilos = festival.getEstilos();
+                for (Estilo estilo : estilos) {
+                    if (festival.getEstilos().contains(estilo)) {
+                        nombres.add(festival.getNombre());
+                        if (!festivalesEstilo.containsKey(estilo)) {
+                            festivalesEstilo.put(estilo, nombres);
+                        } else {
+                            festivalesEstilo.get(estilo).add(festival.getNombre());
+                        }
+                    }
+                }
 
-
-        return null;
+            }
+        }
+        return festivalesEstilo;
     }
 
     /**
@@ -133,7 +150,7 @@ public class AgendaFestivales {
      * Si al borrar de un mes los festivales el mes queda con 0 festivales
      * se borra la entrada completa del map
      */
-    public int festivalesPorEstilo(HashSet<String> lugares, Mes mes) {
+    public int cancelarFestivales(HashSet<String> lugares, Mes mes) {
         //TODO
 
         return 0;
