@@ -121,9 +121,9 @@ public class Festival {
 
         String cadena = "";
 
-        cadena += String.format("1%s","10%S\n",getNombre(), getEstilos());
-        cadena += String.format("1%s", getLugar());
-        cadena += String.format("1%s", obtenerFecha());
+        cadena += String.format("%1s","%10S\n",getNombre(), getEstilos());
+        cadena += String.format("%1s", getLugar());
+        cadena += String.format("%1s", obtenerFecha());
         cadena += "******************************";
 
         return cadena;
@@ -136,7 +136,7 @@ public class Festival {
 
         LocalDate hoy = LocalDate.now();
 
-        if(inicio.isBefore(hoy)) {
+        if(inicio.isAfter(hoy)) {
             cadena += getFechaInicio();
             cadena += "(Quedan " + inicio.compareTo(hoy) + " días)";
         }
