@@ -55,8 +55,14 @@ public class AgendaFestivales {
      * @return la posición en la que debería ir el nuevo festival
      * de forma que la lista quedase ordenada por nombre
      */
-    private int obtenerPosicionDeInsercion(ArrayList<Festival> festivales,
-                                           Festival festival) {
+    private int obtenerPosicionDeInsercion(ArrayList<Festival> festivales, Festival festival) {
+        int posicion = 0;
+        for (int i = 0; i < festivales.size(); i++) {
+            if (festival.getNombre().compareTo(festivales.get(i).getNombre()) > 0) {
+                posicion++;
+            }
+        }
+        return posicion;
 
     }
 
