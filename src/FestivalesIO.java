@@ -1,5 +1,6 @@
 
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -40,12 +41,64 @@ public class FestivalesIO {
      * @return el festival creado
      */
     public static Festival parsearLinea(String lineaFestival) {
-       //TODO
-        
-        return null;
+        String estilosStr = "";
+
+        lineaFestival = lineaFestival.trim();
+        String[] datos = lineaFestival.split(":");
+
+        //nombre...
+        String nombre = datos[0].trim();
+        String[] arrayNombre = nombre.split("[ ]+");
+        nombre = "";
+        for (int i = 0; i < arrayNombre.length; i++) {
+            String primeraLetra = String.valueOf(arrayNombre[i].charAt(0)).toUpperCase();
+            String sigLetras = arrayNombre[0].substring(1, arrayNombre[0].length());
+
+            nombre += primeraLetra + sigLetras + " ";
+        }
+        nombre = nombre.trim();
+
+        //lugar
+        String lugar = datos[1].trim();
+        lugar = primeraLetraMayuscula(lugar);
+
+        //fecha
+        String fechaStr = datos[2].trim();
+        LocalDate fecha = LocalDate.parse(fechaStr);
+
+        //duracion
+        String duracionStr = datos[3];
+        int duracion = Integer.valueOf(duracionStr).intValue();
+
+
+
+        //estilos
+        String[] estilos = new String[datos.length - 4];
+        System.arraycopy(datos, 4, estilos, 0, datos.length - 4);
+
+        //quitar espacios a cada estilo
+        for (int i = 0; i < estilos.length; i++) {
+            estilos[i] = estilos[i].trim();
+        }
+
+        //añadirlo al HashSet
+        HashSet<Estilo> est = new HashSet<>();
+        for (String estilo: estilos) {
+            Estilo e = Estilo.valueOf(estilo);
+            est.add(e);
+        }
+        Festival fest = new Festival(nombre, lugar, fecha, duracion, est);
+        return fest;
     }
-    
-   
+
+    /**
+     *
+     */
+    public static String primeraLetraMayuscula(String palabra) {
+        char[] array = palabra.toCharArray();
+        array[0] = Character.toUpperCase(array[0]);
+        return new String(array);
+    }
     
     
 }
