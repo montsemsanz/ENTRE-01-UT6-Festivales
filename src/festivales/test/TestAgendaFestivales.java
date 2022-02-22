@@ -14,7 +14,7 @@ public class TestAgendaFestivales {
     
     /**
      * Código para probar la clase festivales.modelo.AgendaFestivales
-     * @author Asier Galisteo
+     *
      */
     public static void main(String[] args) {
         AgendaFestivales agenda = new AgendaFestivales();
