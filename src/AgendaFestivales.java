@@ -42,8 +42,18 @@ public class AgendaFestivales {
      *
      */
     public void addFestival(Festival festival) {
-        //TODO
-        
+        Mes mes = festival.getMes();
+
+        int posicion = obtenerPosicionDeInsercion(agenda.get(mes),festival);
+
+        if(agenda.containsKey(mes)){
+            agenda.get(mes).add(posicion,festival);
+        }
+        else{
+            ArrayList<Festival> festivales = new ArrayList<>();
+            festivales.add(festival);
+            agenda.put(mes,festivales);
+        }
         
     }
 
