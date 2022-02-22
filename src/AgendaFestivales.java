@@ -74,7 +74,7 @@ public class AgendaFestivales {
      */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder("Festivales\n");
         Set<Mes> conjuntoMeses = agenda.keySet();
         for (Mes mes: conjuntoMeses) {
             sb.append("\n" + mes + "(" + agenda.get(mes).size() + " festival/es)");
