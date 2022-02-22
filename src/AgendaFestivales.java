@@ -40,7 +40,6 @@ public class AgendaFestivales {
      * obtenerPosicionDeInsercion()
      */
     public void addFestival(Festival festival) {
-        //TODO
 
 
     }
@@ -51,8 +50,7 @@ public class AgendaFestivales {
      * @return la posici�n en la que deber�a ir el nuevo festival
      * de forma que la lista quedase ordenada por nombre
      */
-    private int obtenerPosicionDeInsercion(ArrayList<Festival> festivales,
-                                           Festival festival) {
+    private int obtenerPosicionDeInsercion(ArrayList<Festival> festivales, Festival festival) {
         //TODO
 
         return 0;
@@ -77,9 +75,11 @@ public class AgendaFestivales {
      * Si el mes no existe se devuelve -1
      */
     public int festivalesEnMes(Mes mes) {
-        //TODO
-
-        return 0;
+        int cuantos = 0;
+        if(agenda.containsKey(mes)){
+            cuantos = agenda.get(mes).size();
+        }
+        return cuantos;
     }
 
     /**
