@@ -1,8 +1,9 @@
+package Festivales.modelo;
+
+import Festivales.io.FestivalesIO;
 
 import java.time.LocalDate;
 import java.util.HashSet;
-
-import static java.time.temporal.ChronoUnit.DAYS;
 
 /**
  * Un objeto de esta clase almacena los datos de un
@@ -156,11 +157,11 @@ public class Festival {
     }
 
     /**
-     * Código para probar la clase Festival
+     * Código para probar la clase Festivales.modelo.Festival
      *
      */
     public static void main(String[] args) {
-        System.out.println("Probando clase Festival");
+        System.out.println("Probando clase Festivales.modelo.Festival");
         String datosFestival = "Gazpatxo Rock : " +
                 "valencia: 28-02-2022  :1  :rock" +
                 ":punk " +

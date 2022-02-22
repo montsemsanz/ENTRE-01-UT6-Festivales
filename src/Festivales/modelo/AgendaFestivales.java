@@ -1,3 +1,4 @@
+package Festivales.modelo;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -8,7 +9,7 @@ import java.util.*;
  * en una serie de meses
  *
  * La agenda guardalos festivales en una colección map
- * La clave del map es el mes (un enumerado festivales.modelo.Mes)
+ * La clave del map es el mes (un enumerado festivales.modelo.Festivales.modelo.Mes)
  * Cada mes tiene asociados en una colección ArrayList
  * los festivales  de ese mes
  *
@@ -210,7 +211,7 @@ public class AgendaFestivales {
      * Si al borrar de un mes los festivales el mes queda con 0 festivales
      * se borra la entrada completa del map
      */
-    public int festivalesPorEstilo(HashSet<String> lugares, Mes mes) {
+    public int cancelarEventos(HashSet<String> lugares, Mes mes) {
 
         int cancelados = 0;
 
