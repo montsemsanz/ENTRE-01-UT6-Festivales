@@ -1,3 +1,6 @@
+package festivales.modelo;
+
+import festivales.io.FestivalesIO;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -76,11 +79,7 @@ public class Festival {
      */
     public Mes getMes() {
 
-        String fechaA = String.valueOf(fechaInicio.getMonth());
-        Mes mes = Mes.valueOf(fechaA.toUpperCase().trim());
-        
-        return mes;
-        
+            return Mes.values()[fechaInicio.getMonthValue() - 1];
     }
 
     /**
@@ -201,11 +200,11 @@ public class Festival {
     }
 
     /**
-     * Código para probar la clase Festival
+     * Código para probar la clase festivales.modelo.Festival
      *
      */
     public static void main(String[] args) {
-        System.out.println("Probando clase Festival");
+        System.out.println("Probando clase festivales.modelo.Festival");
         String datosFestival = "Gazpatxo Rock : " +
                 "valencia: 28-02-2022  :1  :rock" +
                 ":punk " +
