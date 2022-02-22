@@ -133,6 +133,17 @@ public class AgendaFestivales {
      * se borra la entrada completa del map
      */
     public int festivalesPorEstilo(HashSet<String> lugares, Mes mes) {
+        Mes[] meses = Mes.values();
+        ArrayList<Festival> festivales = agenda.get(mes);
+        for(Festival fest:festivales){
+            if(lugares.contains(fest.getLugar())){
+                agenda.get(mes).remove(fest);
+            }
+        }
+        if(festivales.size() == 0){
+            agenda.remove(mes);
+        }
+        return 0;
 
 
     }
