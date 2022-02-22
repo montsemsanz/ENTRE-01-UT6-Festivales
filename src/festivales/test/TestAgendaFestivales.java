@@ -1,13 +1,14 @@
- 
-import java.util.Arrays;
+package festivales.test;
+
+import festivales.modelo.AgendaFestivales;
+import festivales.modelo.Mes;
+
 import java.util.HashSet;
-import java.util.Map;
-import java.util.TreeSet;
 
 public class TestAgendaFestivales {
     
     /**
-     * Código para probar la clase AgendaFestivales
+     * Código para probar la clase festivales.modelo.AgendaFestivales
      *
      */
     public static void main(String[] args) {
@@ -23,7 +24,7 @@ public class TestAgendaFestivales {
     
     
     private static void testCargarAgenda(AgendaFestivales agenda) {
-        // FestivalesIO.cargarFestivales(agenda);
+        // festivales.io.FestivalesIO.cargarFestivales(agenda);
         // System.out.println(agenda);
         // System.out.println();
     }
@@ -31,9 +32,9 @@ public class TestAgendaFestivales {
     
     private static void testFestivalesEnMes(AgendaFestivales agenda) {
         // System.out.println("Meses y nº festivales en ese mes\n");
-        // Mes[] meses = {Mes.FEBRERO, Mes.ABRIL, Mes.MAYO, Mes.JUNIO,
-                // Mes.SEPTIEMBRE, Mes.OCTUBRE};
-        // for (Mes mes : meses) {
+        // festivales.modelo.Mes[] meses = {festivales.modelo.Mes.FEBRERO, festivales.modelo.Mes.ABRIL, festivales.modelo.Mes.MAYO, festivales.modelo.Mes.JUNIO,
+                // festivales.modelo.Mes.SEPTIEMBRE, festivales.modelo.Mes.OCTUBRE};
+        // for (festivales.modelo.Mes mes : meses) {
             // System.out.println(mes + ": " + agenda.festivalesEnMes(mes));
             
         // }
@@ -43,7 +44,7 @@ public class TestAgendaFestivales {
     
     private static void testFestivalesPorEstilo(AgendaFestivales agenda) {
         // System.out.println("Nombres de festivales agrupados por estilos\n");
-        // for (Map.Entry<Estilo, TreeSet<String>> entrada :
+        // for (Map.Entry<festivales.modelo.Estilo, TreeSet<String>> entrada :
                 // agenda.festivalesPorEstilo().entrySet()) {
             // System.out.println(entrada.getKey() + " - " + entrada.getValue());
             
@@ -55,13 +56,13 @@ public class TestAgendaFestivales {
    
         // HashSet<String> lugares = new HashSet<>(Arrays.asList("VITORIA",
                 // "BILBAO", "ZARAGOZA"));
-        // testCancelarFestivales(agenda, Mes.JUNIO, lugares);
+        // testCancelarFestivales(agenda, festivales.modelo.Mes.JUNIO, lugares);
  
         // lugares = new HashSet<>(Arrays.asList("SEVILLA"));
-        // testCancelarFestivales(agenda, Mes.MARZO, lugares);
+        // testCancelarFestivales(agenda, festivales.modelo.Mes.MARZO, lugares);
     
         // lugares = new HashSet<>(Arrays.asList("MALLORCA"));
-        // testCancelarFestivales(agenda, Mes.DICIEMBRE, lugares);
+        // testCancelarFestivales(agenda, festivales.modelo.Mes.DICIEMBRE, lugares);
         
     }
 
