@@ -97,7 +97,24 @@ public class AgendaFestivales {
      * Identifica el tipo exacto del valor de retorno
      */
     public TreeMap festivalesPorEstilo() {
+        TreeMap<Estilo, ArrayList<Festival>> agendaEstilos = new TreeMap<>();
+        Mes[] meses = Mes.values();
+        for (int i = 0; i < meses.length; i++) {
+            ArrayList<Festival> festivales = agenda.get(meses[i]);
+            for (Festival fest : festivales) {
+                HashSet<Estilo> estilos = fest.getEstilos();
+                for (Estilo est : estilos) {
 
+                    if (agendaEstilos.containsKey(est)) {
+                        agendaEstilos.get(est).add(fest);
+                    } else {
+                        ArrayList<Festival> festivals = new ArrayList<>();
+                        festivals.add(fest);
+                        agendaEstilos.put(est, festivals);
+                    }
+
+                }
+            }
 
         }
 
