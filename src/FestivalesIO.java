@@ -68,18 +68,15 @@ public class FestivalesIO {
         int duracion = Integer.parseInt(arr[3].trim());
 
         //Conjunto de estilos
-        HashSet<Estilo> e = new HashSet<>();
-        Estilo estilos[] = Estilo.values();
-        for (int i = 4; i < arr.length; i++){
-            for (Estilo estilo: estilos){
-                if (estilo.toString().equalsIgnoreCase(arr[i].trim())){
-                    e.add(estilo);
-                }
-            }
-        }
+
+        String[] datos = lineaFestival.trim().split(":");
+
+        HashSet<Estilo> estilos = new HashSet<>();
+        for (int i = 4; i < datos.length; i++) {
+            estilos.add(Estilo.valueOf(datos[i].trim().toUpperCase()) );}
 
         // Creacion de objeto Festival
-        Festival fest = new Festival(nombre, lugar, fechaInicio, duracion, e);
+        Festival fest = new Festival(nombre, lugar, fechaInicio, duracion, estilos);
 
         return fest;
     }
