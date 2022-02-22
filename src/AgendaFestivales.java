@@ -1,9 +1,5 @@
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 
 
 /**
@@ -80,9 +76,14 @@ public class AgendaFestivales {
      */
     @Override
     public String toString() {
-        //TODO
+        Set<Mes> rep = agenda.keySet();
+        StringBuilder sb = new StringBuilder();
+        for(Mes mes: rep){
+            sb.append(mes + "\n ");
+            sb.append( agenda.get(mes).toString() + "\n" );
+            }
 
-        return null;
+        return sb.toString();
     }
 
     /**
@@ -107,11 +108,12 @@ public class AgendaFestivales {
      * <p>
      * Identifica el tipo exacto del valor de retorno
      */
-    public TreeMap festivalesPorEstilo() {
-        //TODO
 
+    public TreeMap<Estilo, TreeSet<String>>  festivalesPorEstilo() {
+        TreeMap<Estilo, TreeSet<String>> estilos = new TreeMap<>();
+        Set<Mes> meses = agenda.keySet();
 
-        return null;
+        return estilos;
     }
 
     /**
@@ -125,8 +127,25 @@ public class AgendaFestivales {
      * se borra la entrada completa del map
      */
     public int cancelarFestivales(HashSet<String> lugares, Mes mes) {
-        //TODO
-
-        return 0;
+        int cancelados = 0;
+        for(String lugar:lugares){
+            if(agenda.containsKey(lugar)){
+                ArrayList<Festival> festivalesDeMes = agenda.get(mes);
+                int aux = festivalesDeMes.size();
+                for(int j = 0; j<festivalesDeMes.size(); j++ ){
+                    if (festivalesDeMes.get(j).getMes() == mes){
+                        agenda.get(mes).remove(j);
+                    }
+                }
+                cancelados += (aux - festivalesDeMes.size());
+                if(agenda.get(mes).size() == 0){
+                    agenda.remove(mes);
+                }
+                else{
+                    agenda.put(mes, festivalesDeMes);
+                }
+            }
+        }
+        return cancelados;
     }
 }
