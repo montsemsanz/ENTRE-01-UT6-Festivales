@@ -19,6 +19,8 @@ import java.util.TreeMap;
  *
  * Las claves se recuperan en orden alfabéico
  *
+ *@ author Pablo Mosquera
+ *
  */
 public class AgendaFestivales {
     private TreeMap<Mes, ArrayList<Festival>> agenda;
@@ -42,9 +44,19 @@ public class AgendaFestivales {
      *
      */
     public void addFestival(Festival festival) {
-        //TODO
-        
-        
+
+        Mes mes = festival.getMes();
+
+
+        if(agenda.containsKey(mes)){
+            agenda.get(mes).add(festival);
+        }
+        else {
+            ArrayList<Festival> festivales = new ArrayList<>();
+            festivales.add(festival);
+            agenda.put(mes, festivales);
+        }
+
     }
 
     /**
@@ -56,10 +68,14 @@ public class AgendaFestivales {
      */
     private int obtenerPosicionDeInsercion(ArrayList<Festival> festivales,
                                            Festival festival) {
-       //TODO
-        
+        /*
+        int pos = 0;
+        for(int i = 0; i < festivales.size(); i++){
+            if()
+        }
+        */
         return 0;
-        
+
     }
 
     /**
@@ -81,10 +97,9 @@ public class AgendaFestivales {
      * Si el mes no existe se devuelve -1
      */
     public int festivalesEnMes(Mes mes) {
-       //TODO
-        
-        return 0;
+
     }
+
 
     /**
      * Se trata de agrupar todos los festivales de la agenda

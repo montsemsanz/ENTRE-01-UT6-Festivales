@@ -81,7 +81,7 @@ public class Festival {
      * @return true si el festival actual empieza
      * en un fecha anterior a otro
      */
-    public boolean empiezaAntesQue(Festival otro) {
+    public boolean empiezadespuesQue(Festival otro) {
 
         return fechaInicio.isAfter(otro.getFechaInicio());
         
@@ -93,7 +93,7 @@ public class Festival {
      * @return true si el festival actual empieza
      * en un fecha posteior a otro
      */
-    public boolean empiezaDespuesQue(Festival otro) {
+    public boolean empiezaAntespuesQue(Festival otro) {
         
         return fechaInicio.isBefore(otro.getFechaInicio());
         
@@ -186,9 +186,9 @@ public class Festival {
         
         System.out.println("\nProbando empiezaAntesQue() empiezaDespuesQue()" +
                 "\n");
-        if (f1.empiezaAntesQue(f2)) {
+        if (f1.empiezaAntespuesQue(f2)) {
             System.out.println(f1.getNombre() + " empieza antes que " + f2.getNombre());
-        } else if (f1.empiezaDespuesQue(f2)) {
+        } else if (f1.empiezadespuesQue(f2)) {
             System.out.println(f1.getNombre() + " empieza después que " + f2.getNombre());
         } else {
             System.out.println(f1.getNombre() + " empieza el mismo día que " + f2.getNombre());
