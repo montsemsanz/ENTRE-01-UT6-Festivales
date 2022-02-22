@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.Collections;
+import java.util.Iterator;
 
 
 /**
@@ -100,9 +102,20 @@ public class AgendaFestivales {
      */
     @Override
     public String toString() {
-        //TODO
-        
-        return null;
+        StringBuilder resul = new StringBuilder("Festivales\n");
+        Set<Mes> conjuntoKey = agenda.keySet();
+        Iterator<Mes> it = conjuntoKey.iterator();
+        while (it.hasNext()) {
+            Mes mes = it.next();
+            String mesStr = mes.toString();
+            int numFestivales = agenda.get(mes).size();
+            resul.append(mesStr + "(" + numFestivales + " festivales)" + "\n");
+            ArrayList<Festival> fests = agenda.get(mes);
+            for (Festival f: fests) {
+                resul.append(f.toString());
+            }
+        }
+        return resul.toString();
     }
 
     /**
