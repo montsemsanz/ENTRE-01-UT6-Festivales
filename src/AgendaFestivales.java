@@ -1,9 +1,5 @@
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 
 
 /**
@@ -119,12 +115,49 @@ public class AgendaFestivales {
      *
      * Identifica el tipo exacto del valor de retorno
      */
-    public  Map   festivalesPorEstilo() {
-       //TODO
+    public  TreeMap<Estilo, TreeSet<String>>   festivalesPorEstilo() {
 
-         
+        TreeMap<Estilo, TreeSet<String>> festivalEstilos = new TreeMap<>();
+        Set <Mes> claves = agenda.keySet();
+        Estilo[] estilos = Estilo.values();
 
-        return null;
+        Mes[] mes = Mes.values();
+
+        TreeMap<Estilo, ArrayList<String>> nombres = new TreeMap<>();
+
+        for(Festival festival: agenda.get(mes)){
+            for(Estilo estilo: estilos){
+                if(festival.getEstilos().equals(estilo)) {
+                    if(nombres.containsKey(estilo)){
+                        nombres.get(estilo).add(festival.getNombre());
+                    }
+                    else {
+                        ArrayList<String> nombre = new ArrayList<>();
+                        nombre.add(festival.getNombre());
+                        nombres.put(estilo, nombre);
+                    }
+                }
+            }
+
+        }
+
+        for(Mes mes2: claves){
+            if (festivalEstilos.containsKey(mes)){
+                for(Estilo estilo: estilos){
+                    if(nombres.get(estilo).equals(estilo)){
+                        festivalEstilos.get(mes).add(nombres.get(estilo).toString());
+                    }
+                }
+            }
+            else {
+                for(Estilo estilo: estilos) {
+                    TreeSet<String> nombres2 = new TreeSet<>();
+                    nombres2.add(nombres.get(estilo).toString());
+                    festivalEstilos.put(estilo, nombres2);
+                }
+            }
+        }
+        return festivalEstilos;
     }
 
     /**
@@ -138,7 +171,7 @@ public class AgendaFestivales {
      * se borra la entrada completa del map
      */
     public int festivalesPorEstilo(HashSet<String> lugares, Mes mes) {
-       //TODO
+
         
         return 0;
     }
