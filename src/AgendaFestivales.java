@@ -115,18 +115,10 @@ public class AgendaFestivales {
     public TreeMap<Estilo,TreeSet<String>> festivalesPorEstilo() {
         TreeMap<Estilo,TreeSet<String>> porEstilos = new TreeMap<>();
 
-        ArrayList<Festival> festivales = new ArrayList<>();                     // festivales = un ArrayList con todos los festivales
-        for (Map.Entry<Mes,ArrayList<Festival>> entrada:agenda.entrySet()) {
-            Iterator<Festival> it = entrada.getValue().iterator();
-            while (it.hasNext()) {
-                festivales.add(it.next());
-            }
-        }
-
         // Ahora quiero sacar el nombre y estilos de cada festival.
         String nombre = "";
         HashSet<Estilo> estilosDeCadaFestival = new HashSet<>();
-        for (Festival festival:festivales) {
+        for (Festival festival:getTodosLosFestivales()) {
 
             estilosDeCadaFestival = festival.getEstilos();               // Sacamos los estilos de cada festival
 
@@ -137,7 +129,7 @@ public class AgendaFestivales {
                 if (!porEstilos.containsKey(cadaEstilo)) {
                     porEstilos.put(cadaEstilo, nombres);
                 }
-                    porEstilos.get(cadaEstilo).add(nombre);
+                porEstilos.get(cadaEstilo).add(nombre);
             }
         }
         return porEstilos;
@@ -153,9 +145,33 @@ public class AgendaFestivales {
      * Si al borrar de un mes los festivales el mes queda con 0 festivales
      * se borra la entrada completa del map
      */
-    public int cancelarFestival(HashSet<String> lugares, Mes mes) {
-       //TODO
-        
-        return 0;
+    public int cancelarFestivales(HashSet<String> lugares, Mes mes) {
+       int suma = 0;
+
+        String lugar = "";
+        for (Festival festival:getTodosLosFestivales()) {
+            lugar = festival.getLugar();             // Sacamos el lugar donde se celebra cada festival
+            Mes mesFestival = festival.getMes();     // Sacamos el mes en el que se celebra cada festival
+            if (lugares.contains(lugar) && mes.equals(mesFestival) && !festival.haConcluido()) {
+                agenda.get(mes).remove(festival);
+                suma++;
+            }
+        }
+        // Borramos la entrada de mes si no tiene ningún festival
+        if (agenda.get(mes).isEmpty()) {
+            agenda.remove(mes);
+        }
+        return suma;
+    }
+
+    public ArrayList<Festival> getTodosLosFestivales() {
+        ArrayList<Festival> festivales = new ArrayList<>();                     // festivales = un ArrayList con todos los festivales
+        for (Map.Entry<Mes,ArrayList<Festival>> entrada:agenda.entrySet()) {
+            Iterator<Festival> it = entrada.getValue().iterator();
+            while (it.hasNext()) {
+                festivales.add(it.next());
+            }
+        }
+        return festivales;
     }
 }
