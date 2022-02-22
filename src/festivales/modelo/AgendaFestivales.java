@@ -1,5 +1,5 @@
+package festivales.modelo;
 
-import java.time.LocalDate;
 import java.util.*;
 
 
@@ -8,7 +8,7 @@ import java.util.*;
  * en una serie de meses
  *
  * La agenda guardalos festivales en una colección map
- * La clave del map es el mes (un enumerado festivales.modelo.Mes)
+ * La clave del map es el mes (un enumerado festivales.modelo.festivales.modelo.Mes)
  * Cada mes tiene asociados en una colección ArrayList
  * los festivales  de ese mes
  *
@@ -73,8 +73,19 @@ public class AgendaFestivales {
      */
     @Override
     public String toString() {
-        String str = "";
-        return str;
+        Set<Map.Entry<Mes, ArrayList<Festival>>> ent = agenda.entrySet();
+        Iterator<Map.Entry<Mes, ArrayList<Festival>>> it = ent.iterator();
+        StringBuilder sb = new StringBuilder();
+        sb.append("Festivales\n");
+        while(it.hasNext()){
+            Map.Entry<Mes, ArrayList<Festival>> entrada = it.next();
+            sb.append("\n" + entrada.getKey() + " ("+ festivalesEnMes(entrada.getKey()) +
+                    " festival/es)");
+            for(Festival fest:entrada.getValue()){
+                sb.append(fest);
+            }
+        }
+        return sb.toString();
     }
 
     /**
@@ -143,7 +154,12 @@ public class AgendaFestivales {
         if(festivales.size() == 0){
             agenda.remove(mes);
         }
-        return 0;
+        for(int i = 0; i < meses.length; i++){
+            if(meses[i].equals(String.valueOf(mes))){
+                return i + 1;
+            }
+        }
+        return -1;
 
 
     }
