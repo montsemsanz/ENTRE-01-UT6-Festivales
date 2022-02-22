@@ -77,8 +77,10 @@ public class AgendaFestivales {
         StringBuilder sb = new StringBuilder();
         Set<Mes> conjuntoMeses = agenda.keySet();
         for (Mes mes: conjuntoMeses) {
-            sb.append(mes + "\n");
-            sb.append(agenda.get(mes).toString() + "\n");
+            sb.append("\n" + mes + "(" + agenda.get(mes).size() + " festival/es)");
+            for (Festival festival: agenda.get(mes)) {
+                sb.append(festival.toString());
+            }
         }
         return sb.toString();
     }
