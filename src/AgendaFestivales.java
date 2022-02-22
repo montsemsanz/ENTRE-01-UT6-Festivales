@@ -104,7 +104,7 @@ public class AgendaFestivales {
             }
             return cuantos;
         }
-        return 0;
+        return -1;
     }
 
     /**
@@ -151,8 +151,24 @@ public class AgendaFestivales {
      * se borra la entrada completa del map
      */
     public int cancelarFestivales(HashSet<String> lugares, Mes mes) {
-        //TODO
-
-        return 0;
+        if (!(festivalesEnMes(mes) == -1)) {
+            int cancelados = 0;
+            ArrayList<Festival> festivales = agenda.get(mes);
+            Iterator<Festival> it = festivales.iterator();
+            while (it.hasNext()) {
+                Festival festival = it.next();
+                for (String lugar : lugares) {
+                    if (festival.getLugar().equalsIgnoreCase(lugar) && !festival.haConcluido()) {
+                        it.remove();
+                        cancelados++;
+                    }
+                }
+            }
+            if (festivales.size() == 0) {
+                agenda.remove(mes);
+            }
+            return cancelados;
+        }
+        return -1;
     }
 }
