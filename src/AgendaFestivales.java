@@ -1,9 +1,6 @@
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import javax.print.DocFlavor;
+import java.util.*;
 
 
 /**
@@ -61,13 +58,13 @@ public class AgendaFestivales {
      * de forma que la lista quedase ordenada por nombre
      */
     private int obtenerPosicionDeInsercion(ArrayList<Festival> festivales, Festival festival) {
+        int pos = 0;
         for (int i = 0; i < festivales.size(); i++) {
-            if (festival.getNombre().compareTo(festivales.get(i).getNombre()) < 0) {
-                return i;
+            if (festival.getNombre().compareTo(festivales.get(i).getNombre()) > 0) {
+                pos++;
             }
         }
-        return -1;
-
+        return pos;
     }
 
     /**
@@ -77,9 +74,21 @@ public class AgendaFestivales {
      */
     @Override
     public String toString() {
+        StringBuilder sb = new StringBuilder();
+        Set<Map.Entry<Mes, ArrayList<Festival>>> entradas = agenda.entrySet();
+        Iterator<Map.Entry<Mes, ArrayList<Festival>>> it = entradas.iterator();
+        sb.append("Festivales" + "\n");
+        while (it.hasNext()) {
+            String str = "";
+            Map.Entry<Mes, ArrayList<Festival>> entrada = it.next();
+            sb.append("\n" + entrada.getKey() + " (" + festivalesEnMes(entrada.getKey()) + " festival/es)");
+            for (Festival festival : entrada.getValue()) {
+                str += festival;
+            }
+            sb.append(str);
+        }
 
-
-        return null;
+        return sb.toString();
     }
 
     /**
@@ -88,8 +97,13 @@ public class AgendaFestivales {
      * Si el mes no existe se devuelve -1
      */
     public int festivalesEnMes(Mes mes) {
-        //TODO
-
+        if (agenda.containsKey(mes)) {
+            int cuantos = 0;
+            while (cuantos < agenda.get(mes).size()) {
+                cuantos++;
+            }
+            return cuantos;
+        }
         return 0;
     }
 

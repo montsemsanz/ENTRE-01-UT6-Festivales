@@ -124,7 +124,7 @@ public class Festival {
             str += " (ON)";
 
         } else {
-            str += " (quedan " + (getFechaInicio().getDayOfMonth() - LocalDate.now().getDayOfMonth()) + " dias)";
+            str += " (quedan " + (getFechaInicio().getDayOfYear() - LocalDate.now().getDayOfYear()) + " dias)";
         }
         return str;
     }
