@@ -101,6 +101,12 @@ public class AgendaFestivales {
      */
     public int festivalesEnMes(Mes mes) {
 
+
+        if(!agenda.containsKey(mes)) {
+                return -1;
+        }
+
+        return agenda.get(mes).size();
     }
 
 
