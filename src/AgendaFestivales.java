@@ -144,12 +144,14 @@ public class AgendaFestivales {
     public int cancelarFestivales(HashSet<String> lugares, Mes mes) {
         int cancelados = 0;
         ArrayList<Festival> festivalEnMes = agenda.get(mes);
-        for (Festival festival : festivalEnMes) {
+        Iterator<Festival> it = festivalEnMes.iterator();
+        while (it.hasNext()) {
+            Festival festival = it.next();
             for (String lugar : lugares) {
                 if (festival.getLugar().equalsIgnoreCase(lugar) && festival.getFechaInicio().isBefore(LocalDate.now())
                         && !festival.haConcluido())  {
                     cancelados++;
-                    festivalEnMes.remove(lugar);
+                    it.remove();
                 }
             }
         }
