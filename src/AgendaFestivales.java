@@ -133,7 +133,7 @@ public class AgendaFestivales {
                     }
                 }
         }
-        return grupos;
+        return null;
     }
 
     /**
