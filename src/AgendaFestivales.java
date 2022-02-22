@@ -40,6 +40,16 @@ public class AgendaFestivales {
      * obtenerPosicionDeInsercion()
      */
     public void addFestival(Festival festival) {
+        Mes mes = festival.getMes();
+        int pos = obtenerPosicionDeInsercion(agenda.get(mes),festival);
+        ArrayList<Festival> listaFestivales = new ArrayList<>();
+
+        if(agenda.containsKey(festival)){
+           agenda.get(mes).add(pos,festival);
+        }
+        else{
+           agenda.put(mes,listaFestivales);
+        }
 
 
     }
@@ -97,7 +107,7 @@ public class AgendaFestivales {
      * <p>
      * Identifica el tipo exacto del valor de retorno
      */
-    public Map festivalesPorEstilo() {
+    public TreeMap festivalesPorEstilo() {
         //TODO
 
 
@@ -114,7 +124,7 @@ public class AgendaFestivales {
      * Si al borrar de un mes los festivales el mes queda con 0 festivales
      * se borra la entrada completa del map
      */
-    public int festivalesPorEstilo(HashSet<String> lugares, Mes mes) {
+    public int cancelarFestivales(HashSet<String> lugares, Mes mes) {
         //TODO
 
         return 0;
