@@ -1,5 +1,5 @@
+package festivales.modelo;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 
@@ -8,7 +8,7 @@ import java.util.*;
  * en una serie de meses
  * <p>
  * La agenda guardalos festivales en una colección map
- * La clave del map es el mes (un enumerado festivales.modelo.Mes)
+ * La clave del map es el mes (un enumerado festivales.modelo.festivales.modelo.Mes)
  * Cada mes tiene asociados en una colección ArrayList
  * los festivales  de ese mes
  * <p>
@@ -125,14 +125,13 @@ public class AgendaFestivales {
             for (Festival festival : festivales) {
                 HashSet<Estilo> estilos = festival.getEstilos();
                 for (Estilo estilo : estilos) {
-                    if (festival.getEstilos().contains(estilo)) {
-                        nombres.add(festival.getNombre());
-                        if (!festivalesEstilo.containsKey(estilo)) {
-                            festivalesEstilo.put(estilo, nombres);
-                        } else {
-                            festivalesEstilo.get(estilo).add(festival.getNombre());
-                        }
+                    nombres.add(festival.getNombre());
+                    if (!festivalesEstilo.containsKey(estilo)) {
+                        festivalesEstilo.put(estilo, nombres);
+                    } else {
+                        festivalesEstilo.get(estilo).add(festival.getNombre());
                     }
+
                 }
 
             }
