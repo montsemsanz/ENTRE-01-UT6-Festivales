@@ -9,6 +9,7 @@ import java.util.HashSet;
  * en una determinada fecha, dura una serie de días y
  * se engloba en un conjunto determinado de estilos
  *
+ * @author - Jiacheng Lin
  */
 public class Festival {
     private final String nombre;

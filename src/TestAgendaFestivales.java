@@ -17,8 +17,6 @@ public class TestAgendaFestivales {
         testFestivalesEnMes(agenda);
         testFestivalesPorEstilo(agenda);
         testCancelarFestivales(agenda);
-        
-        
     }
     
     
