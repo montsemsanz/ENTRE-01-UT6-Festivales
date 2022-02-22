@@ -1,5 +1,6 @@
 
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -39,12 +40,27 @@ public class FestivalesIO {
      * @return el festival creado
      */
     public static Festival parsearLinea(String lineaFestival) {
-       //TODO
-        
-        return null;
+
+       String[] texto = lineaFestival.trim().split(":");
+       String nombre = texto[0];
+       String lugar = texto[1];
+
+       String[] fecha = texto[2].trim().split("-");
+       LocalDate dia = LocalDate.of(Integer.parseInt(fecha[2]),Integer.parseInt(fecha[1]),Integer.parseInt(fecha[0]));
+
+       Integer duracion = Integer.parseInt(texto[3].trim());
+
+       HashSet<Estilo> estilos = new HashSet<>();
+       Estilo[] estilo = Estilo.values();
+       for(int i = 4; i <= texto.length -1 ; i++){
+
+           estilos.add(Estilo.valueOf(texto[i].trim().toUpperCase()));
+       }
+       Festival festival = new Festival(nombre,lugar.toUpperCase(),dia,duracion,estilos);
+        return festival;
     }
     
-   
+
     
     
 }

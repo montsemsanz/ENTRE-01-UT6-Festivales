@@ -56,7 +56,16 @@ public class AgendaFestivales {
      */
     private int obtenerPosicionDeInsercion(ArrayList<Festival> festivales,
                                            Festival festival) {
-       //TODO
+
+
+       for(int i = 0; i <= festivales.size() - 1; i++){
+           if(festivales.get(i).getNombre().compareTo(festival.getNombre()) > 0){
+               return i;
+
+           }
+
+       }
+
         
         return 0;
         

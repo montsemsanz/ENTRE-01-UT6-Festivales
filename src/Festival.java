@@ -111,7 +111,7 @@ public class Festival {
     @Override
     public String toString() {
        String str = "";
-       str += getNombre() + "\t" +  getEstilos() + "\n" + getLugar() + getFechaInicio() + "(quedan " + getDuracion() + " dias )" ;
+       str += getNombre() + "\t" +  getEstilos() + "\n" + getLugar() +"\n"+ getFechaInicio() + "(quedan " + getDuracion() + " dias )" ;
         
         return str;
         
